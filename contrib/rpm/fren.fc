@@ -1,0 +1,8 @@
+/usr/bin/fren-cli		--	gen_context(system_u:object_r:fren_exec_t,s0)
+/usr/sbin/frend		--	gen_context(system_u:object_r:fren_exec_t,s0)
+/usr/lib(64)?/fren/frend		--	gen_context(system_u:object_r:fren_exec_t,s0)
+
+/etc/fren(/.*)?		gen_context(system_u:object_r:fren_conf_t,s0)
+/var/lib/fren(/.*)?		gen_context(system_u:object_r:fren_var_lib_t,s0)
+
+(/var)?/run/frend(/.*)?   gen_context(system_u:object_r:fren_var_run_t,s0)

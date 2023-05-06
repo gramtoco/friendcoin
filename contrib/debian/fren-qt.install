@@ -1,0 +1,6 @@
+usr/local/bin/fren-qt usr/bin
+share/pixmaps/fren32.xpm usr/share/pixmaps
+share/pixmaps/fren16.xpm usr/share/pixmaps
+share/pixmaps/fren128.png usr/share/pixmaps
+debian/fren-qt.desktop usr/share/applications
+debian/fren-qt.protocol usr/share/kde4/services/

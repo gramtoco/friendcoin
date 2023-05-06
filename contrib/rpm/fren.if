@@ -1,0 +1,157 @@
+
+## <summary>policy for fren</summary>
+
+
+########################################
+## <summary>
+##	Transition to fren.
+## </summary>
+## <param name="domain">
+## <summary>
+##	Domain allowed to transition.
+## </summary>
+## </param>
+#
+interface(`fren_domtrans',`
+	gen_require(`
+		type fren_t, fren_exec_t;
+	')
+
+	corecmd_search_bin($1)
+	domtrans_pattern($1, fren_exec_t, fren_t)
+')
+
+
+########################################
+## <summary>
+##	Execute fren server in the fren domain.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`fren_initrc_domtrans',`
+	gen_require(`
+		type fren_initrc_exec_t;
+	')
+
+	init_labeled_script_domtrans($1, fren_initrc_exec_t)
+')
+
+
+########################################
+## <summary>
+##	Search fren lib directories.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`fren_search_lib',`
+	gen_require(`
+		type fren_var_lib_t;
+	')
+
+	allow $1 fren_var_lib_t:dir search_dir_perms;
+	files_search_var_lib($1)
+')
+
+########################################
+## <summary>
+##	Read fren lib files.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`fren_read_lib_files',`
+	gen_require(`
+		type fren_var_lib_t;
+	')
+
+	files_search_var_lib($1)
+	read_files_pattern($1, fren_var_lib_t, fren_var_lib_t)
+')
+
+########################################
+## <summary>
+##	Manage fren lib files.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`fren_manage_lib_files',`
+	gen_require(`
+		type fren_var_lib_t;
+	')
+
+	files_search_var_lib($1)
+	manage_files_pattern($1, fren_var_lib_t, fren_var_lib_t)
+')
+
+########################################
+## <summary>
+##	Manage fren lib directories.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`fren_manage_lib_dirs',`
+	gen_require(`
+		type fren_var_lib_t;
+	')
+
+	files_search_var_lib($1)
+	manage_dirs_pattern($1, fren_var_lib_t, fren_var_lib_t)
+')
+
+
+########################################
+## <summary>
+##	All of the rules required to administrate
+##	a fren environment
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+## <param name="role">
+##	<summary>
+##	Role allowed access.
+##	</summary>
+## </param>
+## <rolecap/>
+#
+interface(`fren_admin',`
+	gen_require(`
+		type fren_t;
+		type fren_initrc_exec_t;
+		type fren_var_lib_t;
+	')
+
+	allow $1 fren_t:process { ptrace signal_perms };
+	ps_process_pattern($1, fren_t)
+
+	fren_initrc_domtrans($1)
+	domain_system_change_exemption($1)
+	role_transition $2 fren_initrc_exec_t system_r;
+	allow $2 system_r;
+
+	files_search_var_lib($1)
+	admin_pattern($1, fren_var_lib_t)
+
+')
+

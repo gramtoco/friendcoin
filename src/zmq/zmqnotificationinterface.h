@@ -1,10 +1,11 @@
 // Copyright (c) 2015-2016 The Bitcoin Core developers
 // Copyright (c) 2017-2019 The Raven Core developers
+// Copyright (c) 2023 The Fren Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_ZMQ_ZMQNOTIFICATIONINTERFACE_H
-#define RAVEN_ZMQ_ZMQNOTIFICATIONINTERFACE_H
+#ifndef FREN_ZMQ_ZMQNOTIFICATIONINTERFACE_H
+#define FREN_ZMQ_ZMQNOTIFICATIONINTERFACE_H
 
 #include "validationinterface.h"
 #include <string>
@@ -39,4 +40,4 @@ private:
     std::list<CZMQAbstractNotifier*> notifiers;
 };
 
-#endif // RAVEN_ZMQ_ZMQNOTIFICATIONINTERFACE_H
+#endif // FREN_ZMQ_ZMQNOTIFICATIONINTERFACE_H

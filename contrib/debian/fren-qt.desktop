@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Fren Core
+Comment=Connect to the Fren P2P Network
+Comment[de]=Verbinde mit dem Fren peer-to-peer Netzwerk
+Comment[fr]=Fren, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Fren, eşten eşe kriptografik sanal para birimi
+Exec=fren-qt %u
+Terminal=false
+Type=Application
+Icon=fren128
+MimeType=x-scheme-handler/fren;
+Categories=Office;Finance;

@@ -1,10 +1,11 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Copyright (c) 2017-2021 The Raven Core developers
+// Copyright (c) 2023 The Fren Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_QT_TRANSACTIONVIEW_H
-#define RAVEN_QT_TRANSACTIONVIEW_H
+#ifndef FREN_QT_TRANSACTIONVIEW_H
+#define FREN_QT_TRANSACTIONVIEW_H
 
 #include "guiutil.h"
 
@@ -123,4 +124,4 @@ public Q_SLOTS:
 
 };
 
-#endif // RAVEN_QT_TRANSACTIONVIEW_H
+#endif // FREN_QT_TRANSACTIONVIEW_H

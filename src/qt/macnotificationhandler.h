@@ -1,10 +1,11 @@
 // Copyright (c) 2011-2014 The Bitcoin Core developers
 // Copyright (c) 2017-2019 The Raven Core developers
+// Copyright (c) 2023 The Fren Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_QT_MACNOTIFICATIONHANDLER_H
-#define RAVEN_QT_MACNOTIFICATIONHANDLER_H
+#ifndef FREN_QT_MACNOTIFICATIONHANDLER_H
+#define FREN_QT_MACNOTIFICATIONHANDLER_H
 
 #include <QObject>
 
@@ -25,4 +26,4 @@ public:
 };
 
 
-#endif // RAVEN_QT_MACNOTIFICATIONHANDLER_H
+#endif // FREN_QT_MACNOTIFICATIONHANDLER_H

@@ -1,10 +1,11 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Copyright (c) 2017-2019 The Raven Core developers
+// Copyright (c) 2023 The Fren Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_QT_BANTABLEMODEL_H
-#define RAVEN_QT_BANTABLEMODEL_H
+#ifndef FREN_QT_BANTABLEMODEL_H
+#define FREN_QT_BANTABLEMODEL_H
 
 #include "net.h"
 
@@ -71,4 +72,4 @@ private:
     std::unique_ptr<BanTablePriv> priv;
 };
 
-#endif // RAVEN_QT_BANTABLEMODEL_H
+#endif // FREN_QT_BANTABLEMODEL_H

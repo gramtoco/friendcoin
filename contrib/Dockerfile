@@ -1,10 +1,10 @@
 FROM amd64/ubuntu:20.04 AS base
 
-#If you found this docker image helpful please donate RVN to the maintainer
+#If you found this docker image helpful please donate FRENS to the maintainer
 LABEL maintainer="RV9zdNeUTQUToZUcRp9uNF8gwH5LzDFtan"
 
-EXPOSE 8766/tcp
-EXPOSE 8767/tcp
+EXPOSE 4206/tcp
+EXPOSE 4207/tcp
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -31,33 +31,33 @@ RUN apt-get update && \
 	apt-get clean
 
 #Copy source dir
-COPY . /home/raven/build/Ravencoin/
-WORKDIR /home/raven/build/Ravencoin
+COPY . /home/fren/build/Frencoin/
+WORKDIR /home/fren/build/Frencoin
 
 #build db4 from source
-WORKDIR /home/raven/build/Ravencoin/contrib
+WORKDIR /home/fren/build/Frencoin/contrib
 RUN ./install_db4.sh ../../
 
-# build Ravencore
-WORKDIR /home/raven/build/Ravencoin
-RUN ./autogen.sh && ./configure --disable-tests BDB_LIBS="-L/home/raven/build/db4/lib -ldb_cxx-4.8" BDB_CFLAGS="-I/home/raven/build/db4/include" --with-gui=no  && make -j4
+# build Frencore
+WORKDIR /home/fren/build/Frencoin
+RUN ./autogen.sh && ./configure --disable-tests BDB_LIBS="-L/home/fren/build/db4/lib -ldb_cxx-4.8" BDB_CFLAGS="-I/home/fren/build/db4/include" --with-gui=no  && make -j4
 
 FROM base AS final
 
 #Add our service account user
-RUN useradd -ms /bin/bash raven && \
-	mkdir /var/lib/raven && \
-	chown raven:raven /var/lib/raven && \
-	ln -s /var/lib/raven /home/raven/.raven && \
-	chown -h raven:raven /home/raven/.raven
+RUN useradd -ms /bin/bash fren && \
+	mkdir /var/lib/fren && \
+	chown fren:fren /var/lib/fren && \
+	ln -s /var/lib/fren /home/fren/.fren && \
+	chown -h fren:fren /home/fren/.fren
 
-VOLUME /var/lib/raven
+VOLUME /var/lib/fren
 
 #Copy the compiled binaries from the build
-COPY --from=build /home/raven/build/Ravencoin/src/ravend /usr/local/bin/ravend
-COPY --from=build /home/raven/build/Ravencoin/src/raven-cli /usr/local/bin/raven-cli
+COPY --from=build /home/fren/build/Frencoin/src/frend /usr/local/bin/frend
+COPY --from=build /home/fren/build/Frencoin/src/fren-cli /usr/local/bin/fren-cli
 
-WORKDIR /home/raven
-USER raven
+WORKDIR /home/fren
+USER fren
 
-CMD /usr/local/bin/ravend -datadir=/var/lib/raven -printtoconsole -onlynet=ipv4
+CMD /usr/local/bin/frend -datadir=/var/lib/fren -printtoconsole -onlynet=ipv4

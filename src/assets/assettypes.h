@@ -1,9 +1,9 @@
-// Copyright (c) 2019 The Raven Core developers
+// Copyright (c) 2019 The Fren Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVENCOIN_NEWASSET_H
-#define RAVENCOIN_NEWASSET_H
+#ifndef FRENCOIN_NEWASSET_H
+#define FRENCOIN_NEWASSET_H
 
 #include <string>
 #include <sstream>
@@ -652,4 +652,4 @@ private:
     size_t maxSize;
 };
 
-#endif //RAVENCOIN_NEWASSET_H
+#endif //FRENCOIN_NEWASSET_H

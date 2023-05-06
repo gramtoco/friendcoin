@@ -1,0 +1,92 @@
+#!/sbin/runscript
+
+# backward compatibility for existing gentoo layout 
+#
+if [ -d "/var/lib/fren/.fren" ]; then
+	FREND_DEFAULT_DATADIR="/var/lib/fren/.fren"
+else
+	FREND_DEFAULT_DATADIR="/var/lib/frend"
+fi
+
+FREND_CONFIGFILE=${FREND_CONFIGFILE:-/etc/fren/fren.conf}
+FREND_PIDDIR=${FREND_PIDDIR:-/var/run/frend}
+FREND_PIDFILE=${FREND_PIDFILE:-${FREND_PIDDIR}/frend.pid}
+FREND_DATADIR=${FREND_DATADIR:-${FREND_DEFAULT_DATADIR}}
+FREND_USER=${FREND_USER:-${FREN_USER:-fren}}
+FREND_GROUP=${FREND_GROUP:-fren}
+FREND_BIN=${FREND_BIN:-/usr/bin/frend}
+FREND_NICE=${FREND_NICE:-${NICELEVEL:-0}}
+FREND_OPTS="${FREND_OPTS:-${FREN_OPTS}}"
+
+name="Fren Core Daemon"
+description="Fren cryptocurrency P2P network daemon"
+
+command="/usr/bin/frend"
+command_args="-pid=\"${FREND_PIDFILE}\" \
+		-conf=\"${FREND_CONFIGFILE}\" \
+		-datadir=\"${FREND_DATADIR}\" \
+		-daemon \
+		${FREND_OPTS}"
+
+required_files="${FREND_CONFIGFILE}"
+start_stop_daemon_args="-u ${FREND_USER} \
+			-N ${FREND_NICE} -w 2000"
+pidfile="${FREND_PIDFILE}"
+
+# The retry schedule to use when stopping the daemon. Could be either
+# a timeout in seconds or multiple signal/timeout pairs (like
+# "SIGKILL/180 SIGTERM/300")
+retry="${FREND_SIGTERM_TIMEOUT}"
+
+depend() {
+	need localmount net
+}
+
+# verify
+# 1) that the datadir exists and is writable (or create it)
+# 2) that a directory for the pid exists and is writable
+# 3) ownership and permissions on the config file
+start_pre() {
+	checkpath \
+	-d \
+	--mode 0750 \
+	--owner "${FREND_USER}:${FREND_GROUP}" \
+	"${FREND_DATADIR}"
+
+	checkpath \
+	-d \
+	--mode 0755 \
+	--owner "${FREND_USER}:${FREND_GROUP}" \
+	"${FREND_PIDDIR}"
+
+	checkpath -f \
+	-o ${FREND_USER}:${FREND_GROUP} \
+	-m 0660 \
+	${FREND_CONFIGFILE}
+
+	checkconfig || return 1
+}
+
+checkconfig()
+{
+	if ! grep -qs '^rpcpassword=' "${FREND_CONFIGFILE}" ; then
+		eerror ""
+		eerror "ERROR: You must set a secure rpcpassword to run frend."
+		eerror "The setting must appear in ${FREND_CONFIGFILE}"
+		eerror ""
+		eerror "This password is security critical to securing wallets "
+		eerror "and must not be the same as the rpcuser setting."
+		eerror "You can generate a suitable random password using the following "
+		eerror "command from the shell:"
+		eerror ""
+		eerror "bash -c 'tr -dc a-zA-Z0-9 < /dev/urandom | head -c32 && echo'"
+		eerror ""
+		eerror "It is recommended that you also set alertnotify so you are "
+		eerror "notified of problems:"
+		eerror ""
+		eerror "ie: alertnotify=echo %%s | mail -s \"Fren Alert\"" \
+			"admin@foo.com"
+		eerror ""
+		return 1
+	fi
+}
