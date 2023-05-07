@@ -165,10 +165,10 @@ public:
 
 
         // The best chain should have at least this much work
-        // consensus.nMinimumChainWork = uint256S("0x0"); // Block 22
+        consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000000000000000000000100b500"); // Block 180
 
-        // By default assume that the signatures in ancestors of this block are valid. Block# 1040000
-        // consensus.defaultAssumeValid = uint256S("0x00000015a8b444368ed8fdf3a0f03620a64d971e0bbca34412ba1a0a9b59ea64"); // Block genesis
+        // By default assume that the signatures in ancestors of this block are valid. Block# 180
+        consensus.defaultAssumeValid = uint256S("0x00c1d3ead56cf13f9bcfdf187e9fca725fa837fc5e32a7174c8329d08399a4e9"); // Block genesis
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -275,16 +275,16 @@ public:
         checkpointData = (CCheckpointData) {
             {
                 { 0, uint256S("0x00000022bcd010da6b8d3c2c0e80229ea1f5c0bb4960678d3c26bab2c9b23b9a")},
+                { 180, uint256S("0x00c1d3ead56cf13f9bcfdf187e9fca725fa837fc5e32a7174c8329d08399a4e9")}
             }
         };
 
-		// 20969961 transactions as of block #2383625 at 2022-07-28 22:02:22 (UTC)
-		// previously set at 6709969 txns by time 1577939273 ==>
+
         chainTxData = ChainTxData{
             // Update as we know more about the contents of the Fren chain
-            // Stats as of 0x00000000000016ec03d8d93f9751323bcc42137b1b4df67e6a11c4394fd8e5ad window size 43200
-            nGenesisTime, // * UNIX timestamp of last known number of transactions
-            0,    // * total number of transactions between genesis and that timestamp
+            // Stats as of 
+            1683489877, // * UNIX timestamp of last known number of transactions
+            180,    // * total number of transactions between genesis and that timestamp
                         //   (the tx=... number in the SetBestChain debug.log lines)
             0.1       // * estimated number of transactions per second after that timestamp
         };
