@@ -15,7 +15,7 @@ Frencoin is designed to make Frens.
 
 Thank you to the Bitcoin and Ravencoin developers. Frencoin was launched based on the hard work and continuous effort of over 430 Bitcoin and Ravencoin developers who made over 16,500 commits by the date of the Frencoin code fork. Thank you frens for making a secure network and for your support of free and open source software development. 
 
-> **Abstract**. Frencoin is a blockchain and platform optimized for making frens and for one fren to send another fren lots of frens. Based development and testing on the UTXO model of the Bitcoin and Ravencoin protocol, Frencoin is built on a fork of the Bitcoin and Ravencoin code. Key changes include a block reward time of 20 seconds, a change in the number of Frens issued, Dogecoin distribution and halving time schedule, possible future addition of token creation, and possible future messaging capabilities. Frencoin is free and open source. All Frencoin (FRENS) are fairly issued and mined publicly and transparently using Proof of Work (POW) using the KAWPOW algorithm which was created for Ravencoin. There is no private, public, founder, or developer allocation set aside. Frencoin is intended to prioritize security, user control, privacy, and censorship resistance. It is open to use and development in any jurisdiction.
+> **Abstract**. Frencoin is a blockchain and platform optimized for making frens and for one fren to send another fren lots of frens. Based development and testing on the UTXO model of the Bitcoin and Ravencoin protocol, Frencoin is built on a fork of the Bitcoin and Ravencoin code. Key changes include a block reward time of 30 seconds, a change in the number of Frens issued, Dogecoin distribution and halving time schedule, possible future addition of token creation, and possible future messaging capabilities. Frencoin is free and open source. All Frencoin (FRENS) are fairly issued and mined publicly and transparently using Proof of Work (POW) using the KAWPOW algorithm which was created for Ravencoin. There is no private, public, founder, or developer allocation set aside. Frencoin is intended to prioritize security, user control, privacy, and censorship resistance. It is open to use and development in any jurisdiction.
 
 ## 1. Introduction
 
@@ -23,7 +23,7 @@ Frencoin is designed to make lots of frens.
 
 ## 2. Background 
 
-If it is not Proof-Of-Work then it's a scam. If it is Proof-Of-Work then it is Proof-Of-Fren.
+If it is Proof-Of-Work then it is Proof-Of-Fren.
 
 ## 3. Quotes and Ideas
 
@@ -34,7 +34,7 @@ If it is not Proof-Of-Work then it's a scam. If it is Proof-Of-Work then it is P
 
 ## 4. Frencoin Launch and Algorithm
 
-Frencoin was announced on April 30, 2023 and code was released for building the nodes for mining or making frens.
+Frencoin was announced on May 7, 2023 and code was released for building the nodes for mining or making frens.
 
 ## 5. Additional
 

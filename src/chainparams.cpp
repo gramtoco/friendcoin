@@ -165,85 +165,25 @@ public:
 
 
         // The best chain should have at least this much work
-        consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000000000000000000000100b500"); // Block 180
+        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000519dcdf63d30"); // Block 19521
 
-        // By default assume that the signatures in ancestors of this block are valid. Block# 180
-        consensus.defaultAssumeValid = uint256S("0x00c1d3ead56cf13f9bcfdf187e9fca725fa837fc5e32a7174c8329d08399a4e9"); // Block genesis
+        // By default assume that the signatures in ancestors of this block are valid. 
+        consensus.defaultAssumeValid = uint256S("0x00000001952b6f1d0d1fec21bda9173de9a705852d1da8688cfd8df622d929a8"); // Block 19521
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 32-bit integer with any alignment.
          */
-        pchMessageStart[0] = 0x46; // F
-        pchMessageStart[1] = 0x52; // R
-        pchMessageStart[2] = 0x45; // E
-        pchMessageStart[3] = 0x4E; // N
+        pchMessageStart[0] = 0x41; // A
+        pchMessageStart[1] = 0x50; // P
+        pchMessageStart[2] = 0x55; // U
+        pchMessageStart[3] = 0x53; // S
         nDefaultPort = 4207;
         nPruneAfterHeight = 100000;
 
         uint32_t nGenesisTime = 1683401142;  // Sat, 06 May 2023 
 
-        // This is used inorder to mine the genesis block. Once found, we can use the nonce and block hash found to create a valid genesis block
-        // /////////////////////////////////////////////////////////////////
-
-
-        // arith_uint256 test;
-        // bool fNegative;
-        // bool fOverflow;
-        // test.SetCompact(0x1e00ffff, &fNegative, &fOverflow);
-        // std::cout << "Test threshold: " << test.GetHex() << "\n\n";
-
-        // int genesisNonce = 0;
-        // uint256 TempHashHolding = uint256S("0x0000000000000000000000000000000000000000000000000000000000000000");
-        // uint256 BestBlockHash = uint256S("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
-        // for (int i=0;i<40000000;i++) {
-        //     genesis = CreateGenesisBlock(nGenesisTime, i, 0x1e00ffff, 4, 2000000 * COIN);
-        //     //genesis.hashPrevBlock = TempHashHolding;
-        //     // Depending on when the timestamp is on the genesis block. You will need to use GetX16RHash or GetX16RV2Hash. Replace GetHash() with these below
-        //     consensus.hashGenesisBlock = genesis.GetX16RV2Hash();
-
-        //     arith_uint256 BestBlockHashArith = UintToArith256(BestBlockHash);
-        //     if (UintToArith256(consensus.hashGenesisBlock) < BestBlockHashArith) {
-        //         BestBlockHash = consensus.hashGenesisBlock;
-        //         std::cout << BestBlockHash.GetHex() << " Nonce: " << i << "\n";
-        //         std::cout << "   PrevBlockHash: " << genesis.hashPrevBlock.GetHex() << "\n";
-        //     }
-
-        //     TempHashHolding = consensus.hashGenesisBlock;
-
-        //     if (BestBlockHashArith < test) {
-        //         genesisNonce = i - 1;
-        //         break;
-        //     }
-        //     //std::cout << consensus.hashGenesisBlock.GetHex() << "\n";
-        // }
-        // std::cout << "\n";
-        // std::cout << "\n";
-        // std::cout << "\n";
-
-        // std::cout << "Main hashGenesisBlock to 0x" << BestBlockHash.GetHex() << std::endl;
-        // std::cout << "Genesis Nonce to " << genesisNonce << std::endl;
-        // std::cout << "Genesis Merkle " << genesis.hashMerkleRoot.GetHex() << std::endl;
-
-        // std::cout << "\n";
-        // std::cout << "\n";
-        // int totalHits = 0;
-        // double totalTime = 0.0;
-
-        // for(int x = 0; x < 16; x++) {
-        //     totalHits += algoHashHits[x];
-        //     totalTime += algoHashTotal[x];
-        //     std::cout << "hash algo " << x << " hits " << algoHashHits[x] << " total " << algoHashTotal[x] << " avg " << algoHashTotal[x]/algoHashHits[x] << std::endl;
-        // }
-
-        // std::cout << "Totals: hash algo " <<  " hits " << totalHits << " total " << totalTime << " avg " << totalTime/totalHits << std::endl;
-
-        // genesis.hashPrevBlock = TempHashHolding;
-
-        // return;
-
-        // /////////////////////////////////////////////////////////////////
 
         genesis = CreateGenesisBlock(nGenesisTime, 11859329, 0x1e00ffff, 4, 2000000 * COIN);
 
@@ -275,7 +215,10 @@ public:
         checkpointData = (CCheckpointData) {
             {
                 { 0, uint256S("0x00000022bcd010da6b8d3c2c0e80229ea1f5c0bb4960678d3c26bab2c9b23b9a")},
-                { 180, uint256S("0x00c1d3ead56cf13f9bcfdf187e9fca725fa837fc5e32a7174c8329d08399a4e9")}
+                { 180, uint256S("0x00c1d3ead56cf13f9bcfdf187e9fca725fa837fc5e32a7174c8329d08399a4e9")},
+                { 4391, uint256S("0x00000000e7490492559fb07a78e5a7181739be4ad262db016b197f04a0e06ed6")},
+                { 8344, uint256S("0x00000000e4f9c29ef961026e681750fd310347e48dfa338c406fa78b553b1ff6")},
+                { 19521, uint256S("0x00000001952b6f1d0d1fec21bda9173de9a705852d1da8688cfd8df622d929a8")}
             }
         };
 
@@ -283,10 +226,10 @@ public:
         chainTxData = ChainTxData{
             // Update as we know more about the contents of the Fren chain
             // Stats as of 
-            1683489877, // * UNIX timestamp of last known number of transactions
-            180,    // * total number of transactions between genesis and that timestamp
-                        //   (the tx=... number in the SetBestChain debug.log lines)
-            0.1       // * estimated number of transactions per second after that timestamp
+            1684086163, // * UNIX timestamp of last known number of transactions
+            19631,    // * total number of transactions between genesis and that timestamp
+                        //   getchaintxstats(the tx=... number in the SetBestChain debug.log lines)
+            0.032       // * estimated number of transactions per second after that timestamp
         };
 
         /** FRENS Start **/

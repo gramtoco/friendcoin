@@ -18,7 +18,7 @@ Sometime in the future.
 
 #### Block Size
 
-Fren may increase the blocksize from 2 MB up to 2000000 MB (by year 2051) to allow for more on-chain transactions.
+Fren may increase the blocksize from 1 MB up to 2000000 MB (by year 2051) to allow for more on-chain transactions.
 
 
 ### Phase 3 - Compatibility Mode
