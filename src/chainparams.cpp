@@ -165,10 +165,10 @@ public:
 
 
         // The best chain should have at least this much work
-        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000519dcdf63d30"); // Block 19521
+        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000002283df82072c4"); // Block 37211
 
         // By default assume that the signatures in ancestors of this block are valid. 
-        consensus.defaultAssumeValid = uint256S("0x00000001952b6f1d0d1fec21bda9173de9a705852d1da8688cfd8df622d929a8"); // Block 19521
+        consensus.defaultAssumeValid = uint256S("0x000000001c9bea4630d650d120ed3101f973a0795fb8506eed0f4fc1e6b891ae"); // Block 37211
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -192,7 +192,7 @@ public:
         assert(consensus.hashGenesisBlock == uint256S("0x00000022bcd010da6b8d3c2c0e80229ea1f5c0bb4960678d3c26bab2c9b23b9a"));
         assert(genesis.hashMerkleRoot == uint256S("826ffa0d97ee1c9b8ce96f862673b89be0a3e3a4d0be3b42798e776e51b77eb5"));
 
-        vSeeds.emplace_back("seed.frencoin.org", false);
+        vSeeds.emplace_back("seed.frencoin.net", false);
         vSeeds.emplace_back("fren.ignorelist.com", false);
         vSeeds.emplace_back("frenseed.ignorelist.com ", false);
 
@@ -218,7 +218,8 @@ public:
                 { 180, uint256S("0x00c1d3ead56cf13f9bcfdf187e9fca725fa837fc5e32a7174c8329d08399a4e9")},
                 { 4391, uint256S("0x00000000e7490492559fb07a78e5a7181739be4ad262db016b197f04a0e06ed6")},
                 { 8344, uint256S("0x00000000e4f9c29ef961026e681750fd310347e48dfa338c406fa78b553b1ff6")},
-                { 19521, uint256S("0x00000001952b6f1d0d1fec21bda9173de9a705852d1da8688cfd8df622d929a8")}
+                { 19521, uint256S("0x00000001952b6f1d0d1fec21bda9173de9a705852d1da8688cfd8df622d929a8")},
+                { 37211, uint256S("0x000000001c9bea4630d650d120ed3101f973a0795fb8506eed0f4fc1e6b891ae")}
             }
         };
 
@@ -226,10 +227,10 @@ public:
         chainTxData = ChainTxData{
             // Update as we know more about the contents of the Fren chain
             // Stats as of 
-            1684086163, // * UNIX timestamp of last known number of transactions
-            19631,    // * total number of transactions between genesis and that timestamp
+            1684619005, // * UNIX timestamp of last known number of transactions
+            38186,    // * total number of transactions between genesis and that timestamp
                         //   getchaintxstats(the tx=... number in the SetBestChain debug.log lines)
-            0.032       // * estimated number of transactions per second after that timestamp
+            0.033       // * estimated number of transactions per second after that timestamp
         };
 
         /** FRENS Start **/

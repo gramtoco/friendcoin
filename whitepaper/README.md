@@ -4,7 +4,7 @@
 
 
 <p align="center">
-Aputoshi<br>
+Aputoshii<br>
         <br>
 http://www.frencoin.org<br>
 30 APR 2023
