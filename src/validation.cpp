@@ -1328,7 +1328,7 @@ CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
         return 10000 * COIN;
 
     CAmount nSubsidy = 2000000 * COIN;
-    // Subsidy is cut in half every 300,000 blocks with a remaining tail emission after the sixth event.
+    // Subsidy is cut in half every 100,000 blocks with a remaining tail emission after the sixth event.
     nSubsidy >>= halvings;
     return nSubsidy;
 }

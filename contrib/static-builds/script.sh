@@ -29,7 +29,7 @@ cd ~/
 # Removes any existing builds and starts clean WARNING
 rm -rf ~/frencoin ~/sign ~/release
 
-git clone https://github.com/Apushii/Frencoin
+git clone https://github.com/Apushii/frencoin
 cd ~/frencoin
 git checkout $BRANCH
 
