@@ -11,11 +11,17 @@ All Frencoin FREN are fairly issued being mined publicly and transparently using
 #### Block Halvening and Reduction Schedule
 
 Block  1 — 99,999: 2,000,000 FRENs
+
 Block 100,000 — 199,999: 1,000,000 FRENs
+
 Block 200,000 — 299,999: 500,000 FRENs
+
 Block 300,000 — 399,999: 250,000 FRENs
+
 Block 400,000 — 499,999: 125,000 FRENs
+
 Block 500,000 — 599,999: 62,500 FRENs
+
 Block 600,000+: 10,000 FRENs Forever tail emission
 
 #### Circulating and Maximum Supply 
