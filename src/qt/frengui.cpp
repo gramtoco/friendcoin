@@ -1894,6 +1894,6 @@ void FrenGUI::mnemonic()
 
 void FrenGUI::getLatestVersion()
 {
-    versionRequest->setUrl(QUrl("https://api.github.com/repos/FrenProject/Frencoin/releases"));
+    versionRequest->setUrl(QUrl("https://api.github.com/repos/apushii/frencoin/releases"));
     networkVersionManager->get(*versionRequest);
 }
