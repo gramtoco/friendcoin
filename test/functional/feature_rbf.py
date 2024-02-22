@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
 # Copyright (c) 2014-2016 The Bitcoin Core developers
-# Copyright (c) 2017-2020 The Raven Core developers
-# Copyright (c) 2023 The Fren Core developers
+# Copyright (c) 2017-2020 The Pejecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 """Test the RBF code."""
 
-from test_framework.test_framework import FrenTestFramework
+from test_framework.test_framework import PejecoinTestFramework
 from test_framework.util import satoshi_round, assert_raises_rpc_error, assert_equal, Decimal
 from test_framework.script import CScript
 from test_framework.mininode import COIN, CTransaction, CTxIn, COutPoint, CTxOut
@@ -65,7 +64,7 @@ def make_utxo(node, amount, confirmed=True, script_pub_key=CScript([1])):
     return COutPoint(int(txid, 16), 0)
 
 
-class ReplaceByFeeTest(FrenTestFramework):
+class ReplaceByFeeTest(PejecoinTestFramework):
 
     def set_test_params(self):
         self.num_nodes = 2
@@ -146,7 +145,7 @@ class ReplaceByFeeTest(FrenTestFramework):
         # This will raise an exception due to transaction replacement being disabled
         assert_raises_rpc_error(-26, "txn-mempool-conflict", self.nodes[1].sendrawtransaction, tx1b_hex, True)
 
-        # Extra 0.1 FRENS fee
+        # Extra 0.1 PEJE fee
         tx1b = CTransaction()
         tx1b.vin = [CTxIn(tx0_outpoint, n_sequence=0)]
         tx1b.vout = [CTxOut(int(0.9 * COIN), CScript([b'b']))]
@@ -171,7 +170,7 @@ class ReplaceByFeeTest(FrenTestFramework):
     def test_doublespend_chain(self):
         """Doublespend of a long chain"""
 
-        initial_n_value = 5000 * COIN
+        initial_n_value = 100 * COIN
         tx0_outpoint = make_utxo(self.nodes[0], initial_n_value)
 
         prevout = tx0_outpoint
@@ -188,7 +187,7 @@ class ReplaceByFeeTest(FrenTestFramework):
             prevout = COutPoint(int(txid, 16), 0)
 
         # Whether the double-spend is allowed is evaluated by including all
-        # child fees - 40 FRENS - so this attempt is rejected.
+        # child fees - 40 PEJE - so this attempt is rejected.
         dbl_tx = CTransaction()
         dbl_tx.vin = [CTxIn(tx0_outpoint, n_sequence=0)]
         dbl_tx.vout = [CTxOut(initial_n_value - 30 * COIN, CScript([1]))]
@@ -258,7 +257,7 @@ class ReplaceByFeeTest(FrenTestFramework):
         # This will raise an exception due to insufficient fee
         assert_raises_rpc_error(-26, "insufficient fee", self.nodes[0].sendrawtransaction, dbl_tx_hex, True)
 
-        # 1 FRENS fee is enough
+        # 1 PEJE fee is enough
         dbl_tx = CTransaction()
         dbl_tx.vin = [CTxIn(tx0_outpoint, n_sequence=0)]
         dbl_tx.vout = [CTxOut(initial_n_value - fee * n - 1 * COIN, CScript([1]))]

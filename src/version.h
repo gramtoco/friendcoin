@@ -1,11 +1,10 @@
 // Copyright (c) 2012-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2020 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2020 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_VERSION_H
-#define FREN_VERSION_H
+#ifndef PEJECOIN_VERSION_H
+#define PEJECOIN_VERSION_H
 
 /**
  * network protocol versioning
@@ -62,4 +61,4 @@ static const int ASSETDATA_VERSION_UPDATED = 70020;
 static const int MESSAGING_RESTRICTED_ASSETS_VERSION = 70026;
 
 
-#endif // FREN_VERSION_H
+#endif // PEJECOIN_VERSION_H

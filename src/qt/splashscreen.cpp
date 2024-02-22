@@ -1,11 +1,10 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2021 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2021 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include "config/fren-config.h"
+#include "config/pejecoin-config.h"
 #endif
 
 #include "splashscreen.h"
@@ -54,7 +53,7 @@ SplashScreen::SplashScreen(const NetworkStyle* networkStyle)
     // define text to place
     QString titleText       = tr(PACKAGE_NAME);
     QString versionText     = QString("Version %1").arg(QString::fromStdString(FormatFullVersion()));
-    QString copyrightText   = QString::fromUtf8(CopyrightHolders(strprintf("\xc2\xA9 %u-%u ", 2022, COPYRIGHT_YEAR)).c_str());
+    QString copyrightText   = QString::fromUtf8(CopyrightHolders(strprintf("\xc2\xA9 %u-%u ", 2009, COPYRIGHT_YEAR)).c_str());
     QString titleAddText    = networkStyle->getTitleAddText();
 
     QString font            = QApplication::font().toString();
@@ -78,8 +77,8 @@ SplashScreen::SplashScreen(const NetworkStyle* networkStyle)
     QRect rGradient(QPoint(0,0), splashSize);
     pixPaint.fillRect(rGradient, gradient);
 
-    // draw the fren icon, expected size of PNG: 1024x1024
-    QRect rectIcon(QPoint(-40,0), QSize(310,310));
+    // draw the pejecoin icon, expected size of PNG: 1024x1024
+    QRect rectIcon(QPoint(30,40), QSize(200,200));
 
     const QSize requiredSize(1024,1024);
     QPixmap icon(networkStyle->getSplashIcon().pixmap(requiredSize));

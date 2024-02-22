@@ -1,12 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2020 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2020 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_CHAIN_H
-#define FREN_CHAIN_H
+#ifndef PEJECOIN_CHAIN_H
+#define PEJECOIN_CHAIN_H
 
 #include "arith_uint256.h"
 #include "primitives/block.h"
@@ -522,4 +521,4 @@ public:
     CBlockIndex* FindEarliestAtLeast(int64_t nTime) const;
 };
 
-#endif // FREN_CHAIN_H
+#endif // PEJECOIN_CHAIN_H

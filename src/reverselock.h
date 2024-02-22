@@ -1,11 +1,10 @@
 // Copyright (c) 2015-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_REVERSELOCK_H
-#define FREN_REVERSELOCK_H
+#ifndef PEJECOIN_REVERSELOCK_H
+#define PEJECOIN_REVERSELOCK_H
 
 /**
  * An RAII-style reverse lock. Unlocks on construction and locks on destruction.
@@ -33,4 +32,4 @@ private:
     Lock templock;
 };
 
-#endif // FREN_REVERSELOCK_H
+#endif // PEJECOIN_REVERSELOCK_H

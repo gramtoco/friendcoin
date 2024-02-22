@@ -1,11 +1,11 @@
 Sample configuration files for:
 ```
-SystemD: frend.service
-Upstart: frend.conf
-OpenRC:  frend.openrc
-         frend.openrcconf
-CentOS:  frend.init
-OS X:    org.fren.frend.plist
+SystemD: pejecoind.service
+Upstart: pejecoind.conf
+OpenRC:  pejecoind.openrc
+         pejecoind.openrcconf
+CentOS:  pejecoind.init
+OS X:    org.pejecoin.pejecoind.plist
 ```
 have been made available to assist packagers in creating node packages here.
 

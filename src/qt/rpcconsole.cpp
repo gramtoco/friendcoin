@@ -1,11 +1,10 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2021 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2021 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include "config/fren-config.h"
+#include "config/pejecoin-config.h"
 #endif
 
 #include "rpcconsole.h"
@@ -773,7 +772,7 @@ void RPCConsole::buildParameterlist(QString arg)
     // Append repair parameter to command line.
     args.append(arg);
 
-    // Send command-line arguments to FrenGUI::handleRestart()
+    // Send command-line arguments to PejecoinGUI::handleRestart()
     Q_EMIT handleRestart(args);
 }
 

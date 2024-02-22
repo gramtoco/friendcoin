@@ -2,18 +2,17 @@
 # Copyright (c) 2010 ArtForz -- public domain half-a-node
 # Copyright (c) 2012 Jeff Garzik
 # Copyright (c) 2010-2016 The Bitcoin Core developers
-# Copyright (c) 2017-2020 The Raven Core developers
-# Copyright (c) 2023 The Fren Core developers
+# Copyright (c) 2017-2020 The Pejecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 """
-Fren P2P network half-a-node.
+Pejecoin P2P network half-a-node.
 
 This python code was modified from ArtForz' public domain  half-a-node, as
 found in the mini-node branch of http://github.com/jgarzik/pynode.
 
-NodeConn: an object which manages p2p connectivity to a fren node
+NodeConn: an object which manages p2p connectivity to a pejecoin node
 
 NodeConnCB: a base class that describes the interface for receiving
             callbacks with network messages from a NodeConn
@@ -46,7 +45,7 @@ mininode_lock = RLock()
 
 
 class NodeConnCB:
-    """Callback and helper functions for P2P connection to a frend node.
+    """Callback and helper functions for P2P connection to a pejecoind node.
 
     Individual test cases should subclass this and override the on_* methods
     if they want to alter message handling behaviour.
@@ -307,7 +306,7 @@ class NodeConn(asyncore.dispatcher):
             vt.addrFrom.port = 0
             self.send_message(vt, True)
 
-        logger.info('Connecting to Fren Node: %s:%d' % (self.dstaddr, self.dstport))
+        logger.info('Connecting to Pejecoin Node: %s:%d' % (self.dstaddr, self.dstport))
 
         try:
             self.connect((dstaddr, dstport))

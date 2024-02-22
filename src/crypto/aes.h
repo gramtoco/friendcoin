@@ -1,13 +1,12 @@
 // Copyright (c) 2015-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 //
 // C++ wrapper around ctaes, a constant-time AES implementation
 
-#ifndef FREN_CRYPTO_AES_H
-#define FREN_CRYPTO_AES_H
+#ifndef PEJECOIN_CRYPTO_AES_H
+#define PEJECOIN_CRYPTO_AES_H
 
 extern "C" {
 #include "crypto/ctaes/ctaes.h"
@@ -117,4 +116,4 @@ private:
     unsigned char iv[AES_BLOCKSIZE];
 };
 
-#endif // FREN_CRYPTO_AES_H
+#endif // PEJECOIN_CRYPTO_AES_H

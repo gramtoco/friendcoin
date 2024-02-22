@@ -1,6 +1,6 @@
 // Automatically generated file. Do not modify.
-#ifndef FREN_UNIVALUE_UNIVALUE_ESCAPES_H
-#define FREN_UNIVALUE_UNIVALUE_ESCAPES_H
+#ifndef PEJECOIN_UNIVALUE_UNIVALUE_ESCAPES_H
+#define PEJECOIN_UNIVALUE_UNIVALUE_ESCAPES_H
 static const char *escapes[256] = {
 	"\\u0000",
 	"\\u0001",
@@ -259,4 +259,4 @@ static const char *escapes[256] = {
 	NULL,
 	NULL,
 };
-#endif // FREN_UNIVALUE_UNIVALUE_ESCAPES_H
+#endif // PEJECOIN_UNIVALUE_UNIVALUE_ESCAPES_H

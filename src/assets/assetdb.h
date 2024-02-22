@@ -1,10 +1,9 @@
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_ASSETDB_H
-#define FREN_ASSETDB_H
+#ifndef PEJECOIN_ASSETDB_H
+#define PEJECOIN_ASSETDB_H
 
 #include "fs.h"
 #include "serialize.h"
@@ -96,4 +95,4 @@ public:
 };
 
 
-#endif //FREN_ASSETDB_H
+#endif //PEJECOIN_ASSETDB_H

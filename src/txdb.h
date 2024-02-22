@@ -1,12 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2021 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2021 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_TXDB_H
-#define FREN_TXDB_H
+#ifndef PEJECOIN_TXDB_H
+#define PEJECOIN_TXDB_H
 
 #include "coins.h"
 #include "dbwrapper.h"
@@ -150,4 +149,4 @@ public:
     bool LoadBlockIndexGuts(const Consensus::Params& consensusParams, std::function<CBlockIndex*(const uint256&)> insertBlockIndex);
 };
 
-#endif // FREN_TXDB_H
+#endif // PEJECOIN_TXDB_H

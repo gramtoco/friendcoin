@@ -1,12 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2021 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2021 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_CONSENSUS_PARAMS_H
-#define FREN_CONSENSUS_PARAMS_H
+#ifndef PEJECOIN_CONSENSUS_PARAMS_H
+#define PEJECOIN_CONSENSUS_PARAMS_H
 
 #include "uint256.h"
 #include <map>
@@ -17,7 +16,7 @@ namespace Consensus {
 enum DeploymentPos
 {
     DEPLOYMENT_TESTDUMMY,
-    DEPLOYMENT_ASSETS, // Deployment of RIP2
+    DEPLOYMENT_ASSETS, // Deployment of HIP2
     DEPLOYMENT_MSG_REST_ASSETS, // Delpoyment of RIP5 and Restricted assets
     DEPLOYMENT_TRANSFER_SCRIPT_SIZE,
     DEPLOYMENT_ENFORCE_VALUE,
@@ -54,6 +53,7 @@ struct Params {
     bool nBIP34Enabled;
     bool nBIP65Enabled;
     bool nBIP66Enabled;
+    int BIP34LockedIn; //I don't know what this is for, maybe a sanity check???
     // uint256 BIP34Hash;
     /** Block height at which BIP65 becomes active */
     // int BIP65Height;
@@ -82,4 +82,4 @@ struct Params {
 };
 } // namespace Consensus
 
-#endif // FREN_CONSENSUS_PARAMS_H
+#endif // PEJECOIN_CONSENSUS_PARAMS_H

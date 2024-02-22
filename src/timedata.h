@@ -1,11 +1,10 @@
 // Copyright (c) 2014-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_TIMEDATA_H
-#define FREN_TIMEDATA_H
+#ifndef PEJECOIN_TIMEDATA_H
+#define PEJECOIN_TIMEDATA_H
 
 #include <algorithm>
 #include <assert.h>
@@ -77,4 +76,4 @@ int64_t GetTimeOffset();
 int64_t GetAdjustedTime();
 void AddTimeData(const CNetAddr& ip, int64_t nTime);
 
-#endif // FREN_TIMEDATA_H
+#endif // PEJECOIN_TIMEDATA_H

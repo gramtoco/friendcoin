@@ -1,25 +1,25 @@
 dnl require autoconf 2.60 (AS_ECHO/AS_ECHO_N)
 AC_PREREQ([2.60])
-define(_CLIENT_VERSION_MAJOR, 5)
-define(_CLIENT_VERSION_MINOR, 2)
-define(_CLIENT_VERSION_REVISION, 3)
-define(_CLIENT_VERSION_BUILD,0)
+define(_CLIENT_VERSION_MAJOR, 1)
+define(_CLIENT_VERSION_MINOR, 0)
+define(_CLIENT_VERSION_REVISION, 0)
+define(_CLIENT_VERSION_BUILD, 0)
 define(_CLIENT_VERSION_RC, 0)
 define(_CLIENT_VERSION_IS_RELEASE, true)
-define(_COPYRIGHT_YEAR, 2023)
+define(_COPYRIGHT_YEAR, 2024)
 define(_COPYRIGHT_HOLDERS,[The %s developers])
-define(_COPYRIGHT_HOLDERS_SUBSTITUTION,[[Fren Core]])
-AC_INIT([Fren Core],m4_join([.], _CLIENT_VERSION_MAJOR, _CLIENT_VERSION_MINOR, _CLIENT_VERSION_REVISION, m4_if(_CLIENT_VERSION_BUILD, [0], [], _CLIENT_VERSION_BUILD))m4_if(_CLIENT_VERSION_RC, [0], [], [test]_CLIENT_VERSION_RC),[https://github.com/Apushii/Frencoin/issues],[fren],[https://frencoin.org/])
+define(_COPYRIGHT_HOLDERS_SUBSTITUTION,[[Pejecoin Core]])
+AC_INIT([Pejecoin Core],m4_join([.], _CLIENT_VERSION_MAJOR, _CLIENT_VERSION_MINOR, _CLIENT_VERSION_REVISION, m4_if(_CLIENT_VERSION_BUILD, [0], [], _CLIENT_VERSION_BUILD))m4_if(_CLIENT_VERSION_RC, [0], [], [test]_CLIENT_VERSION_RC),[https://github.com/PejecoincoinProject/Pejecoin/issues],[pejecoin],[https://pejecoin.org/])
 
 AC_CONFIG_SRCDIR([src/validation.cpp])
-AC_CONFIG_HEADERS([src/config/fren-config.h])
+AC_CONFIG_HEADERS([src/config/pejecoin-config.h])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([build-aux/m4])
 
-FREN_DAEMON_NAME=frend
-FREN_GUI_NAME=fren-qt
-FREN_CLI_NAME=fren-cli
-FREN_TX_NAME=fren-tx
+PEJECOIN_DAEMON_NAME=pejecoind
+PEJECOIN_GUI_NAME=pejecoin-qt
+PEJECOIN_CLI_NAME=pejecoin-cli
+PEJECOIN_TX_NAME=pejecoin-tx
 
 dnl Unless the user specified ARFLAGS, force it to be cr
 AC_ARG_VAR(ARFLAGS, [Flags for the archiver, defaults to <cr> if not set])
@@ -29,9 +29,9 @@ fi
 
 AC_CANONICAL_HOST
 
-AH_TOP([#ifndef FREN_CONFIG_H])
-AH_TOP([#define FREN_CONFIG_H])
-AH_BOTTOM([#endif //FREN_CONFIG_H])
+AH_TOP([#ifndef PEJECOIN_CONFIG_H])
+AH_TOP([#define PEJECOIN_CONFIG_H])
+AH_BOTTOM([#endif //PEJECOIN_CONFIG_H])
 
 dnl faketime breaks configure and is only needed for make. Disable it here.
 unset FAKETIME
@@ -301,27 +301,27 @@ CPPFLAGS="$CPPFLAGS -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS"
 
 AC_ARG_WITH([cli],
   [AS_HELP_STRING([--with-cli],
-  [build fren-cli (default=yes)])],
-  [build_fren_cli=$withval],
-  [build_fren_cli=yes])
+  [build pejecoin-cli (default=yes)])],
+  [build_pejecoin_cli=$withval],
+  [build_pejecoin_cli=yes])
 
 AC_ARG_WITH([tx],
   [AS_HELP_STRING([--with-tx],
-  [build fren-tx (default=no)])],
-  [build_fren_tx=$withval],
-  [build_fren_tx=no])
+  [build pejecoin-tx (default=no)])],
+  [build_pejecoin_tx=$withval],
+  [build_pejecoin_tx=no])
 
 AC_ARG_WITH([libs],
   [AS_HELP_STRING([--with-libs],
-  [build libraries (default=no)])],
-  [build_fren_libs=$withval],
-  [build_fren_libs=no])
+  [build libraries (default=yes)])],
+  [build_pejecoin_libs=$withval],
+  [build_pejecoin_libs=yes])
 
 AC_ARG_WITH([daemon],
   [AS_HELP_STRING([--with-daemon],
-  [build frend daemon (default=yes)])],
-  [build_frend=$withval],
-  [build_frend=yes])
+  [build pejecoind daemon (default=yes)])],
+  [build_pejecoind=$withval],
+  [build_pejecoind=yes])
 
 use_pkgconfig=yes
 case $host in
@@ -518,7 +518,7 @@ AC_C_BIGENDIAN
 dnl Check for pthread compile/link requirements
 AX_PTHREAD
 
-# The following macro will add the necessary defines to fren-config.h, but
+# The following macro will add the necessary defines to pejecoin-config.h, but
 # they also need to be passed down to any subprojects. Pull the results out of
 # the cache and add them to CPPFLAGS.
 AC_SYS_LARGEFILE
@@ -673,28 +673,6 @@ AC_LINK_IFELSE([AC_LANG_SOURCE([
   ]
 )
 
-TEMP_LDFLAGS="$LDFLAGS"
-LDFLAGS="$TEMP_LDFLAGS $PTHREAD_CFLAGS"
-AC_MSG_CHECKING([for thread_local support])
-AC_LINK_IFELSE([AC_LANG_SOURCE([
-  #include <thread>
-  static thread_local int foo = 0;
-  static void run_thread() { foo++;}
-  int main(){
-  for(int i = 0; i < 10; i++) { std::thread(run_thread).detach();}
-  return foo;
-  }
-  ])],
-  [
-    AC_DEFINE(HAVE_THREAD_LOCAL,1,[Define if thread_local is supported.])
-    AC_MSG_RESULT(yes)
-  ],
-  [
-    AC_MSG_RESULT(no)
-  ]
-)
-LDFLAGS="$TEMP_LDFLAGS"
-
 # Check for different ways of gathering OS randomness
 AC_MSG_CHECKING(for Linux getrandom syscall)
 AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <unistd.h>
@@ -745,7 +723,7 @@ AC_SUBST(LIBMEMENV)
 
 if test x$enable_wallet != xno; then
     dnl Check for libdb_cxx only if wallet enabled
-    FREN_FIND_BDB48
+    PEJECOIN_FIND_BDB48
 fi
 
 dnl Check for libminiupnpc (optional)
@@ -777,12 +755,12 @@ if test x$have_miniupnpc != xno; then
 fi
 fi
 
-FREN_QT_INIT
+PEJECOIN_QT_INIT
 
-dnl sets $fren_enable_qt, $fren_enable_qt_test, $fren_enable_qt_dbus
-FREN_QT_CONFIGURE([$use_pkgconfig], [qt5])
+dnl sets $pejecoin_enable_qt, $pejecoin_enable_qt_test, $pejecoin_enable_qt_dbus
+PEJECOIN_QT_CONFIGURE([$use_pkgconfig], [qt5])
 
-if test x$build_fren_cli$build_fren_tx$build_frend$fren_enable_qt$use_tests$use_bench = xnononononono; then
+if test x$build_pejecoin_cli$build_pejecoin_tx$build_pejecoind$pejecoin_enable_qt$use_tests$use_bench = xnononononono; then
     use_boost=no
 else
     use_boost=yes
@@ -964,11 +942,11 @@ if test x$use_pkgconfig = xyes; then
     [
       PKG_CHECK_MODULES([SSL], [libssl],, [AC_MSG_ERROR(openssl  not found.)])
       PKG_CHECK_MODULES([CRYPTO], [libcrypto],,[AC_MSG_ERROR(libcrypto  not found.)])
-      FREN_QT_CHECK([PKG_CHECK_MODULES([PROTOBUF], [protobuf], [have_protobuf=yes], [FREN_QT_FAIL(libprotobuf not found)])])
+      PEJECOIN_QT_CHECK([PKG_CHECK_MODULES([PROTOBUF], [protobuf], [have_protobuf=yes], [PEJECOIN_QT_FAIL(libprotobuf not found)])])
       if test x$use_qr != xno; then
-        FREN_QT_CHECK([PKG_CHECK_MODULES([QR], [libqrencode], [have_qrencode=yes], [have_qrencode=no])])
+        PEJECOIN_QT_CHECK([PKG_CHECK_MODULES([QR], [libqrencode], [have_qrencode=yes], [have_qrencode=no])])
       fi
-      if test x$build_fren_cli$build_fren_tx$build_frend$fren_enable_qt$use_tests != xnonononono; then
+      if test x$build_pejecoin_cli$build_pejecoin_tx$build_pejecoind$pejecoin_enable_qt$use_tests != xnonononono; then
         PKG_CHECK_MODULES([EVENT], [libevent],, [AC_MSG_ERROR(libevent not found.)])
         if test x$TARGET_OS != xwindows; then
           PKG_CHECK_MODULES([EVENT_PTHREADS], [libevent_pthreads],, [AC_MSG_ERROR(libevent_pthreads not found.)])
@@ -993,7 +971,7 @@ else
   AC_CHECK_HEADER([openssl/ssl.h],, AC_MSG_ERROR(libssl headers missing),)
   AC_CHECK_LIB([ssl],         [main],SSL_LIBS=-lssl, AC_MSG_ERROR(libssl missing))
 
-  if test x$build_fren_cli$build_fren_tx$build_frend$fren_enable_qt$use_tests != xnonononono; then
+  if test x$build_pejecoin_cli$build_pejecoin_tx$build_pejecoind$pejecoin_enable_qt$use_tests != xnonononono; then
     AC_CHECK_HEADER([event2/event.h],, AC_MSG_ERROR(libevent headers missing),)
     AC_CHECK_LIB([event],[main],EVENT_LIBS=-levent,AC_MSG_ERROR(libevent missing))
     if test x$TARGET_OS != xwindows; then
@@ -1024,10 +1002,10 @@ else
     esac
   fi
 
-  FREN_QT_CHECK(AC_CHECK_LIB([protobuf] ,[main],[PROTOBUF_LIBS=-lprotobuf], FREN_QT_FAIL(libprotobuf not found)))
+  PEJECOIN_QT_CHECK(AC_CHECK_LIB([protobuf] ,[main],[PROTOBUF_LIBS=-lprotobuf], PEJECOIN_QT_FAIL(libprotobuf not found)))
   if test x$use_qr != xno; then
-    FREN_QT_CHECK([AC_CHECK_LIB([qrencode], [main],[QR_LIBS=-lqrencode], [have_qrencode=no])])
-    FREN_QT_CHECK([AC_CHECK_HEADER([qrencode.h],, have_qrencode=no)])
+    PEJECOIN_QT_CHECK([AC_CHECK_LIB([qrencode], [main],[QR_LIBS=-lqrencode], [have_qrencode=no])])
+    PEJECOIN_QT_CHECK([AC_CHECK_HEADER([qrencode.h],, have_qrencode=no)])
   fi
 fi
 
@@ -1042,7 +1020,7 @@ dnl univalue check
 
 need_bundled_univalue=yes
 
-if test x$build_fren_cli$build_fren_tx$build_frend$fren_enable_qt$use_tests$use_bench = xnonononono; then
+if test x$build_pejecoin_cli$build_pejecoin_tx$build_pejecoind$pejecoin_enable_qt$use_tests$use_bench = xnonononono; then
   need_bundled_univalue=no
 else
 
@@ -1086,27 +1064,27 @@ AM_CONDITIONAL([EMBEDDED_UNIVALUE],[test x$need_bundled_univalue = xyes])
 AC_SUBST(UNIVALUE_CFLAGS)
 AC_SUBST(UNIVALUE_LIBS)
 
-FREN_QT_PATH_PROGS([PROTOC], [protoc],$protoc_bin_path)
+PEJECOIN_QT_PATH_PROGS([PROTOC], [protoc],$protoc_bin_path)
 
-AC_MSG_CHECKING([whether to build frend])
-AM_CONDITIONAL([BUILD_FREND], [test x$build_frend = xyes])
-AC_MSG_RESULT($build_frend)
+AC_MSG_CHECKING([whether to build pejecoind])
+AM_CONDITIONAL([BUILD_PEJECOIND], [test x$build_pejecoind = xyes])
+AC_MSG_RESULT($build_pejecoind)
 
-AC_MSG_CHECKING([whether to build fren-cli])
-AM_CONDITIONAL([BUILD_FREN_CLI], [test x$build_fren_cli = xyes])
-AC_MSG_RESULT($build_fren_cli)
+AC_MSG_CHECKING([whether to build pejecoin-cli])
+AM_CONDITIONAL([BUILD_PEJECOIN_CLI], [test x$build_pejecoin_cli = xyes])
+AC_MSG_RESULT($build_pejecoin_cli)
 
-AC_MSG_CHECKING([whether to build fren-tx])
-AM_CONDITIONAL([BUILD_FREN_TX], [test x$build_fren_tx = xyes])
-AC_MSG_RESULT($build_fren_tx)
+AC_MSG_CHECKING([whether to build pejecoin-tx])
+AM_CONDITIONAL([BUILD_PEJECOIN_TX], [test x$build_pejecoin_tx = xyes])
+AC_MSG_RESULT($build_pejecoin_tx)
 
 AC_MSG_CHECKING([whether to build libraries])
-AM_CONDITIONAL([BUILD_FREN_LIBS], [test x$build_fren_libs = xyes])
-if test x$build_fren_libs = xyes; then
+AM_CONDITIONAL([BUILD_PEJECOIN_LIBS], [test x$build_pejecoin_libs = xyes])
+if test x$build_pejecoin_libs = xyes; then
   AC_DEFINE(HAVE_CONSENSUS_LIB, 1, [Define this symbol if the consensus lib has been built])
-  AC_CONFIG_FILES([libfrenconsensus.pc:libfrenconsensus.pc.in])
+  AC_CONFIG_FILES([libpejecoinconsensus.pc:libpejecoinconsensus.pc.in])
 fi
-AC_MSG_RESULT($build_fren_libs)
+AC_MSG_RESULT($build_pejecoin_libs)
 
 AC_LANG_POP
 
@@ -1168,13 +1146,13 @@ fi
 
 dnl these are only used when qt is enabled
 BUILD_TEST_QT=""
-if test x$fren_enable_qt != xno; then
+if test x$pejecoin_enable_qt != xno; then
   dnl enable dbus support
   AC_MSG_CHECKING([whether to build GUI with support for D-Bus])
-  if test x$fren_enable_qt_dbus != xno; then
+  if test x$pejecoin_enable_qt_dbus != xno; then
     AC_DEFINE([USE_DBUS],[1],[Define if dbus support should be compiled in])
   fi
-  AC_MSG_RESULT($fren_enable_qt_dbus)
+  AC_MSG_RESULT($pejecoin_enable_qt_dbus)
 
   dnl enable qr support
   AC_MSG_CHECKING([whether to build GUI with support for QR codes])
@@ -1197,8 +1175,8 @@ if test x$fren_enable_qt != xno; then
     AC_MSG_WARN("xgettext is required to update qt translations")
   fi
 
-  AC_MSG_CHECKING([whether to build test_fren-qt])
-  if test x$use_gui_tests$fren_enable_qt_test = xyesyes; then
+  AC_MSG_CHECKING([whether to build test_pejecoin-qt])
+  if test x$use_gui_tests$pejecoin_enable_qt_test = xyesyes; then
     AC_MSG_RESULT([yes])
     BUILD_TEST_QT="yes"
   else
@@ -1208,7 +1186,7 @@ fi
 
 AM_CONDITIONAL([ENABLE_ZMQ], [test "x$use_zmq" = "xyes"])
 
-AC_MSG_CHECKING([whether to build test_fren])
+AC_MSG_CHECKING([whether to build test_pejecoin])
 if test x$use_tests = xyes; then
   AC_MSG_RESULT([yes])
   BUILD_TEST="yes"
@@ -1224,7 +1202,7 @@ else
   AC_MSG_RESULT([no])
 fi
 
-if test x$build_fren_cli$build_fren_tx$build_fren_libs$build_frend$fren_enable_qt$use_bench$use_tests = xnonononononono; then
+if test x$build_pejecoin_cli$build_pejecoin_tx$build_pejecoin_libs$build_pejecoind$pejecoin_enable_qt$use_bench$use_tests = xnonononononono; then
   AC_MSG_ERROR([No targets! Please specify at least one of: --with-cli --with-tx --with-libs --with-daemon --with-gui --enable-bench or --enable-tests])
 fi
 
@@ -1233,7 +1211,7 @@ AM_CONDITIONAL([BUILD_DARWIN], [test x$BUILD_OS = xdarwin])
 AM_CONDITIONAL([TARGET_WINDOWS], [test x$TARGET_OS = xwindows])
 AM_CONDITIONAL([ENABLE_WALLET],[test x$enable_wallet = xyes])
 AM_CONDITIONAL([ENABLE_TESTS],[test x$BUILD_TEST = xyes])
-AM_CONDITIONAL([ENABLE_QT],[test x$fren_enable_qt = xyes])
+AM_CONDITIONAL([ENABLE_QT],[test x$pejecoin_enable_qt = xyes])
 AM_CONDITIONAL([ENABLE_QT_TESTS],[test x$BUILD_TEST_QT = xyes])
 AM_CONDITIONAL([ENABLE_BENCH],[test x$use_bench = xyes])
 AM_CONDITIONAL([USE_QRCODE], [test x$use_qr = xyes])
@@ -1262,10 +1240,10 @@ AC_SUBST(COPYRIGHT_YEAR, _COPYRIGHT_YEAR)
 AC_SUBST(COPYRIGHT_HOLDERS, "_COPYRIGHT_HOLDERS")
 AC_SUBST(COPYRIGHT_HOLDERS_SUBSTITUTION, "_COPYRIGHT_HOLDERS_SUBSTITUTION")
 AC_SUBST(COPYRIGHT_HOLDERS_FINAL, "_COPYRIGHT_HOLDERS_FINAL")
-AC_SUBST(FREN_DAEMON_NAME)
-AC_SUBST(FREN_GUI_NAME)
-AC_SUBST(FREN_CLI_NAME)
-AC_SUBST(FREN_TX_NAME)
+AC_SUBST(PEJECOIN_DAEMON_NAME)
+AC_SUBST(PEJECOIN_GUI_NAME)
+AC_SUBST(PEJECOIN_CLI_NAME)
+AC_SUBST(PEJECOIN_TX_NAME)
 
 AC_SUBST(RELDFLAGS)
 AC_SUBST(COMPAT_LDFLAGS)
@@ -1296,7 +1274,7 @@ AC_CONFIG_FILES([contrib/devtools/split-debug.sh],[chmod +x contrib/devtools/spl
 AM_COND_IF([HAVE_DOXYGEN], [AC_CONFIG_FILES([doc/Doxyfile])])
 AC_CONFIG_LINKS([contrib/filter-lcov.py:contrib/filter-lcov.py])
 AC_CONFIG_LINKS([test/functional/test_runner.py:test/functional/test_runner.py])
-AC_CONFIG_LINKS([test/util/fren-util-test.py:test/util/fren-util-test.py])
+AC_CONFIG_LINKS([test/util/pejecoin-util-test.py:test/util/pejecoin-util-test.py])
 AC_CONFIG_LINKS([src/crypto/md_helper.c:src/crypto/md_helper.c])
 
 dnl boost's m4 checks do something really nasty: they export these vars. As a
@@ -1352,12 +1330,12 @@ esac
 
 echo
 echo "Options used to compile and link:"
-echo "  build fren-cli = $build_fren_cli"
-echo "  build fren-tx  = $build_fren_tx"
+echo "  build pejecoin-cli = $build_pejecoin_cli"
+echo "  build pejecoin-tx  = $build_pejecoin_tx"
 echo "  with wallet     = $enable_wallet"
-echo "  with gui / qt   = $fren_enable_qt"
-if test x$fren_enable_qt != xno; then
-    echo "    qt version    = $fren_qt_got_major_vers"
+echo "  with gui / qt   = $pejecoin_enable_qt"
+if test x$pejecoin_enable_qt != xno; then
+    echo "    qt version    = $pejecoin_qt_got_major_vers"
     echo "    with qr       = $use_qr"
 fi
 echo "  with zmq        = $use_zmq"

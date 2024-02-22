@@ -20,18 +20,18 @@ import json
 import logging
 
 
-#Set this to your fren-cli program
-cli = "fren-cli"
+#Set this to your pejecoin-cli program
+cli = "pejecoin-cli"
 
 mode = "-main"
-rpc_port = 4206
+rpc_port = 9766
 
 #mode = "-testnet"
-#rpc_port = 14206
+#rpc_port = 12024
 #mode =  "-regtest"
-#rpc_port = 18444
+#rpc_port = 22024
 
-#Set this information in your fren.conf file (in datadir, not testnet6)
+#Set this information in your pejecoin.conf file (in datadir, not testnet6)
 rpc_user = 'rpcuser'
 rpc_pass = 'rpcpass555'
 
@@ -156,7 +156,7 @@ def audit(filter):
             print("Audit FAILED for " + asset)
             msg = "Audit FAILED for " + asset + " Issued="+str(total_issued)+ " Total="+str(total_for_asset)
             log_failure(msg)
-            send_notification(notification_emails, "Frencoin Asset Audit Failed", msg)
+            send_notification(notification_emails, "Pejecoin Asset Audit Failed", msg)
             #exit(-1)
 
         if len(assets) == count:
@@ -164,7 +164,7 @@ def audit(filter):
             print("Stats:")
             print("  Max Distribed Asset: " + max_dist_asset_name + " with " + str(max_dist_address_count) + " addresses.")
             if (send_alerts_on_success and audits_failed == 0):
-              send_notification(notification_emails, "Frencoin Asset Audit Success", "All " + str(len(assets)) + " assets audited.")
+              send_notification(notification_emails, "Pejecoin Asset Audit Success", "All " + str(len(assets)) + " assets audited.")
 
 if mode == "-regtest":  #If regtest then mine our own blocks
     import os

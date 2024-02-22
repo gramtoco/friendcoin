@@ -1,12 +1,11 @@
 // Copyright (c) 2012 Pieter Wuille
 // Copyright (c) 2012-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_ADDRMAN_H
-#define FREN_ADDRMAN_H
+#ifndef PEJECOIN_ADDRMAN_H
+#define PEJECOIN_ADDRMAN_H
 
 #include "netaddress.h"
 #include "protocol.h"
@@ -604,4 +603,4 @@ public:
 
 };
 
-#endif // FREN_ADDRMAN_H
+#endif // PEJECOIN_ADDRMAN_H

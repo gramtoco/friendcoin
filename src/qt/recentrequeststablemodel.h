@@ -1,11 +1,10 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_QT_RECENTREQUESTSTABLEMODEL_H
-#define FREN_QT_RECENTREQUESTSTABLEMODEL_H
+#ifndef PEJECOIN_QT_RECENTREQUESTSTABLEMODEL_H
+#define PEJECOIN_QT_RECENTREQUESTSTABLEMODEL_H
 
 #include "walletmodel.h"
 
@@ -54,7 +53,7 @@ private:
     Qt::SortOrder order;
 };
 
-/** Model for list of recently generated payment requests / fren: URIs.
+/** Model for list of recently generated payment requests / pejecoin: URIs.
  * Part of wallet model.
  */
 class RecentRequestsTableModel: public QAbstractTableModel
@@ -106,4 +105,4 @@ private:
     QString getAmountTitle();
 };
 
-#endif // FREN_QT_RECENTREQUESTSTABLEMODEL_H
+#endif // PEJECOIN_QT_RECENTREQUESTSTABLEMODEL_H

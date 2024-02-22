@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2014-2016 The Bitcoin Core developers
-# Copyright (c) 2017-2020 The Raven Core developers
-# Copyright (c) 2023 The Fren Core developers
+# Copyright (c) 2017-2020 The Pejecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -11,7 +10,7 @@ Test the rawtransaction RPCs for asset transactions.
 
 import math
 from io import BytesIO
-from test_framework.test_framework import FrenTestFramework
+from test_framework.test_framework import PejecoinTestFramework
 from test_framework.util import assert_equal, assert_raises_rpc_error, assert_is_hash_string, assert_does_not_contain_key, assert_contains_key, assert_contains_pair
 from test_framework.mininode import CTransaction, hex_str_to_bytes, bytes_to_hex_str, CScriptReissue, CScriptOwner, CScriptTransfer, CTxOut, CScriptIssue
 
@@ -57,13 +56,13 @@ def get_tx_issue_hex(self, node, asset_name, asset_quantity, asset_units=0):
 
 
 # noinspection PyTypeChecker
-class RawAssetTransactionsTest(FrenTestFramework):
+class RawAssetTransactionsTest(PejecoinTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 3
 
     def activate_assets(self):
-        self.log.info("Generating FRENS for node[0] and activating assets...")
+        self.log.info("Generating PEJE for node[0] and activating assets...")
         n0 = self.nodes[0]
 
         n0.generate(1)
@@ -137,19 +136,19 @@ class RawAssetTransactionsTest(FrenTestFramework):
         tx = CTransaction()
         f = BytesIO(hex_str_to_bytes(tx_hex))
         tx.deserialize(f)
-        frensr = '72766e72'  # frensr
+        pejer = '72766e72'  # pejer
         op_drop = '75'
         for n in range(0, len(tx.vout)):
             out = tx.vout[n]
-            if frensr in bytes_to_hex_str(out.scriptPubKey):
+            if pejer in bytes_to_hex_str(out.scriptPubKey):
                 script_hex = bytes_to_hex_str(out.scriptPubKey)
-                reissue_script_hex = script_hex[script_hex.index(frensr) + len(frensr):-len(op_drop)]
+                reissue_script_hex = script_hex[script_hex.index(pejer) + len(pejer):-len(op_drop)]
                 f = BytesIO(hex_str_to_bytes(reissue_script_hex))
                 reissue = CScriptReissue()
                 reissue.deserialize(f)
                 reissue.name = alternate_asset_name.encode()
                 tampered_reissue = bytes_to_hex_str(reissue.serialize())
-                tampered_script = script_hex[:script_hex.index(frensr)] + frensr + tampered_reissue + op_drop
+                tampered_script = script_hex[:script_hex.index(pejer)] + pejer + tampered_reissue + op_drop
                 tx.vout[n].scriptPubKey = hex_str_to_bytes(tampered_script)
         tx_hex_bad = bytes_to_hex_str(tx.serialize())
         tx_signed = n0.signrawtransaction(tx_hex_bad)['hex']
@@ -160,9 +159,9 @@ class RawAssetTransactionsTest(FrenTestFramework):
         tx = CTransaction()
         f = BytesIO(hex_str_to_bytes(tx_hex))
         tx.deserialize(f)
-        frenst = '72766e74'  # frenst
+        pejet = '72766e74'  # pejet
         # remove the owner output from vout
-        bad_vout = list(filter(lambda out_script: frenst not in bytes_to_hex_str(out_script.scriptPubKey), tx.vout))
+        bad_vout = list(filter(lambda out_script: pejet not in bytes_to_hex_str(out_script.scriptPubKey), tx.vout))
         tx.vout = bad_vout
         tx_hex_bad = bytes_to_hex_str(tx.serialize())
         tx_signed = n0.signrawtransaction(tx_hex_bad)['hex']
@@ -196,9 +195,9 @@ class RawAssetTransactionsTest(FrenTestFramework):
         tx = CTransaction()
         f = BytesIO(hex_str_to_bytes(tx_issue_hex))
         tx.deserialize(f)
-        frenso = '72766e6f'  # frenso
+        pejeo = '72766e6f'  # pejeo
         # remove the owner output from vout
-        bad_vout = list(filter(lambda out_script: frenso not in bytes_to_hex_str(out_script.scriptPubKey), tx.vout))
+        bad_vout = list(filter(lambda out_script: pejeo not in bytes_to_hex_str(out_script.scriptPubKey), tx.vout))
         tx.vout = bad_vout
         tx_bad_issue = bytes_to_hex_str(tx.serialize())
         tx_bad_issue_signed = n0.signrawtransaction(tx_bad_issue)['hex']
@@ -210,9 +209,9 @@ class RawAssetTransactionsTest(FrenTestFramework):
         tx = CTransaction()
         f = BytesIO(hex_str_to_bytes(tx_issue_hex))
         tx.deserialize(f)
-        frenso = '72766e6f'  # frenso
+        pejeo = '72766e6f'  # pejeo
         # find the owner output from vout and insert a duplicate back in
-        owner_vout = list(filter(lambda out_script: frenso in bytes_to_hex_str(out_script.scriptPubKey), tx.vout))[0]
+        owner_vout = list(filter(lambda out_script: pejeo in bytes_to_hex_str(out_script.scriptPubKey), tx.vout))[0]
         tx.vout.insert(-1, owner_vout)
         tx_bad_issue = bytes_to_hex_str(tx.serialize())
         tx_bad_issue_signed = n0.signrawtransaction(tx_bad_issue)['hex']
@@ -224,9 +223,9 @@ class RawAssetTransactionsTest(FrenTestFramework):
         tx = CTransaction()
         f = BytesIO(hex_str_to_bytes(tx_issue_hex))
         tx.deserialize(f)
-        frensq = '72766e71'  # frensq
+        pejeq = '72766e71'  # pejeq
         # remove the owner output from vout
-        bad_vout = list(filter(lambda out_script: frensq not in bytes_to_hex_str(out_script.scriptPubKey), tx.vout))
+        bad_vout = list(filter(lambda out_script: pejeq not in bytes_to_hex_str(out_script.scriptPubKey), tx.vout))
         tx.vout = bad_vout
         tx_bad_issue = bytes_to_hex_str(tx.serialize())
         tx_bad_issue_signed = n0.signrawtransaction(tx_bad_issue)['hex']
@@ -238,21 +237,21 @@ class RawAssetTransactionsTest(FrenTestFramework):
         tx = CTransaction()
         f = BytesIO(hex_str_to_bytes(tx_issue_hex))
         tx.deserialize(f)
-        frenso = '72766e6f'  # frenso
+        pejeo = '72766e6f'  # pejeo
         op_drop = '75'
         # change the owner name
         for n in range(0, len(tx.vout)):
             out = tx.vout[n]
-            if frenso in bytes_to_hex_str(out.scriptPubKey):
+            if pejeo in bytes_to_hex_str(out.scriptPubKey):
                 owner_out = out
                 owner_script_hex = bytes_to_hex_str(owner_out.scriptPubKey)
-                asset_script_hex = owner_script_hex[owner_script_hex.index(frenso) + len(frenso):-len(op_drop)]
+                asset_script_hex = owner_script_hex[owner_script_hex.index(pejeo) + len(pejeo):-len(op_drop)]
                 f = BytesIO(hex_str_to_bytes(asset_script_hex))
                 owner = CScriptOwner()
                 owner.deserialize(f)
                 owner.name = b"NOT_MY_ASSET!"
                 tampered_owner = bytes_to_hex_str(owner.serialize())
-                tampered_script = owner_script_hex[:owner_script_hex.index(frenso)] + frenso + tampered_owner + op_drop
+                tampered_script = owner_script_hex[:owner_script_hex.index(pejeo)] + pejeo + tampered_owner + op_drop
                 tx.vout[n].scriptPubKey = hex_str_to_bytes(tampered_script)
         tx_bad_issue = bytes_to_hex_str(tx.serialize())
         tx_bad_issue_signed = n0.signrawtransaction(tx_bad_issue)['hex']
@@ -264,18 +263,18 @@ class RawAssetTransactionsTest(FrenTestFramework):
         tx = CTransaction()
         f = BytesIO(hex_str_to_bytes(tx_issue_hex))
         tx.deserialize(f)
-        frenso = '72766e6f'  # frenso
-        FRENSO = '52564e4f'  # FRENSO
+        pejeo = '72766e6f'  # pejeo
+        PEJEO = '52564e4f'  # PEJEO
         # change the owner output script type to be invalid
         for n in range(0, len(tx.vout)):
             out = tx.vout[n]
-            if frenso in bytes_to_hex_str(out.scriptPubKey):
+            if pejeo in bytes_to_hex_str(out.scriptPubKey):
                 owner_script_hex = bytes_to_hex_str(out.scriptPubKey)
-                tampered_script = owner_script_hex.replace(frenso, FRENSO)
+                tampered_script = owner_script_hex.replace(pejeo, PEJEO)
                 tx.vout[n].scriptPubKey = hex_str_to_bytes(tampered_script)
         tx_bad_issue = bytes_to_hex_str(tx.serialize())
         tx_bad_issue_signed = n0.signrawtransaction(tx_bad_issue)['hex']
-        assert_raises_rpc_error(-26, "bad-txns-op-frens-asset-not-in-right-script-location",
+        assert_raises_rpc_error(-26, "bad-txns-op-peje-asset-not-in-right-script-location",
                                 n0.sendrawtransaction, tx_bad_issue_signed)
 
         ########################################
@@ -397,17 +396,17 @@ class RawAssetTransactionsTest(FrenTestFramework):
         tx = CTransaction()
         f = BytesIO(hex_str_to_bytes(tx_hex))
         tx.deserialize(f)
-        frenst = '72766e74'  # frenst
+        pejet = '72766e74'  # pejet
         op_drop = '75'
         # change asset outputs from 400,600 to 500,500
         for i in range(1, 3):
             script_hex = bytes_to_hex_str(tx.vout[i].scriptPubKey)
-            f = BytesIO(hex_str_to_bytes(script_hex[script_hex.index(frenst) + len(frenst):-len(op_drop)]))
+            f = BytesIO(hex_str_to_bytes(script_hex[script_hex.index(pejet) + len(pejet):-len(op_drop)]))
             transfer = CScriptTransfer()
             transfer.deserialize(f)
             transfer.amount = 50000000000
             tampered_transfer = bytes_to_hex_str(transfer.serialize())
-            tampered_script = script_hex[:script_hex.index(frenst)] + frenst + tampered_transfer + op_drop
+            tampered_script = script_hex[:script_hex.index(pejet)] + pejet + tampered_transfer + op_drop
             tx.vout[i].scriptPubKey = hex_str_to_bytes(tampered_script)
         tampered_hex = bytes_to_hex_str(tx.serialize())
         assert_raises_rpc_error(-26, "mandatory-script-verify-flag-failed (Signature must be zero for failed CHECK(MULTI)SIG operation)", n0.sendrawtransaction, tampered_hex)
@@ -460,19 +459,19 @@ class RawAssetTransactionsTest(FrenTestFramework):
         tx = CTransaction()
         f = BytesIO(hex_str_to_bytes(tx_hex))
         tx.deserialize(f)
-        frenst = '72766e74'  # frenst
+        pejet = '72766e74'  # pejet
         op_drop = '75'
         # change asset name
         for n in range(0, len(tx.vout)):
             out = tx.vout[n]
-            if frenst in bytes_to_hex_str(out.scriptPubKey):
+            if pejet in bytes_to_hex_str(out.scriptPubKey):
                 script_hex = bytes_to_hex_str(out.scriptPubKey)
-                f = BytesIO(hex_str_to_bytes(script_hex[script_hex.index(frenst) + len(frenst):-len(op_drop)]))
+                f = BytesIO(hex_str_to_bytes(script_hex[script_hex.index(pejet) + len(pejet):-len(op_drop)]))
                 transfer = CScriptTransfer()
                 transfer.deserialize(f)
                 transfer.name = b"ASSET_DOES_NOT_EXIST"
                 tampered_transfer = bytes_to_hex_str(transfer.serialize())
-                tampered_script = script_hex[:script_hex.index(frenst)] + frenst + tampered_transfer + op_drop
+                tampered_script = script_hex[:script_hex.index(pejet)] + pejet + tampered_transfer + op_drop
                 tx.vout[n].scriptPubKey = hex_str_to_bytes(tampered_script)
         tampered_hex = bytes_to_hex_str(tx.serialize())
         assert_raises_rpc_error(-26, "bad-txns-transfer-asset-not-exist",
@@ -486,19 +485,19 @@ class RawAssetTransactionsTest(FrenTestFramework):
         tx = CTransaction()
         f = BytesIO(hex_str_to_bytes(tx_hex))
         tx.deserialize(f)
-        frenst = '72766e74'  # frenst
+        pejet = '72766e74'  # pejet
         op_drop = '75'
         # change asset name
         for n in range(0, len(tx.vout)):
             out = tx.vout[n]
-            if frenst in bytes_to_hex_str(out.scriptPubKey):
+            if pejet in bytes_to_hex_str(out.scriptPubKey):
                 script_hex = bytes_to_hex_str(out.scriptPubKey)
-                f = BytesIO(hex_str_to_bytes(script_hex[script_hex.index(frenst) + len(frenst):-len(op_drop)]))
+                f = BytesIO(hex_str_to_bytes(script_hex[script_hex.index(pejet) + len(pejet):-len(op_drop)]))
                 transfer = CScriptTransfer()
                 transfer.deserialize(f)
                 transfer.name = alternate_asset_name.encode()
                 tampered_transfer = bytes_to_hex_str(transfer.serialize())
-                tampered_script = script_hex[:script_hex.index(frenst)] + frenst + tampered_transfer + op_drop
+                tampered_script = script_hex[:script_hex.index(pejet)] + pejet + tampered_transfer + op_drop
                 tx.vout[n].scriptPubKey = hex_str_to_bytes(tampered_script)
         tampered_hex = bytes_to_hex_str(tx.serialize())
         assert_raises_rpc_error(-26, "bad-tx-inputs-outputs-mismatch Bad Transaction - " +
@@ -510,9 +509,9 @@ class RawAssetTransactionsTest(FrenTestFramework):
         tx = CTransaction()
         f = BytesIO(hex_str_to_bytes(tx_hex))
         tx.deserialize(f)
-        frenst = '72766e74'  # frenst
+        pejet = '72766e74'  # pejet
         # remove the transfer output from vout
-        bad_vout = list(filter(lambda out_script: frenst not in bytes_to_hex_str(out_script.scriptPubKey), tx.vout))
+        bad_vout = list(filter(lambda out_script: pejet not in bytes_to_hex_str(out_script.scriptPubKey), tx.vout))
         tx.vout = bad_vout
         tampered_hex = bytes_to_hex_str(tx.serialize())
         assert_raises_rpc_error(-26, "bad-tx-asset-inputs-size-does-not-match-outputs-size",
@@ -1293,21 +1292,21 @@ class RawAssetTransactionsTest(FrenTestFramework):
         tx = CTransaction()
         f = BytesIO(hex_str_to_bytes(tx_issue_sub_hex))
         tx.deserialize(f)
-        frenst = '72766e74'  # frenst
+        pejet = '72766e74'  # pejet
         op_drop = '75'
         # change the transfer amount
         for n in range(0, len(tx.vout)):
             out = tx.vout[n]
-            if frenst in bytes_to_hex_str(out.scriptPubKey):
+            if pejet in bytes_to_hex_str(out.scriptPubKey):
                 transfer_out = out
                 transfer_script_hex = bytes_to_hex_str(transfer_out.scriptPubKey)
-                asset_script_hex = transfer_script_hex[transfer_script_hex.index(frenst) + len(frenst):-len(op_drop)]
+                asset_script_hex = transfer_script_hex[transfer_script_hex.index(pejet) + len(pejet):-len(op_drop)]
                 f = BytesIO(hex_str_to_bytes(asset_script_hex))
                 transfer = CScriptTransfer()
                 transfer.deserialize(f)
                 transfer.amount = 0
                 tampered_transfer = bytes_to_hex_str(transfer.serialize())
-                tampered_script = transfer_script_hex[:transfer_script_hex.index(frenst)] + frenst + tampered_transfer + op_drop
+                tampered_script = transfer_script_hex[:transfer_script_hex.index(pejet)] + pejet + tampered_transfer + op_drop
                 tx.vout[n].scriptPubKey = hex_str_to_bytes(tampered_script)
         tx_bad_transfer = bytes_to_hex_str(tx.serialize())
         tx_bad_transfer_signed = n0.signrawtransaction(tx_bad_transfer)['hex']
@@ -1369,21 +1368,21 @@ class RawAssetTransactionsTest(FrenTestFramework):
         tx = CTransaction()
         f = BytesIO(hex_str_to_bytes(tx_transfer_hex))
         tx.deserialize(f)
-        frenst = '72766e74'  # frenst
+        pejet = '72766e74'  # pejet
         op_drop = '75'
         # change the transfer amounts = 0
         for n in range(0, len(tx.vout)):
             out = tx.vout[n]
-            if frenst in bytes_to_hex_str(out.scriptPubKey):
+            if pejet in bytes_to_hex_str(out.scriptPubKey):
                 transfer_out = out
                 transfer_script_hex = bytes_to_hex_str(transfer_out.scriptPubKey)
-                asset_script_hex = transfer_script_hex[transfer_script_hex.index(frenst) + len(frenst):-len(op_drop)]
+                asset_script_hex = transfer_script_hex[transfer_script_hex.index(pejet) + len(pejet):-len(op_drop)]
                 f = BytesIO(hex_str_to_bytes(asset_script_hex))
                 transfer = CScriptTransfer()
                 transfer.deserialize(f)
                 transfer.amount = 0
                 tampered_transfer = bytes_to_hex_str(transfer.serialize())
-                tampered_script = transfer_script_hex[:transfer_script_hex.index(frenst)] + frenst + tampered_transfer + op_drop
+                tampered_script = transfer_script_hex[:transfer_script_hex.index(pejet)] + pejet + tampered_transfer + op_drop
                 tx.vout[n].scriptPubKey = hex_str_to_bytes(tampered_script)
         tx_bad_transfer = bytes_to_hex_str(tx.serialize())
         tx_bad_transfer_signed = n0.signrawtransaction(tx_bad_transfer)['hex']
@@ -1435,7 +1434,7 @@ class RawAssetTransactionsTest(FrenTestFramework):
         tx = CTransaction()
         f = BytesIO(hex_str_to_bytes(tx_transfer_hex))
         tx.deserialize(f)
-        frenst = '72766e74'  # frenst
+        pejet = '72766e74'  # pejet
         op_drop = '75'
 
         # create a new issue CTxOut
@@ -1447,16 +1446,16 @@ class RawAssetTransactionsTest(FrenTestFramework):
         issue_script.name = b'BYTE_ISSUE'
         issue_script.amount = 1
         issue_serialized = bytes_to_hex_str(issue_script.serialize())
-        frensq = '72766e71'  # frensq
+        pejeq = '72766e71'  # pejeq
 
         for n in range(0, len(tx.vout)):
             out = tx.vout[n]
-            if frenst in bytes_to_hex_str(out.scriptPubKey):
+            if pejet in bytes_to_hex_str(out.scriptPubKey):
                 transfer_out = out
                 transfer_script_hex = bytes_to_hex_str(transfer_out.scriptPubKey)
 
-                # Generate a script that has a valid destination address but switch it with frensq and the issue_serialized data
-                issue_out.scriptPubKey = hex_str_to_bytes(transfer_script_hex[:transfer_script_hex.index(frenst)] + frensq + issue_serialized + op_drop)
+                # Generate a script that has a valid destination address but switch it with pejeq and the issue_serialized data
+                issue_out.scriptPubKey = hex_str_to_bytes(transfer_script_hex[:transfer_script_hex.index(pejet)] + pejeq + issue_serialized + op_drop)
 
         tx.vout.insert(0, issue_out)  # Insert the issue transaction at the begin on the vouts
 
@@ -1497,9 +1496,9 @@ class RawAssetTransactionsTest(FrenTestFramework):
         balance2 = float(n2.getwalletinfo()['balance'])
 
         ########################################
-        # frens for assets
+        # peje for assets
 
-        # n1 buys 400 ANDUIN from n2 for 4000 FRENS
+        # n1 buys 400 ANDUIN from n2 for 4000 PEJE
         price = 4000
         amount = 400
         fee = 0.01
@@ -1546,9 +1545,9 @@ class RawAssetTransactionsTest(FrenTestFramework):
         assert_equal(starting_amount - amount, int(n2.listmyassets()[anduin]))
 
         ########################################
-        # frens for owner
+        # peje for owner
 
-        # n2 buys JAINA! from n1 for 20000 FRENS
+        # n2 buys JAINA! from n1 for 20000 PEJE
         price = 20000
         amount = 1
         balance1 = newbalance1
@@ -1741,9 +1740,9 @@ class RawAssetTransactionsTest(FrenTestFramework):
         self.log.info("Testing fundrawtransaction with transfer outputs...")
         n0 = self.nodes[0]
         n2 = self.nodes[2]
-        asset_name = "DONT_FUND_FRENS"
+        asset_name = "DONT_FUND_PEJE"
         asset_amount = 100
-        frens_amount = 100
+        peje_amount = 100
 
         n2_address = n2.getnewaddress()
 
@@ -1766,7 +1765,7 @@ class RawAssetTransactionsTest(FrenTestFramework):
         self.sync_all()
 
         for _ in range(0, 5):
-            n0.sendtoaddress(n2_address, frens_amount / 5)
+            n0.sendtoaddress(n2_address, peje_amount / 5)
         n0.generate(1)
         self.sync_all()
 

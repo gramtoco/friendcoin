@@ -1,13 +1,12 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2021 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2021 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "guiutil.h"
 
-#include "frenaddressvalidator.h"
-#include "frenunits.h"
+#include "pejecoinaddressvalidator.h"
+#include "pejecoinunits.h"
 #include "qvalidatedlineedit.h"
 #include "walletmodel.h"
 
@@ -96,7 +95,7 @@ QFont getSubLabelFont()
 #if !defined(Q_OS_MAC)
     labelSubFont.setFamily("Open Sans");
 #endif
-    labelSubFont.setWeight(QFont::Weight::ExtraLight);
+    labelSubFont.setWeight(QFont::Weight::Bold);
     labelSubFont.setLetterSpacing(QFont::SpacingType::AbsoluteSpacing, -0.6);
     labelSubFont.setPixelSize(14);
     return labelSubFont;
@@ -144,7 +143,7 @@ QFont getTopLabelFont()
 #if !defined(Q_OS_MAC)
     labelTopFont.setFamily("Open Sans");
 #endif
-    labelTopFont.setWeight(QFont::Weight::Light);
+    labelTopFont.setWeight(QFont::Weight::Bold);
     labelTopFont.setLetterSpacing(QFont::SpacingType::AbsoluteSpacing, -0.6);
     labelTopFont.setPixelSize(18);
     return labelTopFont;
@@ -213,11 +212,11 @@ void setupAddressWidget(QValidatedLineEdit *widget, QWidget *parent)
 #if QT_VERSION >= 0x040700
     // We don't want translators to use own addresses in translations
     // and this is the only place, where this address is supplied.
-    widget->setPlaceholderText(QObject::tr("Enter a Fren address (e.g. %1)").arg(
+    widget->setPlaceholderText(QObject::tr("Enter a Pejecoin address (e.g. %1)").arg(
         QString::fromStdString(DummyAddress(GetParams()))));
 #endif
-    widget->setValidator(new FrenAddressEntryValidator(parent));
-    widget->setCheckValidator(new FrenAddressCheckValidator(parent));
+    widget->setValidator(new PejecoinAddressEntryValidator(parent));
+    widget->setCheckValidator(new PejecoinAddressCheckValidator(parent));
 }
 
 void setupAmountWidget(QLineEdit *widget, QWidget *parent)
@@ -229,10 +228,10 @@ void setupAmountWidget(QLineEdit *widget, QWidget *parent)
     widget->setAlignment(Qt::AlignRight|Qt::AlignVCenter);
 }
 
-bool parseFrenURI(const QUrl &uri, SendCoinsRecipient *out)
+bool parsePejecoinURI(const QUrl &uri, SendCoinsRecipient *out)
 {
-    // return if URI is not valid or is no fren: URI
-    if(!uri.isValid() || uri.scheme() != QString("fren"))
+    // return if URI is not valid or is no pejecoin: URI
+    if(!uri.isValid() || uri.scheme() != QString("pejecoin"))
         return false;
 
     SendCoinsRecipient rv;
@@ -272,7 +271,7 @@ bool parseFrenURI(const QUrl &uri, SendCoinsRecipient *out)
         {
             if(!i->second.isEmpty())
             {
-                if(!FrenUnits::parse(FrenUnits::FRENS, i->second, &rv.amount))
+                if(!PejecoinUnits::parse(PejecoinUnits::PEJE, i->second, &rv.amount))
                 {
                     return false;
                 }
@@ -290,28 +289,28 @@ bool parseFrenURI(const QUrl &uri, SendCoinsRecipient *out)
     return true;
 }
 
-bool parseFrenURI(QString uri, SendCoinsRecipient *out)
+bool parsePejecoinURI(QString uri, SendCoinsRecipient *out)
 {
-    // Convert fren:// to fren:
+    // Convert pejecoin:// to pejecoin:
     //
-    //    Cannot handle this later, because fren:// will cause Qt to see the part after // as host,
+    //    Cannot handle this later, because pejecoin:// will cause Qt to see the part after // as host,
     //    which will lower-case it (and thus invalidate the address).
-    if(uri.startsWith("fren://", Qt::CaseInsensitive))
+    if(uri.startsWith("pejecoin://", Qt::CaseInsensitive))
     {
-        uri.replace(0, 10, "fren:");
+        uri.replace(0, 10, "pejecoin:");
     }
     QUrl uriInstance(uri);
-    return parseFrenURI(uriInstance, out);
+    return parsePejecoinURI(uriInstance, out);
 }
 
-QString formatFrenURI(const SendCoinsRecipient &info)
+QString formatPejecoinURI(const SendCoinsRecipient &info)
 {
-    QString ret = QString("fren:%1").arg(info.address);
+    QString ret = QString("pejecoin:%1").arg(info.address);
     int paramCount = 0;
 
     if (info.amount)
     {
-        ret += QString("?amount=%1").arg(FrenUnits::format(FrenUnits::FRENS, info.amount, false, FrenUnits::separatorNever));
+        ret += QString("?amount=%1").arg(PejecoinUnits::format(PejecoinUnits::PEJE, info.amount, false, PejecoinUnits::separatorNever));
         paramCount++;
     }
 
@@ -501,9 +500,9 @@ void openDebugLogfile()
         QDesktopServices::openUrl(QUrl::fromLocalFile(boostPathToQString(pathDebug)));
 }
 
-bool openFrenConf()
+bool openPejecoinConf()
 {
-    boost::filesystem::path pathConfig = GetConfigFile(FREN_CONF_FILENAME);
+    boost::filesystem::path pathConfig = GetConfigFile(PEJECOIN_CONF_FILENAME);
 
     /* Create the file */
     boost::filesystem::ofstream configFile(pathConfig, std::ios_base::app);
@@ -513,7 +512,7 @@ bool openFrenConf()
     
     configFile.close();
     
-    /* Open fren.conf with the associated application */
+    /* Open pejecoin.conf with the associated application */
     return QDesktopServices::openUrl(QUrl::fromLocalFile(boostPathToQString(pathConfig)));
 }
 
@@ -603,15 +602,15 @@ fs::path static StartupShortcutPath()
 {
     std::string chain = ChainNameFromCommandLine();
     if (chain == CBaseChainParams::MAIN)
-        return GetSpecialFolderPath(CSIDL_STARTUP) / "Fren.lnk";
+        return GetSpecialFolderPath(CSIDL_STARTUP) / "Pejecoin.lnk";
     if (chain == CBaseChainParams::TESTNET) // Remove this special case when CBaseChainParams::TESTNET = "testnet4"
-        return GetSpecialFolderPath(CSIDL_STARTUP) / "Fren (testnet).lnk";
-    return GetSpecialFolderPath(CSIDL_STARTUP) / strprintf("Fren (%s).lnk", chain);
+        return GetSpecialFolderPath(CSIDL_STARTUP) / "Pejecoin (testnet).lnk";
+    return GetSpecialFolderPath(CSIDL_STARTUP) / strprintf("Pejecoin (%s).lnk", chain);
 }
 
 bool GetStartOnSystemStartup()
 {
-    // check for Fren*.lnk
+    // check for Pejecoin*.lnk
     return fs::exists(StartupShortcutPath());
 }
 
@@ -701,8 +700,8 @@ fs::path static GetAutostartFilePath()
 {
     std::string chain = ChainNameFromCommandLine();
     if (chain == CBaseChainParams::MAIN)
-        return GetAutostartDir() / "fren.desktop";
-    return GetAutostartDir() / strprintf("fren-%s.lnk", chain);
+        return GetAutostartDir() / "pejecoin.desktop";
+    return GetAutostartDir() / strprintf("pejecoin-%s.lnk", chain);
 }
 
 bool GetStartOnSystemStartup()
@@ -742,13 +741,13 @@ bool SetStartOnSystemStartup(bool fAutoStart)
         if (!optionFile.good())
             return false;
         std::string chain = ChainNameFromCommandLine();
-        // Write a fren.desktop file to the autostart directory:
+        // Write a pejecoin.desktop file to the autostart directory:
         optionFile << "[Desktop Entry]\n";
         optionFile << "Type=Application\n";
         if (chain == CBaseChainParams::MAIN)
-            optionFile << "Name=Fren\n";
+            optionFile << "Name=Pejecoin\n";
         else
-            optionFile << strprintf("Name=Fren (%s)\n", chain);
+            optionFile << strprintf("Name=Pejecoin (%s)\n", chain);
         optionFile << "Exec=" << pszExePath << strprintf(" -min -testnet=%d -regtest=%d\n", gArgs.GetBoolArg("-testnet", false), gArgs.GetBoolArg("-regtest", false));
         optionFile << "Terminal=false\n";
         optionFile << "Hidden=false\n";
@@ -774,7 +773,7 @@ LSSharedFileListItemRef findStartupItemInList(LSSharedFileListRef list, CFURLRef
         return nullptr;
     }
     
-    // loop through the list of startup items and try to find the fren app
+    // loop through the list of startup items and try to find the pejecoin app
     for(int i = 0; i < CFArrayGetCount(listSnapshot); i++) {
         LSSharedFileListItemRef item = (LSSharedFileListItemRef)CFArrayGetValueAtIndex(listSnapshot, i);
         UInt32 resolutionFlags = kLSSharedFileListNoUserInteraction | kLSSharedFileListDoNotMountVolumes;
@@ -808,38 +807,38 @@ LSSharedFileListItemRef findStartupItemInList(LSSharedFileListRef list, CFURLRef
 
 bool GetStartOnSystemStartup()
 {
-    CFURLRef frenAppUrl = CFBundleCopyBundleURL(CFBundleGetMainBundle());
-    if (frenAppUrl == nullptr) {
+    CFURLRef pejeAppUrl = CFBundleCopyBundleURL(CFBundleGetMainBundle());
+    if (pejeAppUrl == nullptr) {
         return false;
     }
     
     LSSharedFileListRef loginItems = LSSharedFileListCreate(nullptr, kLSSharedFileListSessionLoginItems, nullptr);
-    LSSharedFileListItemRef foundItem = findStartupItemInList(loginItems, frenAppUrl);
+    LSSharedFileListItemRef foundItem = findStartupItemInList(loginItems, pejeAppUrl);
 
-    CFRelease(frenAppUrl);
+    CFRelease(pejeAppUrl);
     return !!foundItem; // return boolified object
 }
 
 bool SetStartOnSystemStartup(bool fAutoStart)
 {
-    CFURLRef frenAppUrl = CFBundleCopyBundleURL(CFBundleGetMainBundle());
-    if (frenAppUrl == nullptr) {
+    CFURLRef pejeAppUrl = CFBundleCopyBundleURL(CFBundleGetMainBundle());
+    if (pejeAppUrl == nullptr) {
         return false;
     }
     
     LSSharedFileListRef loginItems = LSSharedFileListCreate(nullptr, kLSSharedFileListSessionLoginItems, nullptr);
-    LSSharedFileListItemRef foundItem = findStartupItemInList(loginItems, frenAppUrl);
+    LSSharedFileListItemRef foundItem = findStartupItemInList(loginItems, pejeAppUrl);
 
     if(fAutoStart && !foundItem) {
-        // add fren app to startup item list
-        LSSharedFileListInsertItemURL(loginItems, kLSSharedFileListItemBeforeFirst, nullptr, nullptr, frenAppUrl, nullptr, nullptr);
+        // add pejecoin app to startup item list
+        LSSharedFileListInsertItemURL(loginItems, kLSSharedFileListItemBeforeFirst, nullptr, nullptr, pejeAppUrl, nullptr, nullptr);
     }
     else if(!fAutoStart && foundItem) {
         // remove item
         LSSharedFileListItemRemove(loginItems, foundItem);
     }
     
-    CFRelease(frenAppUrl);
+    CFRelease(pejeAppUrl);
     return true;
 }
 #pragma GCC diagnostic pop

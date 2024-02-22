@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
 # Copyright (c) 2014-2016 The Bitcoin Core developers
-# Copyright (c) 2017-2020 The Raven Core developers
-# Copyright (c) 2023 The Fren Core developers
+# Copyright (c) 2017-2020 The Pejecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 """Test the importprunedfunds and removeprunedfunds RPCs."""
 
-from test_framework.test_framework import FrenTestFramework
+from test_framework.test_framework import PejecoinTestFramework
 from test_framework.util import assert_equal, assert_raises_rpc_error, Decimal
 
-class ImportPrunedFundsTest(FrenTestFramework):
+class ImportPrunedFundsTest(PejecoinTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 2

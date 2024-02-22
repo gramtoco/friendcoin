@@ -1,13 +1,13 @@
  #!/usr/bin/env bash
 
- # Execute this file to install the fren cli tools into your path on OS X
+ # Execute this file to install the pejecoin cli tools into your path on OS X
 
  CURRENT_LOC="$( cd "$(dirname "$0")" ; pwd -P )"
- LOCATION=${CURRENT_LOC%Fren-Qt.app*}
+ LOCATION=${CURRENT_LOC%Pejecoin-Qt.app*}
 
  # Ensure that the directory to symlink to exists
  sudo mkdir -p /usr/local/bin
 
  # Create symlinks to the cli tools
- sudo ln -s ${LOCATION}/Fren-Qt.app/Contents/MacOS/frend /usr/local/bin/frend
- sudo ln -s ${LOCATION}/Fren-Qt.app/Contents/MacOS/fren-cli /usr/local/bin/fren-cli
+ sudo ln -s ${LOCATION}/Pejecoin-Qt.app/Contents/MacOS/pejecoind /usr/local/bin/pejecoind
+ sudo ln -s ${LOCATION}/Pejecoin-Qt.app/Contents/MacOS/pejecoin-cli /usr/local/bin/pejecoin-cli

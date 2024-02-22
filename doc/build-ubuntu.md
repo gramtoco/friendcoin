@@ -1,4 +1,4 @@
-Build instructions for Frencoin 
+Build instructions for Pejecoin 
 =================================
 
 This will install most of the dependencies from ubuntu.
@@ -130,12 +130,12 @@ protobuf-compiler
 
 Directory structure
 ------------------
-Frencoin sources in `$HOME/src`
+Pejecoin sources in `$HOME/src`
 
 Berkeley DB will be installed to `$HOME/src/db4`
 
 
-Frencoin
+Pejecoin
 ------------------
 
 Start in $HOME
@@ -146,11 +146,11 @@ Make the directory for sources and go into it.
 
 `cd src`
 
-__Download Frencoin source.__
+__Download Pejecoin source.__
 
-`git clone https://github.com/Apushii/Frencoin`
+`git clone https://github.com/PejecoinBlockchain/Pejecoin`
 
-`cd Frencoin`
+`cd Pejecoin`
 
 `git checkout develop` # this checks out the develop branch.
 
@@ -171,11 +171,11 @@ _Adjust to own needs. This will install the binaries to `/usr/local/bin`_
 
 `make -j8`  # 8 for 8 build threads, adjust to fit your setup.
 
-You can now start fren-qt from the build directory.
+You can now start pejecoin-qt from the build directory.
 
-`src/qt/fren-qt`
+`src/qt/pejecoin-qt`
 
-frend and fren-cli are in `src/`
+pejecoind and pejecoin-cli are in `src/`
 
 
 __Optional:__

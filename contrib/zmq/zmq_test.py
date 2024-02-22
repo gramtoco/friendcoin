@@ -1,19 +1,18 @@
 #!/usr/bin/env python3
 # Copyright (c) 2014-2016 The Bitcoin Core developers
-# Copyright (c) 2017-2020 The Raven Core developers
-# Copyright (c) 2023 The Fren Core developers
+# Copyright (c) 2017-2020 The Pejecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 """
     ZMQ example using python3's asyncio
 
-    Fren should be started with the command line arguments:
-        frend -testnet -daemon \
-                -zmqpubhashblock=tcp://127.0.0.1:24206 \
-                -zmqpubrawtx=tcp://127.0.0.1:24206 \
-                -zmqpubhashtx=tcp://127.0.0.1:24206 \
-                -zmqpubhashblock=tcp://127.0.0.1:24206
+    Pejecoin should be started with the command line arguments:
+        pejecoind -testnet -daemon \
+                -zmqpubhashblock=tcp://127.0.0.1:28766 \
+                -zmqpubrawtx=tcp://127.0.0.1:28766 \
+                -zmqpubhashtx=tcp://127.0.0.1:28766 \
+                -zmqpubhashblock=tcp://127.0.0.1:28766
 """
 
 import sys
@@ -26,8 +25,8 @@ import codecs
 context = zmq.Context()
 socket = context.socket(zmq.SUB)
 
-print("Getting Frencoin msgs")
-socket.connect("tcp://localhost:24206")
+print("Getting Pejecoin msgs")
+socket.connect("tcp://localhost:28766")
 
 socket.setsockopt_string(zmq.SUBSCRIBE, "hashtx")
 socket.setsockopt_string(zmq.SUBSCRIBE, "hashblock")
@@ -59,8 +58,8 @@ while True:
 		while(pos != -1):
 			pos = astr.find('72766e', start)
 			if (pos > -1):
-				print("FOUND FRENS issuance at " + str(pos))
-				print("After FRENS: " + astr[pos+6:pos+8])
+				print("FOUND PEJE issuance at " + str(pos))
+				print("After PEJE: " + astr[pos+6:pos+8])
 				sizestr = astr[pos+8:pos+10]
 				print("sizestr: " + sizestr)
 				#print(str(astr[pos+8:pos+10]))
@@ -69,7 +68,7 @@ while True:
 				print("Name: " + bytes.fromhex(astr[pos+10:pos+10+size*2]).decode('utf-8'))
 			pos = astr.find('72766e', start)
 			if (pos > -1):
-				print("FOUND FRENS something at " + str(pos))
+				print("FOUND PEJE something at " + str(pos))
 			start += pos+8
 			print(astr)
 

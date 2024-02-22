@@ -1,11 +1,10 @@
 // Copyright (c) 2011-2015 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_QT_EDITADDRESSDIALOG_H
-#define FREN_QT_EDITADDRESSDIALOG_H
+#ifndef PEJECOIN_QT_EDITADDRESSDIALOG_H
+#define PEJECOIN_QT_EDITADDRESSDIALOG_H
 
 #include <QDialog>
 
@@ -56,4 +55,4 @@ private:
     QString address;
 };
 
-#endif // FREN_QT_EDITADDRESSDIALOG_H
+#endif // PEJECOIN_QT_EDITADDRESSDIALOG_H

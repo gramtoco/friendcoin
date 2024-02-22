@@ -23,6 +23,7 @@ using namespace ethash;
 
 namespace
 {
+
 std::mutex shared_context_mutex;
 std::shared_ptr<epoch_context> shared_context;
 thread_local std::shared_ptr<epoch_context> thread_local_context;
@@ -45,7 +46,6 @@ void update_local_context(int epoch_number)
 
     // Local context invalid, check the shared context.
     std::lock_guard<std::mutex> lock{shared_context_mutex};
-
     if (!shared_context || shared_context->epoch_number != epoch_number)
     {
         // Release the shared pointer of the obsoleted context.
@@ -66,7 +66,6 @@ void update_local_context_full(int epoch_number)
 
     // Local context invalid, check the shared context.
     std::lock_guard<std::mutex> lock{shared_context_full_mutex};
-
     if (!shared_context_full || shared_context_full->epoch_number != epoch_number)
     {
         // Release the shared pointer of the obsoleted context.

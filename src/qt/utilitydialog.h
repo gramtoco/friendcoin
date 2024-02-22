@@ -1,16 +1,15 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2021 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2021 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_QT_UTILITYDIALOG_H
-#define FREN_QT_UTILITYDIALOG_H
+#ifndef PEJECOIN_QT_UTILITYDIALOG_H
+#define PEJECOIN_QT_UTILITYDIALOG_H
 
 #include <QDialog>
 #include <QObject>
 
-class FrenGUI;
+class PejecoinGUI;
 
 namespace Ui {
     class HelpMessageDialog;
@@ -44,11 +43,11 @@ class ShutdownWindow : public QWidget
 
 public:
     explicit ShutdownWindow(QWidget *parent=nullptr, Qt::WindowFlags f=Qt::Widget);
-    static QWidget *showShutdownWindow(FrenGUI *window);
+    static QWidget *showShutdownWindow(PejecoinGUI *window);
 
 protected:
     void closeEvent(QCloseEvent *event);
 };
 
 
-#endif // FREN_QT_UTILITYDIALOG_H
+#endif // PEJECOIN_QT_UTILITYDIALOG_H

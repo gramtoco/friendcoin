@@ -1,11 +1,10 @@
 // Copyright (c) 2012-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_LIMITEDMAP_H
-#define FREN_LIMITEDMAP_H
+#ifndef PEJECOIN_LIMITEDMAP_H
+#define PEJECOIN_LIMITEDMAP_H
 
 #include <assert.h>
 #include <map>
@@ -99,4 +98,4 @@ public:
     }
 };
 
-#endif // FREN_LIMITEDMAP_H
+#endif // PEJECOIN_LIMITEDMAP_H

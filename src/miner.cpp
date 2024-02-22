@@ -1,12 +1,12 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2020 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2020 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "miner.h"
 
+#include "base58.h"
 #include "amount.h"
 #include "chain.h"
 #include "chainparams.h"
@@ -42,7 +42,7 @@
 extern std::vector<CWalletRef> vpwallets;
 //////////////////////////////////////////////////////////////////////////////
 //
-// FrenMiner
+// PejecoinMiner
 //
 
 //
@@ -75,14 +75,14 @@ int64_t UpdateTime(CBlockHeader* pblock, const Consensus::Params& consensusParam
 
 BlockAssembler::Options::Options() {
     blockMinFeeRate = CFeeRate(DEFAULT_BLOCK_MIN_TX_FEE);
-    nBlockMaxWeight = GetMaxBlockWeight() - 12000;
+    nBlockMaxWeight = GetMaxBlockWeight() - 4000;
 }
 
 BlockAssembler::BlockAssembler(const CChainParams& params, const Options& options) : chainparams(params)
 {
     blockMinFeeRate = options.blockMinFeeRate;
-    // Limit weight to between 12K and MAX_BLOCK_WEIGHT-12K for sanity:
-    nBlockMaxWeight = std::max<size_t>(12000, std::min<size_t>(GetMaxBlockWeight() - 12000, options.nBlockMaxWeight));
+    // Limit weight to between 4K and MAX_BLOCK_WEIGHT-4K for sanity:
+    nBlockMaxWeight = std::max<size_t>(4000, std::min<size_t>(GetMaxBlockWeight() - 4000, options.nBlockMaxWeight));
 }
 
 static BlockAssembler::Options DefaultOptions(const CChainParams& params)
@@ -92,7 +92,7 @@ static BlockAssembler::Options DefaultOptions(const CChainParams& params)
     // If only one is given, only restrict the specified resource.
     // If both are given, restrict both.
     BlockAssembler::Options options;
-    options.nBlockMaxWeight = gArgs.GetArg("-blockmaxweight",  GetMaxBlockWeight() - 12000);
+    options.nBlockMaxWeight = gArgs.GetArg("-blockmaxweight",  GetMaxBlockWeight() - 4000);
     if (gArgs.IsArgSet("-blockmintxfee")) {
         CAmount n = 0;
         ParseMoney(gArgs.GetArg("-blockmintxfee", ""), n);
@@ -171,19 +171,46 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
     nLastBlockTx = nBlockTx;
     nLastBlockWeight = nBlockWeight;
 
+    //PEJECOIN START
     // Create coinbase transaction.
     CMutableTransaction coinbaseTx;
     coinbaseTx.vin.resize(1);
     coinbaseTx.vin[0].prevout.SetNull();
-    coinbaseTx.vout.resize(1);
+	//vout
+	CAmount nSubsidy 					= GetBlockSubsidy(nHeight, chainparams.GetConsensus());
+	CAmount nCommunityAutonomousAmount 	= GetParams().CommunityAutonomousAmount();
+	
+    coinbaseTx.vout.resize(2);
     coinbaseTx.vout[0].scriptPubKey = scriptPubKeyIn;
-    coinbaseTx.vout[0].nValue = nFees + GetBlockSubsidy(nHeight, chainparams.GetConsensus());
+    coinbaseTx.vout[0].nValue = nFees + ( (100-nCommunityAutonomousAmount) * nSubsidy / 100 );
+	
+    // Assign the set % in chainparams.cpp to the TX
+	std::string  GetCommunityAutonomousAddress 	= GetParams().CommunityAutonomousAddress();
+	CTxDestination destCommunityAutonomous = DecodeDestination(GetCommunityAutonomousAddress);
+    if (!IsValidDestination(destCommunityAutonomous)) {
+		LogPrintf("IsValidDestination: Invalid Pejecoin address %s \n", GetCommunityAutonomousAddress);
+    }
+    // We need to parse the address ready to send to it
+    CScript scriptPubKeyCommunityAutonomous = GetScriptForDestination(destCommunityAutonomous);
+	
+    coinbaseTx.vout[1].scriptPubKey = scriptPubKeyCommunityAutonomous;
+    coinbaseTx.vout[1].nValue = nSubsidy*nCommunityAutonomousAmount/100;
+	LogPrintf("nSubsidy: ====================================================\n");
+	LogPrintf("Miner: %ld \n", coinbaseTx.vout[0].nValue);
+	LogPrintf("scriptPubKeyIn: %s \n", HexStr(scriptPubKeyIn));
+	
+	LogPrintf("GetCommunityAutonomousAddress: %s \n", GetCommunityAutonomousAddress);
+	LogPrintf("scriptPubKeyCommunityAutonomous: %s \n", HexStr(scriptPubKeyCommunityAutonomous));
+	LogPrintf("nCommunityAutonomousAmount: %ld \n", coinbaseTx.vout[1].nValue);
     coinbaseTx.vin[0].scriptSig = CScript() << nHeight << OP_0;
+	
     pblock->vtx[0] = MakeTransactionRef(std::move(coinbaseTx));
     pblocktemplate->vchCoinbaseCommitment = GenerateCoinbaseCommitment(*pblock, pindexPrev, chainparams.GetConsensus());
     pblocktemplate->vTxFees[0] = -nFees;
-
+    
     LogPrintf("CreateNewBlock(): block weight: %u txs: %u fees: %ld sigops %d\n", GetBlockWeight(*pblock), nBlockTx, nFees, nBlockSigOpsCost);
+    //PEJE END
+
 
     // Fill in header
     pblock->hashPrevBlock  = pindexPrev->GetBlockHash();
@@ -434,7 +461,7 @@ void BlockAssembler::addPackageTxs(int &nPackagesSelected, int &nDescendantsUpda
             ++nConsecutiveFailed;
 
             if (nConsecutiveFailed > MAX_CONSECUTIVE_FAILURES && nBlockWeight >
-                    nBlockMaxWeight - 12000) {
+                    nBlockMaxWeight - 4000) {
                 // Give up if we're close to full and haven't succeeded in a while
                 break;
             }
@@ -536,11 +563,11 @@ CWallet *GetFirstWallet() {
     return(NULL);
 }
 
-void static FrenMiner(const CChainParams& chainparams)
+void static PejecoinMiner(const CChainParams& chainparams)
 {
-    LogPrintf("FrenMiner -- started\n");
+    LogPrintf("PejecoinMiner -- started\n");
     SetThreadPriority(THREAD_PRIORITY_LOWEST);
-    RenameThread("fren-miner");
+    RenameThread("pejecoin-miner");
 
     unsigned int nExtraNonce = 0;
 
@@ -552,7 +579,7 @@ void static FrenMiner(const CChainParams& chainparams)
 
 
     if (!EnsureWalletIsAvailable(pWallet, false)) {
-        LogPrintf("FrenMiner -- Wallet not available\n");
+        LogPrintf("PejecoinMiner -- Wallet not available\n");
     }
 #endif
 
@@ -614,13 +641,13 @@ void static FrenMiner(const CChainParams& chainparams)
 
             if (!pblocktemplate.get())
             {
-                LogPrintf("FrenMiner -- Keypool ran out, please call keypoolrefill before restarting the mining thread\n");
+                LogPrintf("PejecoinMiner -- Keypool ran out, please call keypoolrefill before restarting the mining thread\n");
                 return;
             }
             CBlock *pblock = &pblocktemplate->block;
             IncrementExtraNonce(pblock, pindexPrev, nExtraNonce);
 
-            LogPrintf("FrenMiner -- Running miner with %u transactions in block (%u bytes)\n", pblock->vtx.size(),
+            LogPrintf("PejecoinMiner -- Running miner with %u transactions in block (%u bytes)\n", pblock->vtx.size(),
                 ::GetSerializeSize(*pblock, SER_NETWORK, PROTOCOL_VERSION));
 
             //
@@ -641,7 +668,7 @@ void static FrenMiner(const CChainParams& chainparams)
                         pblock->mix_hash = mix_hash;
                         // Found a solution
                         SetThreadPriority(THREAD_PRIORITY_NORMAL);
-                        LogPrintf("FrenMiner:\n  proof-of-work found\n  hash: %s\n  target: %s\n", hash.GetHex(), hashTarget.GetHex());
+                        LogPrintf("PejecoinMiner:\n  proof-of-work found\n  hash: %s\n  target: %s\n", hash.GetHex(), hashTarget.GetHex());
                         ProcessBlockFound(pblock, chainparams);
                         SetThreadPriority(THREAD_PRIORITY_LOWEST);
                         coinbaseScript->KeepScript();
@@ -688,17 +715,17 @@ void static FrenMiner(const CChainParams& chainparams)
     }
     catch (const boost::thread_interrupted&)
     {
-        LogPrintf("FrenMiner -- terminated\n");
+        LogPrintf("PejecoinMiner -- terminated\n");
         throw;
     }
     catch (const std::runtime_error &e)
     {
-        LogPrintf("FrenMiner -- runtime error: %s\n", e.what());
+        LogPrintf("PejecoinMiner -- runtime error: %s\n", e.what());
         return;
     }
 }
 
-int GenerateFrens(bool fGenerate, int nThreads, const CChainParams& chainparams)
+int GeneratePejecoins(bool fGenerate, int nThreads, const CChainParams& chainparams)
 {
 
     static boost::thread_group* minerThreads = NULL;
@@ -725,7 +752,7 @@ int GenerateFrens(bool fGenerate, int nThreads, const CChainParams& chainparams)
     nHashesPerSec = 0;
 
     for (int i = 0; i < nThreads; i++){
-        minerThreads->create_thread(boost::bind(&FrenMiner, boost::cref(chainparams)));
+        minerThreads->create_thread(boost::bind(&PejecoinMiner, boost::cref(chainparams)));
     }
 
     return(numCores);

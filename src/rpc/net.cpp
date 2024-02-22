@@ -1,6 +1,5 @@
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -232,8 +231,8 @@ UniValue addnode(const JSONRPCRequest& request)
             "1. \"node\"     (string, required) The node (see getpeerinfo for nodes)\n"
             "2. \"command\"  (string, required) 'add' to add a node to the list, 'remove' to remove a node from the list, 'onetry' to try a connection to the node once\n"
             "\nExamples:\n"
-            + HelpExampleCli("addnode", "\"192.168.0.6:4207\" \"onetry\"")
-            + HelpExampleRpc("addnode", "\"192.168.0.6:4207\", \"onetry\"")
+            + HelpExampleCli("addnode", "\"192.168.0.6:2024\" \"onetry\"")
+            + HelpExampleRpc("addnode", "\"192.168.0.6:2024\", \"onetry\"")
         );
 
     if(!g_connman)
@@ -274,9 +273,9 @@ UniValue disconnectnode(const JSONRPCRequest& request)
             "1. \"address\"     (string, optional) The IP address/port of the node\n"
             "2. \"nodeid\"      (number, optional) The node ID (see getpeerinfo for node IDs)\n"
             "\nExamples:\n"
-            + HelpExampleCli("disconnectnode", "\"192.168.0.6:4207\"")
+            + HelpExampleCli("disconnectnode", "\"192.168.0.6:2024\"")
             + HelpExampleCli("disconnectnode", "\"\" 1")
-            + HelpExampleRpc("disconnectnode", "\"192.168.0.6:4207\"")
+            + HelpExampleRpc("disconnectnode", "\"192.168.0.6:2024\"")
             + HelpExampleRpc("disconnectnode", "\"\", 1")
         );
 
@@ -321,7 +320,7 @@ UniValue getaddednodeinfo(const JSONRPCRequest& request)
             "    \"connected\" : true|false,          (boolean) If connected\n"
             "    \"addresses\" : [                    (list of objects) Only when connected = true\n"
             "       {\n"
-            "         \"address\" : \"192.168.0.201:4207\",  (string) The fren server IP and port we're connected to\n"
+            "         \"address\" : \"192.168.0.201:2024\",  (string) The pejecoin server IP and port we're connected to\n"
             "         \"connected\" : \"outbound\"           (string) connection, inbound or outbound\n"
             "       }\n"
             "     ]\n"

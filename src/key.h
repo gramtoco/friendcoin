@@ -1,12 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_KEY_H
-#define FREN_KEY_H
+#ifndef PEJECOIN_KEY_H
+#define PEJECOIN_KEY_H
 
 #include "pubkey.h"
 #include "serialize.h"
@@ -185,4 +184,4 @@ void ECC_Stop(void);
 /** Check that required EC support is available at runtime. */
 bool ECC_InitSanityCheck(void);
 
-#endif // FREN_KEY_H
+#endif // PEJECOIN_KEY_H

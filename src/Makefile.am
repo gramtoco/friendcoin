@@ -1,16 +1,13 @@
 # Copyright (c) 2013-2016 The Bitcoin Core developers
-# Copyright (c) 2017-2019 The Raven Core developers
-# Copyright (c) 2023 The Fren Core developers
+# Copyright (c) 2017-2019 The Pejecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 DIST_SUBDIRS = secp256k1 univalue
 
-AM_LDFLAGS = $(LIBTOOL_LDFLAGS) $(HARDENED_LDFLAGS) $(GPROF_LDFLAGS) $(SANITIZER_LDFLAGS)
-AM_CXXFLAGS = $(DEBUG_CXXFLAGS) $(HARDENED_CXXFLAGS) $(WARN_CXXFLAGS) $(NOWARN_CXXFLAGS) $(ERROR_CXXFLAGS) $(GPROF_CXXFLAGS) $(SANITIZER_CXXFLAGS)
-AM_CPPFLAGS = $(DEBUG_CPPFLAGS) $(HARDENED_CPPFLAGS)
-AM_LIBTOOLFLAGS = --preserve-dup-deps
-PTHREAD_FLAGS = $(PTHREAD_CFLAGS) $(PTHREAD_LIBS)
+AM_LDFLAGS = $(PTHREAD_CFLAGS) $(LIBTOOL_LDFLAGS) $(HARDENED_LDFLAGS)
+AM_CXXFLAGS = $(HARDENED_CXXFLAGS) $(ERROR_CXXFLAGS)
+AM_CPPFLAGS = $(HARDENED_CPPFLAGS)
 EXTRA_LIBRARIES =
 
 if EMBEDDED_UNIVALUE
@@ -22,28 +19,28 @@ else
 LIBUNIVALUE = $(UNIVALUE_LIBS)
 endif
 
-FREN_INCLUDES=-I$(builddir) -I$(builddir)/obj $(BDB_CPPFLAGS) $(BOOST_CPPFLAGS) $(LEVELDB_CPPFLAGS) $(CRYPTO_CFLAGS) $(SSL_CFLAGS)
+PEJECOIN_INCLUDES=-I$(builddir) -I$(builddir)/obj $(BDB_CPPFLAGS) $(BOOST_CPPFLAGS) $(LEVELDB_CPPFLAGS) $(CRYPTO_CFLAGS) $(SSL_CFLAGS)
 
-FREN_INCLUDES += -I$(srcdir)/secp256k1/include
-FREN_INCLUDES += $(UNIVALUE_CFLAGS)
+PEJECOIN_INCLUDES += -I$(srcdir)/secp256k1/include
+PEJECOIN_INCLUDES += $(UNIVALUE_CFLAGS)
 
-LIBFREN_SERVER=libfren_server.a
-LIBFREN_COMMON=libfren_common.a
-LIBFREN_CONSENSUS=libfren_consensus.a
-LIBFREN_CLI=libfren_cli.a
-LIBFREN_UTIL=libfren_util.a
-LIBFREN_CRYPTO=crypto/libfren_crypto.a
-LIBFRENQT=qt/libfrenqt.a
+LIBPEJECOIN_SERVER=libpejecoin_server.a
+LIBPEJECOIN_COMMON=libpejecoin_common.a
+LIBPEJECOIN_CONSENSUS=libpejecoin_consensus.a
+LIBPEJECOIN_CLI=libpejecoin_cli.a
+LIBPEJECOIN_UTIL=libpejecoin_util.a
+LIBPEJECOIN_CRYPTO=crypto/libpejecoin_crypto.a
+LIBPEJECOINQT=qt/libpejecoinqt.a
 LIBSECP256K1=secp256k1/libsecp256k1.la
 
 if ENABLE_ZMQ
-LIBFREN_ZMQ=libfren_zmq.a
+LIBPEJECOIN_ZMQ=libpejecoin_zmq.a
 endif
-if BUILD_FREN_LIBS
-LIBFRENCONSENSUS=libfrenconsensus.la
+if BUILD_PEJECOIN_LIBS
+LIBPEJECOINCONSENSUS=libpejecoinconsensus.la
 endif
 if ENABLE_WALLET
-LIBFREN_WALLET=libfren_wallet.a
+LIBPEJECOIN_WALLET=libpejecoin_wallet.a
 endif
 
 $(LIBSECP256K1): $(wildcard secp256k1/src/*) $(wildcard secp256k1/include/*)
@@ -52,37 +49,37 @@ $(LIBSECP256K1): $(wildcard secp256k1/src/*) $(wildcard secp256k1/include/*)
 # Make is not made aware of per-object dependencies to avoid limiting building parallelization
 # But to build the less dependent modules first, we manually select their order here:
 EXTRA_LIBRARIES += \
-  $(LIBFREN_CRYPTO) \
-  $(LIBFREN_UTIL) \
-  $(LIBFREN_COMMON) \
-  $(LIBFREN_CONSENSUS) \
-  $(LIBFREN_SERVER) \
-  $(LIBFREN_CLI) \
-  $(LIBFREN_WALLET) \
-  $(LIBFREN_ZMQ)
+  $(LIBPEJECOIN_CRYPTO) \
+  $(LIBPEJECOIN_UTIL) \
+  $(LIBPEJECOIN_COMMON) \
+  $(LIBPEJECOIN_CONSENSUS) \
+  $(LIBPEJECOIN_SERVER) \
+  $(LIBPEJECOIN_CLI) \
+  $(LIBPEJECOIN_WALLET) \
+  $(LIBPEJECOIN_ZMQ)
 
-lib_LTLIBRARIES = $(LIBFRENCONSENSUS)
+lib_LTLIBRARIES = $(LIBPEJECOINCONSENSUS)
 
 bin_PROGRAMS =
 noinst_PROGRAMS =
 TESTS =
 BENCHMARKS =
 
-if BUILD_FREND
-  bin_PROGRAMS += frend
+if BUILD_PEJECOIND
+  bin_PROGRAMS += pejecoind
 endif
 
-if BUILD_FREN_CLI
-  bin_PROGRAMS += fren-cli
+if BUILD_PEJECOIN_CLI
+  bin_PROGRAMS += pejecoin-cli
 endif
 
-if BUILD_FREN_TX
-  bin_PROGRAMS += fren-tx
+if BUILD_PEJECOIN_TX
+  bin_PROGRAMS += pejecoin-tx
 endif
 
 .PHONY: FORCE check-symbols check-security
-# fren core #
-FREN_CORE_H = \
+# pejecoin core #
+PEJECOIN_CORE_H = \
   addrdb.h \
   addressindex.h \
   algo/sph_groestl.h \
@@ -243,12 +240,12 @@ obj/build.h: FORCE
 	@$(MKDIR_P) $(builddir)/obj
 	@$(top_srcdir)/share/genbuild.sh "$(abs_top_builddir)/src/obj/build.h" \
 	  "$(abs_top_srcdir)"
-libfren_util_a-clientversion.$(OBJEXT): obj/build.h
+libpejecoin_util_a-clientversion.$(OBJEXT): obj/build.h
 
-# server: shared between frend and fren-qt
-libfren_server_a_CPPFLAGS = $(AM_CPPFLAGS) $(FREN_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
-libfren_server_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libfren_server_a_SOURCES = \
+# server: shared between pejecoind and pejecoin-qt
+libpejecoin_server_a_CPPFLAGS = $(AM_CPPFLAGS) $(PEJECOIN_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
+libpejecoin_server_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libpejecoin_server_a_SOURCES = \
   addrdb.cpp \
   addrman.cpp \
   bloom.cpp \
@@ -300,23 +297,23 @@ libfren_server_a_SOURCES = \
   validation.cpp \
   validationinterface.cpp \
   versionbits.cpp \
-  $(FREN_CORE_H)
+  $(PEJECOIN_CORE_H)
 
 if ENABLE_ZMQ
-libfren_zmq_a_CPPFLAGS = $(FREN_INCLUDES) $(ZMQ_CFLAGS)
-libfren_zmq_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libfren_zmq_a_SOURCES = \
+libpejecoin_zmq_a_CPPFLAGS = $(PEJECOIN_INCLUDES) $(ZMQ_CFLAGS)
+libpejecoin_zmq_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libpejecoin_zmq_a_SOURCES = \
   zmq/zmqabstractnotifier.cpp \
   zmq/zmqnotificationinterface.cpp \
   zmq/zmqpublishnotifier.cpp
 endif
 
 
-# wallet: shared between frend and fren-qt, but only linked
+# wallet: shared between pejecoind and pejecoin-qt, but only linked
 # when wallet enabled
-libfren_wallet_a_CPPFLAGS = $(AM_CPPFLAGS) $(FREN_INCLUDES)
-libfren_wallet_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libfren_wallet_a_SOURCES = \
+libpejecoin_wallet_a_CPPFLAGS = $(AM_CPPFLAGS) $(PEJECOIN_INCLUDES)
+libpejecoin_wallet_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libpejecoin_wallet_a_SOURCES = \
   wallet/crypter.cpp \
   wallet/db.cpp \
   wallet/feebumper.cpp \
@@ -327,12 +324,12 @@ libfren_wallet_a_SOURCES = \
   wallet/wallet.cpp \
   wallet/walletdb.cpp \
   wallet/bip39.cpp \
-  $(FREN_CORE_H)
+  $(PEJECOIN_CORE_H)
 
 # crypto primitives library
-crypto_libfren_crypto_a_CPPFLAGS = $(AM_CPPFLAGS)
-crypto_libfren_crypto_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-crypto_libfren_crypto_a_SOURCES = \
+crypto_libpejecoin_crypto_a_CPPFLAGS = $(AM_CPPFLAGS)
+crypto_libpejecoin_crypto_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+crypto_libpejecoin_crypto_a_SOURCES = \
   crypto/aes.cpp \
   crypto/aes.h \
   crypto/chacha20.h \
@@ -375,13 +372,13 @@ crypto_libfren_crypto_a_SOURCES = \
   crypto/ethash/progpow_test_vectors.hpp
 
 if USE_ASM
-crypto_libfren_crypto_a_SOURCES += crypto/sha256_sse4.cpp
+crypto_libpejecoin_crypto_a_SOURCES += crypto/sha256_sse4.cpp
 endif
 
 # consensus: shared between all executables that validate any consensus rules.
-libfren_consensus_a_CPPFLAGS = $(AM_CPPFLAGS) $(FREN_INCLUDES)
-libfren_consensus_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libfren_consensus_a_SOURCES = \
+libpejecoin_consensus_a_CPPFLAGS = $(AM_CPPFLAGS) $(PEJECOIN_INCLUDES)
+libpejecoin_consensus_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libpejecoin_consensus_a_SOURCES = \
   amount.h \
   arith_uint256.cpp \
   arith_uint256.h \
@@ -398,7 +395,7 @@ libfren_consensus_a_SOURCES = \
   primitives/transaction.h \
   pubkey.cpp \
   pubkey.h \
-  script/frenconsensus.cpp \
+  script/pejecoinconsensus.cpp \
   script/interpreter.cpp \
   script/interpreter.h \
   script/script.cpp \
@@ -416,12 +413,12 @@ libfren_consensus_a_SOURCES = \
   version.h \
   LibBoolEE.cpp \
   LibBoolEE.h \
-  $(FREN_CORE_H)
+  $(PEJECOIN_CORE_H)
 
-# common: shared between frend, and fren-qt and non-server tools
-libfren_common_a_CPPFLAGS = $(AM_CPPFLAGS) $(FREN_INCLUDES)
-libfren_common_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libfren_common_a_SOURCES = \
+# common: shared between pejecoind, and pejecoin-qt and non-server tools
+libpejecoin_common_a_CPPFLAGS = $(AM_CPPFLAGS) $(PEJECOIN_INCLUDES)
+libpejecoin_common_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libpejecoin_common_a_SOURCES = \
   base58.cpp \
   chainparams.cpp \
   coins.cpp \
@@ -438,14 +435,14 @@ libfren_common_a_SOURCES = \
   script/sign.cpp \
   script/standard.cpp \
   warnings.cpp \
-  $(FREN_CORE_H)
+  $(PEJECOIN_CORE_H)
 
 # util: shared between all executables.
 # This library *must* be included to make sure that the glibc
 # backward-compatibility objects and their sanity checks are linked.
-libfren_util_a_CPPFLAGS = $(AM_CPPFLAGS) $(FREN_INCLUDES)
-libfren_util_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libfren_util_a_SOURCES = \
+libpejecoin_util_a_CPPFLAGS = $(AM_CPPFLAGS) $(PEJECOIN_INCLUDES)
+libpejecoin_util_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libpejecoin_util_a_SOURCES = \
   support/lockedpool.cpp \
   chainparamsbase.cpp \
   clientversion.cpp \
@@ -461,102 +458,102 @@ libfren_util_a_SOURCES = \
   utilmoneystr.cpp \
   utilstrencodings.cpp \
   utiltime.cpp \
-  $(FREN_CORE_H)
+  $(PEJECOIN_CORE_H)
 
 if GLIBC_BACK_COMPAT
-libfren_util_a_SOURCES += compat/glibc_compat.cpp
+libpejecoin_util_a_SOURCES += compat/glibc_compat.cpp
 AM_LDFLAGS += $(COMPAT_LDFLAGS)
 endif
 
-# cli: shared between fren-cli and fren-qt
-libfren_cli_a_CPPFLAGS = $(AM_CPPFLAGS) $(FREN_INCLUDES)
-libfren_cli_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libfren_cli_a_SOURCES = \
+# cli: shared between pejecoin-cli and pejecoin-qt
+libpejecoin_cli_a_CPPFLAGS = $(AM_CPPFLAGS) $(PEJECOIN_INCLUDES)
+libpejecoin_cli_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libpejecoin_cli_a_SOURCES = \
   rpc/client.cpp \
-  $(FREN_CORE_H)
+  $(PEJECOIN_CORE_H)
 
-nodist_libfren_util_a_SOURCES = $(srcdir)/obj/build.h
+nodist_libpejecoin_util_a_SOURCES = $(srcdir)/obj/build.h
 #
 
-# frend binary #
-frend_SOURCES = frend.cpp
-frend_CPPFLAGS = $(AM_CPPFLAGS) $(FREN_INCLUDES)
-frend_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-frend_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) $(PTHREAD_FLAGS)
+# pejecoind binary #
+pejecoind_SOURCES = pejecoind.cpp
+pejecoind_CPPFLAGS = $(AM_CPPFLAGS) $(PEJECOIN_INCLUDES)
+pejecoind_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+pejecoind_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-frend_SOURCES += frend-res.rc
+pejecoind_SOURCES += pejecoind-res.rc
 endif
 
-frend_LDADD = \
-  $(LIBFREN_SERVER) \
-  $(LIBFREN_COMMON) \
+pejecoind_LDADD = \
+  $(LIBPEJECOIN_SERVER) \
+  $(LIBPEJECOIN_COMMON) \
   $(LIBUNIVALUE) \
-  $(LIBFREN_UTIL) \
-  $(LIBFREN_WALLET) \
-  $(LIBFREN_ZMQ) \
-  $(LIBFREN_CONSENSUS) \
-  $(LIBFREN_CRYPTO) \
+  $(LIBPEJECOIN_UTIL) \
+  $(LIBPEJECOIN_WALLET) \
+  $(LIBPEJECOIN_ZMQ) \
+  $(LIBPEJECOIN_CONSENSUS) \
+  $(LIBPEJECOIN_CRYPTO) \
   $(LIBLEVELDB) \
   $(LIBLEVELDB_SSE42) \
   $(LIBMEMENV) \
   $(LIBSECP256K1)
 
-frend_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
+pejecoind_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
 
-# fren-cli binary #
-fren_cli_SOURCES = fren-cli.cpp
-fren_cli_CPPFLAGS = $(AM_CPPFLAGS) $(FREN_INCLUDES) $(EVENT_CFLAGS)
-fren_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-fren_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) $(PTHREAD_FLAGS)
+# pejecoin-cli binary #
+pejecoin_cli_SOURCES = pejecoin-cli.cpp
+pejecoin_cli_CPPFLAGS = $(AM_CPPFLAGS) $(PEJECOIN_INCLUDES) $(EVENT_CFLAGS)
+pejecoin_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+pejecoin_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-fren_cli_SOURCES += fren-cli-res.rc
+pejecoin_cli_SOURCES += pejecoin-cli-res.rc
 endif
 
-fren_cli_LDADD = \
-  $(LIBFREN_CLI) \
+pejecoin_cli_LDADD = \
+  $(LIBPEJECOIN_CLI) \
   $(LIBUNIVALUE) \
-  $(LIBFREN_UTIL) \
-  $(LIBFREN_CRYPTO)
+  $(LIBPEJECOIN_UTIL) \
+  $(LIBPEJECOIN_CRYPTO)
 
-fren_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
+pejecoin_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
 #
 
-# fren-tx binary #
-fren_tx_SOURCES = fren-tx.cpp
-fren_tx_CPPFLAGS = $(AM_CPPFLAGS) $(FREN_INCLUDES)
-fren_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-fren_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) $(PTHREAD_FLAGS)
+# pejecoin-tx binary #
+pejecoin_tx_SOURCES = pejecoin-tx.cpp
+pejecoin_tx_CPPFLAGS = $(AM_CPPFLAGS) $(PEJECOIN_INCLUDES)
+pejecoin_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+pejecoin_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-fren_tx_SOURCES += fren-tx-res.rc
+pejecoin_tx_SOURCES += pejecoin-tx-res.rc
 endif
 
-fren_tx_LDADD = \
+pejecoin_tx_LDADD = \
   $(LIBUNIVALUE) \
-  $(LIBFREN_COMMON) \
-  $(LIBFREN_UTIL) \
-  $(LIBFREN_CONSENSUS) \
-  $(LIBFREN_CRYPTO) \
+  $(LIBPEJECOIN_COMMON) \
+  $(LIBPEJECOIN_UTIL) \
+  $(LIBPEJECOIN_CONSENSUS) \
+  $(LIBPEJECOIN_CRYPTO) \
   $(LIBSECP256K1)
 
-fren_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
+pejecoin_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
 #
 
-# frenconsensus library #
-if BUILD_FREN_LIBS
-include_HEADERS = script/frenconsensus.h
-libfrenconsensus_la_SOURCES = $(crypto_libfren_crypto_a_SOURCES) $(libfren_consensus_a_SOURCES)
+# pejeconsensus library #
+if BUILD_PEJECOIN_LIBS
+include_HEADERS = script/pejecoinconsensus.h
+libpejecoinconsensus_la_SOURCES = $(crypto_libpejecoin_crypto_a_SOURCES) $(libpejecoin_consensus_a_SOURCES)
 
 if GLIBC_BACK_COMPAT
-  libfrenconsensus_la_SOURCES += compat/glibc_compat.cpp
+  libpejecoinconsensus_la_SOURCES += compat/glibc_compat.cpp
 endif
 
-libfrenconsensus_la_LDFLAGS = $(AM_LDFLAGS) -no-undefined $(RELDFLAGS)
-libfrenconsensus_la_LIBADD = $(LIBSECP256K1) $(BOOST_LIBS)
-libfrenconsensus_la_CPPFLAGS = $(AM_CPPFLAGS) -I$(builddir)/obj -I$(srcdir)/secp256k1/include -DBUILD_FREN_INTERNAL
-libfrenconsensus_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libpejecoinconsensus_la_LDFLAGS = $(AM_LDFLAGS) -no-undefined $(RELDFLAGS)
+libpejecoinconsensus_la_LIBADD = $(LIBSECP256K1) $(BOOST_LIBS)
+libpejecoinconsensus_la_CPPFLAGS = $(AM_CPPFLAGS) -I$(builddir)/obj -I$(srcdir)/secp256k1/include -DBUILD_PEJECOIN_INTERNAL
+libpejecoinconsensus_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 
 endif
 #
@@ -586,12 +583,12 @@ CLEANFILES += obj/build.h
 EXTRA_DIST = $(CTAES_DIST)
 
 
-config/fren-config.h: config/stamp-h1
+config/pejecoin-config.h: config/stamp-h1
 	@$(MAKE) -C $(top_builddir) $(subdir)/$(@)
-config/stamp-h1: $(top_srcdir)/$(subdir)/config/fren-config.h.in $(top_builddir)/config.status
+config/stamp-h1: $(top_srcdir)/$(subdir)/config/pejecoin-config.h.in $(top_builddir)/config.status
 	$(AM_V_at)$(MAKE) -C $(top_builddir) $(subdir)/$(@)
-$(top_srcdir)/$(subdir)/config/fren-config.h.in:  $(am__configure_deps)
-	$(AM_V_at)$(MAKE) -C $(top_srcdir) $(subdir)/config/fren-config.h.in
+$(top_srcdir)/$(subdir)/config/pejecoin-config.h.in:  $(am__configure_deps)
+	$(AM_V_at)$(MAKE) -C $(top_srcdir) $(subdir)/config/pejecoin-config.h.in
 
 clean-local:
 	-$(MAKE) -C secp256k1 clean

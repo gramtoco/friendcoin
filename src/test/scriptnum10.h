@@ -1,12 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2015 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_TEST_SCRIPTNUM10_H
-#define FREN_TEST_SCRIPTNUM10_H
+#ifndef PEJECOIN_TEST_SCRIPTNUM10_H
+#define PEJECOIN_TEST_SCRIPTNUM10_H
 
 #include <algorithm>
 #include <limits>
@@ -26,7 +25,7 @@ public:
 class CScriptNum10
 {
 /**
- * The ScriptNum implementation from Fren Core 0.10.0, for cross-comparison.
+ * The ScriptNum implementation from Pejecoin Core 0.10.0, for cross-comparison.
  */
 public:
 
@@ -219,4 +218,4 @@ private:
 };
 
 
-#endif // FREN_TEST_BIGNUM_H
+#endif // PEJECOIN_TEST_BIGNUM_H

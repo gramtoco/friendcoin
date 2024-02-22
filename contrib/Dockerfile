@@ -1,10 +1,10 @@
 FROM amd64/ubuntu:20.04 AS base
 
-#If you found this docker image helpful please donate FRENS to the maintainer
+#If you found this docker image helpful please donate PEJE to the maintainer
 LABEL maintainer="RV9zdNeUTQUToZUcRp9uNF8gwH5LzDFtan"
 
-EXPOSE 4206/tcp
-EXPOSE 4207/tcp
+EXPOSE 9766/tcp
+EXPOSE 2024/tcp
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -31,33 +31,33 @@ RUN apt-get update && \
 	apt-get clean
 
 #Copy source dir
-COPY . /home/fren/build/Frencoin/
-WORKDIR /home/fren/build/Frencoin
+COPY . /home/pejecoin/build/Pejecoin/
+WORKDIR /home/pejecoin/build/Pejecoin
 
 #build db4 from source
-WORKDIR /home/fren/build/Frencoin/contrib
+WORKDIR /home/pejecoin/build/Pejecoin/contrib
 RUN ./install_db4.sh ../../
 
-# build Frencore
-WORKDIR /home/fren/build/Frencoin
-RUN ./autogen.sh && ./configure --disable-tests BDB_LIBS="-L/home/fren/build/db4/lib -ldb_cxx-4.8" BDB_CFLAGS="-I/home/fren/build/db4/include" --with-gui=no  && make -j4
+# build Pejecoincore
+WORKDIR /home/pejecoin/build/Pejecoin
+RUN ./autogen.sh && ./configure --disable-tests BDB_LIBS="-L/home/pejecoin/build/db4/lib -ldb_cxx-4.8" BDB_CFLAGS="-I/home/pejecoin/build/db4/include" --with-gui=no  && make -j4
 
 FROM base AS final
 
 #Add our service account user
-RUN useradd -ms /bin/bash fren && \
-	mkdir /var/lib/fren && \
-	chown fren:fren /var/lib/fren && \
-	ln -s /var/lib/fren /home/fren/.fren && \
-	chown -h fren:fren /home/fren/.fren
+RUN useradd -ms /bin/bash pejecoin && \
+	mkdir /var/lib/pejecoin && \
+	chown pejecoin:pejecoin /var/lib/pejecoin && \
+	ln -s /var/lib/pejecoin /home/pejecoin/.pejecoin && \
+	chown -h pejecoin:pejecoin /home/pejecoin/.pejecoin
 
-VOLUME /var/lib/fren
+VOLUME /var/lib/pejecoin
 
 #Copy the compiled binaries from the build
-COPY --from=build /home/fren/build/Frencoin/src/frend /usr/local/bin/frend
-COPY --from=build /home/fren/build/Frencoin/src/fren-cli /usr/local/bin/fren-cli
+COPY --from=build /home/pejecoin/build/Pejecoin/src/pejecoind /usr/local/bin/pejecoind
+COPY --from=build /home/pejecoin/build/Pejecoin/src/pejecoin-cli /usr/local/bin/pejecoin-cli
 
-WORKDIR /home/fren
-USER fren
+WORKDIR /home/pejecoin
+USER pejecoin
 
-CMD /usr/local/bin/frend -datadir=/var/lib/fren -printtoconsole -onlynet=ipv4
+CMD /usr/local/bin/pejecoind -datadir=/var/lib/pejecoin -printtoconsole -onlynet=ipv4

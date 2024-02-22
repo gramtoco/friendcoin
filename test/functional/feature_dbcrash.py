@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2017 The Bitcoin Core developers
-# Copyright (c) 2017-2020 The Raven Core developers
-# Copyright (c) 2023 The Fren Core developers
+# Copyright (c) 2017-2020 The Pejecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -36,11 +35,11 @@ import random
 import time
 from test_framework.mininode import CTxIn, COutPoint, COIN, to_hex
 from test_framework.script import CTransaction, CTxOut
-from test_framework.test_framework import FrenTestFramework
+from test_framework.test_framework import PejecoinTestFramework
 from test_framework.util import create_confirmed_utxos, hex_str_to_bytes, assert_equal
 
 
-class ChainstateWriteCrashTest(FrenTestFramework):
+class ChainstateWriteCrashTest(PejecoinTestFramework):
 
     def set_test_params(self):
         self.num_nodes = 4
@@ -84,15 +83,15 @@ class ChainstateWriteCrashTest(FrenTestFramework):
                 return utxo_hash
             except:
                 # An exception here should mean the node is about to crash.
-                # If frend exits, then try again.  wait_for_node_exit()
-                # should raise an exception if frend doesn't exit.
+                # If pejecoind exits, then try again.  wait_for_node_exit()
+                # should raise an exception if pejecoind doesn't exit.
                 self.log.debug("Wait for node exit ~~ during restart, node: %s", node_index)
                 self.wait_for_node_exit(node_index, timeout=10)
             self.crashed_on_restart += 1
             time.sleep(1)
 
-        # If we got here, frend isn't coming back up on restart.  Could be a
-        # bug in frend, or we've gotten unlucky with our dbcrash ratio --
+        # If we got here, pejecoind isn't coming back up on restart.  Could be a
+        # bug in pejecoind, or we've gotten unlucky with our dbcrash ratio --
         # perhaps we generated a test case that blew up our cache?
         # TODO: If this happens a lot, we should try to restart without -dbcrashratio
         # and make sure that recovery happens.

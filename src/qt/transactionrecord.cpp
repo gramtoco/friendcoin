@@ -1,6 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2020 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2020 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -11,7 +10,7 @@
 #include "base58.h"
 #include "consensus/consensus.h"
 #include "validation.h"
-#include "frenunits.h"
+#include "pejecoinunits.h"
 #include "timedata.h"
 #include "wallet/wallet.h"
 #include "core_io.h"
@@ -43,10 +42,10 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
     std::map<std::string, std::string> mapValue = wtx.mapValue;
 
     
-    /** FRENS START */
+    /** PEJE START */
     if(isSwapTransaction(wallet, wtx, parts, nCredit, nDebit, nNet))
         return parts;
-    /** FRENS END */
+    /** PEJE END */
     if (nNet > 0 || wtx.IsCoinBase())
     {
         //
@@ -57,10 +56,10 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
             const CTxOut& txout = wtx.tx->vout[i];
             isminetype mine = wallet->IsMine(txout);
 
-            /** FRENS START */
+            /** PEJE START */
             if (txout.scriptPubKey.IsAssetScript() || txout.scriptPubKey.IsNullAssetTxDataScript() || txout.scriptPubKey.IsNullGlobalRestrictionAssetTxDataScript())
                 continue;
-            /** FRENS END */
+            /** PEJE END */
 
             if(mine)
             {
@@ -71,7 +70,7 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
                 sub.involvesWatchAddress = mine & ISMINE_WATCH_ONLY;
                 if (ExtractDestination(txout.scriptPubKey, address) && IsMine(*wallet, address))
                 {
-                    // Received by Fren Address
+                    // Received by Pejecoin Address
                     sub.type = TransactionRecord::RecvWithAddress;
                     sub.address = EncodeDestination(address);
                 }
@@ -105,10 +104,10 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
         isminetype fAllToMe = ISMINE_SPENDABLE;
         for (const CTxOut& txout : wtx.tx->vout)
         {
-            /** FRENS START */
+            /** PEJE START */
             if (txout.scriptPubKey.IsAssetScript() || txout.scriptPubKey.IsNullAssetTxDataScript() || txout.scriptPubKey.IsNullGlobalRestrictionAssetTxDataScript())
                 continue;
-            /** FRENS END */
+            /** PEJE END */
 
             isminetype mine = wallet->IsMine(txout);
             if(mine & ISMINE_WATCH_ONLY) involvesWatchAddress = true;
@@ -135,10 +134,10 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
             {
                 const CTxOut& txout = wtx.tx->vout[nOut];
 
-                /** FRENS START */
+                /** PEJE START */
                 if (txout.scriptPubKey.IsAssetScript())
                     continue;
-                /** FRENS END */
+                /** PEJE END */
 
                 TransactionRecord sub(hash, nTime);
                 sub.idx = nOut;
@@ -154,7 +153,7 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
                 CTxDestination address;
                 if (ExtractDestination(txout.scriptPubKey, address))
                 {
-                    // Sent to Fren Address
+                    // Sent to Pejecoin Address
                     sub.type = TransactionRecord::SendToAddress;
                     sub.address = EncodeDestination(address);
                 }
@@ -184,7 +183,7 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
             //
 
 
-            /** FRENS START */
+            /** PEJE START */
             // We will only show mixed debit transactions that are nNet < 0 or if they are nNet == 0 and
             // they do not contain assets. This is so the list of transaction doesn't add 0 amount transactions to the
             // list.
@@ -204,12 +203,12 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
                 parts.append(TransactionRecord(hash, nTime, TransactionRecord::Other, "", nNet, 0));
                 parts.last().involvesWatchAddress = involvesWatchAddress;
             }
-            /** FRENS END */
+            /** PEJE END */
         }
     }
 
 
-    /** FRENS START */
+    /** PEJE START */
     if (AreAssetsDeployed()) {
         CAmount nFee;
         std::string strSentAccount;
@@ -306,7 +305,7 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
             }
         }
     }
-    /** FRENS END */
+    /** PEJE END */
 
     return parts;
 }
@@ -382,7 +381,7 @@ bool TransactionRecord::isSwapTransaction(const CWallet *wallet, const CWalletTx
                 {
                     if(wallet->IsMine(txout))
                     {
-                        //If we sent assets, we need to see if we were sent assets or FRENS in return
+                        //If we sent assets, we need to see if we were sent assets or PEJE in return
                         if(txout.scriptPubKey.IsAssetScript())
                         {
                             if(fSentAssets) { //Check to skip asset change by name
@@ -397,7 +396,7 @@ bool TransactionRecord::isSwapTransaction(const CWallet *wallet, const CWalletTx
                             myReceievedOutput = txout;
                             break;
                         }
-                        else //We got FRENS
+                        else //We got PEJE
                         {
                             if(fSentAssets) { //If we sent assets, this is ours. but we need to adjust for change.
                                 myReceievedOutput = txout;
@@ -421,20 +420,20 @@ bool TransactionRecord::isSwapTransaction(const CWallet *wallet, const CWalletTx
                 //Trade!
                 //Amount represents the asset we sent, no matter the perspective
                 sub.credit = recvAmount;
-                std::string asset_qty_format = FrenUnits::formatWithCustomName(QString::fromStdString(sentType), sentAmount, 2).toUtf8().constData();
+                std::string asset_qty_format = PejecoinUnits::formatWithCustomName(QString::fromStdString(sentType), sentAmount, 2).toUtf8().constData();
                 sub.assetName = strprintf("%s (%s %s)", TransactionView::tr("Traded Away").toUtf8().constData(), recvType, asset_qty_format);
             } else if (fSentAssets) {
                 //Sell!
                 //Total price paid, need to use net calculation when we executed
                 sub.credit = mine ? myReceievedOutput.nValue : nNet;
-                std::string asset_qty_format = FrenUnits::formatWithCustomName(QString::fromStdString(sentType), sentAmount, 2).toUtf8().constData();
-                sub.assetName = strprintf("FRENS (%s %s)", TransactionView::tr("Sold").toUtf8().constData(), asset_qty_format);
+                std::string asset_qty_format = PejecoinUnits::formatWithCustomName(QString::fromStdString(sentType), sentAmount, 2).toUtf8().constData();
+                sub.assetName = strprintf("PEJE (%s %s)", TransactionView::tr("Sold").toUtf8().constData(), asset_qty_format);
             } else if (fRecvAssets) {
                 //Buy!
                 //Total price paid, need to use net calculation when we executed
                 sub.credit = (mine ? -myProvidedInput.nValue : nNet);
-                std::string asset_qty_format = FrenUnits::formatWithCustomName(QString::fromStdString(recvType), recvAmount, 2).toUtf8().constData();
-                sub.assetName = strprintf("FRENS (%s %s)", TransactionView::tr("Bought").toUtf8().constData(), asset_qty_format);
+                std::string asset_qty_format = PejecoinUnits::formatWithCustomName(QString::fromStdString(recvType), recvAmount, 2).toUtf8().constData();
+                sub.assetName = strprintf("PEJE (%s %s)", TransactionView::tr("Bought").toUtf8().constData(), asset_qty_format);
             } else {
                 LogPrintf("\tFell Through!\n");
                 return false; //!

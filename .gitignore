@@ -3,14 +3,14 @@ Jenkinsfile
 *.tar.gz
 
 *.exe
-src/fren
-src/frend
-src/fren-cli
-src/fren-tx
-src/test/test_fren
-src/test/test_fren_fuzzy
-src/test/test_fren_hash
-src/qt/test/test_fren-qt
+src/pejecoin
+src/pejecoind
+src/pejecoin-cli
+src/pejecoin-tx
+src/test/test_pejecoin
+src/test/test_pejecoin_fuzzy
+src/test/test_pejecoin_hash
+src/qt/test/test_pejecoin-qt
 .vscode
 output.txt
 
@@ -35,8 +35,8 @@ config.log
 config.status
 configure
 libtool
-src/config/fren-config.h
-src/config/fren-config.h.in
+src/config/pejecoin-config.h
+src/config/pejecoin-config.h.in
 src/config/stamp-h1
 share/setup.nsi
 share/qt/Info.plist
@@ -65,7 +65,6 @@ src/qt/test/moc*.cpp
 *.pyc
 *.o
 *.o-*
-*.patch
 *.a
 *.pb.cc
 *.pb.h
@@ -84,12 +83,12 @@ src/qt/test/moc*.cpp
 # Compilation and Qt preprocessor part
 *.qm
 Makefile
-fren-qt
-Fren-Qt.app
+pejecoin-qt
+Pejecoin-Qt.app
 
 # Unit-tests
 Makefile.test
-fren-qt_test
+pejecoin-qt_test
 
 # Resources cpp
 qrc_*.cpp
@@ -102,7 +101,7 @@ build
 *.gcno
 *.gcda
 /*.info
-test_fren.coverage/
+test_pejecoin.coverage/
 total.coverage/
 coverage_percent.txt
 
@@ -117,9 +116,11 @@ test/cache/*
 
 /doc/doxygen/
 
-libfrenconsensus.pc
+libpejecoinconsensus.pc
 contrib/devtools/split-debug.sh
 .idea
 cmake-build-debug
 
 CMakeLists.txt
+db-4.8.30.NC/
+db4/

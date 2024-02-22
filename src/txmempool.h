@@ -1,12 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2020 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2020 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_TXMEMPOOL_H
-#define FREN_TXMEMPOOL_H
+#ifndef PEJECOIN_TXMEMPOOL_H
+#define PEJECOIN_TXMEMPOOL_H
 
 #include <memory>
 #include <set>
@@ -848,4 +847,4 @@ struct ConnectedBlockAssetData
     std::set<CAssetCacheQualifierAddress> newQualifiersToAdd;
 };
 
-#endif // FREN_TXMEMPOOL_H
+#endif // PEJECOIN_TXMEMPOOL_H

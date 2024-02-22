@@ -1,14 +1,13 @@
 // Copyright (c) 2014 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_ZMQ_ZMQCONFIG_H
-#define FREN_ZMQ_ZMQCONFIG_H
+#ifndef PEJECOIN_ZMQ_ZMQCONFIG_H
+#define PEJECOIN_ZMQ_ZMQCONFIG_H
 
 #if defined(HAVE_CONFIG_H)
-#include "config/fren-config.h"
+#include "config/pejecoin-config.h"
 #endif
 
 #include <stdarg.h>
@@ -23,4 +22,4 @@
 
 void zmqError(const char *str);
 
-#endif // FREN_ZMQ_ZMQCONFIG_H
+#endif // PEJECOIN_ZMQ_ZMQCONFIG_H

@@ -1,11 +1,10 @@
 // Copyright (c) 2016 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_THREADINTERRUPT_H
-#define FREN_THREADINTERRUPT_H
+#ifndef PEJECOIN_THREADINTERRUPT_H
+#define PEJECOIN_THREADINTERRUPT_H
 
 #include <atomic>
 #include <chrono>
@@ -33,4 +32,4 @@ private:
     std::atomic<bool> flag;
 };
 
-#endif //FREN_THREADINTERRUPT_H
+#endif //PEJECOIN_THREADINTERRUPT_H

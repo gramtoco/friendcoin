@@ -1,24 +1,23 @@
 #!/usr/bin/env python3
 # Copyright (c) 2015-2016 The Bitcoin Core developers
-# Copyright (c) 2017-2020 The Raven Core developers
-# Copyright (c) 2023 The Fren Core developers
+# Copyright (c) 2017-2020 The Pejecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 """Test restricted asset related RPC commands."""
 
-from test_framework.test_framework import FrenTestFramework
+from test_framework.test_framework import PejecoinTestFramework
 from test_framework.util import assert_equal, assert_raises_rpc_error, assert_does_not_contain_key, assert_does_not_contain, assert_contains_key, assert_happening, assert_contains
 
 # noinspection PyAttributeOutsideInit
-class RestrictedAssetsTest(FrenTestFramework):
+class RestrictedAssetsTest(PejecoinTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 2
         self.extra_args = [['-assetindex'], ['-assetindex']]
 
     def activate_restricted_assets(self):
-        self.log.info("Generating FRENS and activating restricted assets...")
+        self.log.info("Generating PEJE and activating restricted assets...")
         n0 = self.nodes[0]
         n0.generate(432)
         self.sync_all()
@@ -49,7 +48,7 @@ class RestrictedAssetsTest(FrenTestFramework):
         assert_raises_rpc_error(None, "Verifier string can not be empty", n0.issuerestrictedasset, asset_name, qty, "", to_address)
         assert_raises_rpc_error(None, "bad-txns-null-verifier-failed-syntax-check", n0.issuerestrictedasset, asset_name, qty, "false && true", to_address)
         assert_raises_rpc_error(None, "bad-txns-null-verifier-contains-non-issued-qualifier", n0.issuerestrictedasset, asset_name, qty, "#NONEXIZTENT", to_address)
-        assert_raises_rpc_error(None, "Invalid Fren address", n0.issuerestrictedasset, asset_name, qty, verifier, "garbageaddress")
+        assert_raises_rpc_error(None, "Invalid Pejecoin address", n0.issuerestrictedasset, asset_name, qty, verifier, "garbageaddress")
 
         # base asset required
         assert_raises_rpc_error(-32600, f"Wallet doesn't have asset: {base_asset_name}!", n0.issuerestrictedasset, asset_name, qty, verifier, to_address)
@@ -86,7 +85,7 @@ class RestrictedAssetsTest(FrenTestFramework):
         n0.issue(base_asset_name)
 
         # valid params
-        assert_raises_rpc_error(None, "Invalid Fren address", n0.issuerestrictedasset, asset_name, qty, verifier, to_address, "garbagechangeaddress")
+        assert_raises_rpc_error(None, "Invalid Pejecoin address", n0.issuerestrictedasset, asset_name, qty, verifier, to_address, "garbagechangeaddress")
         assert_raises_rpc_error(None, "Units must be between 0 and 8", n0.issuerestrictedasset, asset_name, qty, verifier, to_address, change_address, 9)
         assert_raises_rpc_error(None, "Units must be between 0 and 8", n0.issuerestrictedasset, asset_name, qty, verifier, to_address, change_address, -1)
 
@@ -145,8 +144,8 @@ class RestrictedAssetsTest(FrenTestFramework):
         # valid params
         assert_raises_rpc_error(None, "Invalid asset name", n0.reissuerestrictedasset, "$!N\/AL!D", qty, to_address)
         assert_raises_rpc_error(None, "Wallet doesn't have asset", n0.reissuerestrictedasset, foreign_asset_name, qty, to_address)
-        assert_raises_rpc_error(None, "Invalid Fren address", n0.reissuerestrictedasset, asset_name, qty, "garbageaddress")
-        assert_raises_rpc_error(None, "Invalid Fren address", n0.reissuerestrictedasset, asset_name, qty, to_address, change_verifier, verifier, "garbagechangeaddress")
+        assert_raises_rpc_error(None, "Invalid Pejecoin address", n0.reissuerestrictedasset, asset_name, qty, "garbageaddress")
+        assert_raises_rpc_error(None, "Invalid Pejecoin address", n0.reissuerestrictedasset, asset_name, qty, to_address, change_verifier, verifier, "garbagechangeaddress")
         assert_raises_rpc_error(None, "Units must be between -1 and 8", n0.reissuerestrictedasset, asset_name, qty, to_address, change_verifier, verifier, change_address, 9)
         assert_raises_rpc_error(None, "Units must be between -1 and 8", n0.reissuerestrictedasset, asset_name, qty, to_address, change_verifier, verifier, change_address, -2)
 
@@ -199,8 +198,8 @@ class RestrictedAssetsTest(FrenTestFramework):
         ipfs_hash = "QmacSRmrkVmvJfbCpmU6pK72furJ8E8fbKHindrLxmYMQo"
 
         assert_raises_rpc_error(None, "Amount must be between 1 and 10", n0.issuequalifierasset, asset_name, 0)
-        assert_raises_rpc_error(None, "Invalid Fren address", n0.issuequalifierasset, asset_name, qty, "garbageaddress")
-        assert_raises_rpc_error(None, "Invalid Fren address", n0.issuequalifierasset, asset_name, qty, to_address, "gargabechangeaddress")
+        assert_raises_rpc_error(None, "Invalid Pejecoin address", n0.issuequalifierasset, asset_name, qty, "garbageaddress")
+        assert_raises_rpc_error(None, "Invalid Pejecoin address", n0.issuequalifierasset, asset_name, qty, to_address, "gargabechangeaddress")
         assert_raises_rpc_error(None, "ipfs_hash must be 46 characters", n0.issuequalifierasset, asset_name, qty, to_address, change_address, True)
 
         # issue
@@ -235,8 +234,8 @@ class RestrictedAssetsTest(FrenTestFramework):
         assert_does_not_contain_key(asset_name, n1.listmyassets())
 
         assert_raises_rpc_error(None, "Only use this rpc call to send Qualifier assets", n0.transferqualifier, nonqualifier_asset_name, 1, n1_address)
-        assert_raises_rpc_error(None, "Invalid Fren address", n0.transferqualifier, asset_name, 1, "garbageaddress")
-        assert_raises_rpc_error(None, "Invalid Fren address", n0.transferqualifier, asset_name, 1, n1_address, "garbagechangeaddress")
+        assert_raises_rpc_error(None, "Invalid Pejecoin address", n0.transferqualifier, asset_name, 1, "garbageaddress")
+        assert_raises_rpc_error(None, "Invalid Pejecoin address", n0.transferqualifier, asset_name, 1, n1_address, "garbagechangeaddress")
         assert_raises_rpc_error(None, "Invalid IPFS hash", n0.transferqualifier, asset_name, 1, n1_address, n0_change_address, "garbagemessage")
 
         # transfer
@@ -296,19 +295,19 @@ class RestrictedAssetsTest(FrenTestFramework):
         assert_raises_rpc_error(-8, "bad-txns-null-verifier-address-failed-verification", n0.transfer, asset_name, 100, address)
 
         # special case: make sure transfer fails if change address(es) are verified even though to address isn't
-        frens_change_address = n0.getnewaddress()
+        peje_change_address = n0.getnewaddress()
         asset_change_address = n0.getnewaddress()
-        n0.addtagtoaddress(tag, frens_change_address)
+        n0.addtagtoaddress(tag, peje_change_address)
         n0.addtagtoaddress(tag, asset_change_address)
         n0.generate(1)
-        assert_raises_rpc_error(-8, "bad-txns-null-verifier-address-failed-verification", n0.transfer, asset_name, 100, address, "", 0, frens_change_address, asset_change_address)
-        n0.removetagfromaddress(tag, frens_change_address)
+        assert_raises_rpc_error(-8, "bad-txns-null-verifier-address-failed-verification", n0.transfer, asset_name, 100, address, "", 0, peje_change_address, asset_change_address)
+        n0.removetagfromaddress(tag, peje_change_address)
         n0.removetagfromaddress(tag, asset_change_address)
         n0.generate(1)
         ##
 
-        assert_raises_rpc_error(None, "Invalid Fren address", n0.addtagtoaddress, tag, "garbageaddress")
-        assert_raises_rpc_error(None, "Invalid Fren change address", n0.addtagtoaddress, tag, address, "garbagechangeaddress")
+        assert_raises_rpc_error(None, "Invalid Pejecoin address", n0.addtagtoaddress, tag, "garbageaddress")
+        assert_raises_rpc_error(None, "Invalid Pejecoin change address", n0.addtagtoaddress, tag, address, "garbagechangeaddress")
 
         n0.addtagtoaddress(tag, address, change_address)
         n0.generate(1)
@@ -332,14 +331,14 @@ class RestrictedAssetsTest(FrenTestFramework):
             else:
                 assert_happening(t['Removed'])
 
-        # special case: make sure transfer fails if the asset change address isn't verified (even if the frens change address is)
-        frens_change_address = n0.getnewaddress()
+        # special case: make sure transfer fails if the asset change address isn't verified (even if the peje change address is)
+        peje_change_address = n0.getnewaddress()
         asset_change_address = n0.getnewaddress()
-        assert_raises_rpc_error(-20, "bad-txns-null-verifier-address-failed-verification", n0.transfer, asset_name, 100, address, "", 0, frens_change_address, asset_change_address)
-        n0.addtagtoaddress(tag, frens_change_address)
+        assert_raises_rpc_error(-20, "bad-txns-null-verifier-address-failed-verification", n0.transfer, asset_name, 100, address, "", 0, peje_change_address, asset_change_address)
+        n0.addtagtoaddress(tag, peje_change_address)
         n0.generate(1)
-        assert_raises_rpc_error(-20, "bad-txns-null-verifier-address-failed-verification", n0.transfer, asset_name, 100, address, "", 0, frens_change_address, asset_change_address)
-        n0.removetagfromaddress(tag, frens_change_address)
+        assert_raises_rpc_error(-20, "bad-txns-null-verifier-address-failed-verification", n0.transfer, asset_name, 100, address, "", 0, peje_change_address, asset_change_address)
+        n0.removetagfromaddress(tag, peje_change_address)
         n0.generate(1)
 
         # do the transfer already!
@@ -357,8 +356,8 @@ class RestrictedAssetsTest(FrenTestFramework):
         assert_equal(64, len(txid[0]))
         assert (n0.listassetbalancesbyaddress(asset_change_address)[asset_name] > 0)
 
-        assert_raises_rpc_error(None, "Invalid Fren address", n0.removetagfromaddress, tag, "garbageaddress")
-        assert_raises_rpc_error(None, "Invalid Fren change address", n0.removetagfromaddress, tag, address, "garbagechangeaddress")
+        assert_raises_rpc_error(None, "Invalid Pejecoin address", n0.removetagfromaddress, tag, "garbageaddress")
+        assert_raises_rpc_error(None, "Invalid Pejecoin change address", n0.removetagfromaddress, tag, address, "garbagechangeaddress")
 
         n0.removetagfromaddress(tag, address, change_address)
         n0.generate(1)
@@ -396,7 +395,7 @@ class RestrictedAssetsTest(FrenTestFramework):
         verifier = "true"
         address = n0.getnewaddress()
         safe_address = n0.getnewaddress()
-        frens_change_address = n0.getnewaddress()
+        peje_change_address = n0.getnewaddress()
 
         n0.issue(base_asset_name)
         n0.generate(1)
@@ -430,13 +429,13 @@ class RestrictedAssetsTest(FrenTestFramework):
         assert_equal(1000, n1.listmyassets()[asset_name])
         address = change_address  # assets have moved
 
-        assert_raises_rpc_error(None, "Invalid Fren address", n0.freezeaddress, asset_name, "garbageaddress")
-        assert_raises_rpc_error(None, "Invalid Fren change address", n0.freezeaddress, asset_name, address, "garbagechangeaddress")
+        assert_raises_rpc_error(None, "Invalid Pejecoin address", n0.freezeaddress, asset_name, "garbageaddress")
+        assert_raises_rpc_error(None, "Invalid Pejecoin change address", n0.freezeaddress, asset_name, address, "garbagechangeaddress")
 
-        n0.freezeaddress(asset_name, address, frens_change_address)
+        n0.freezeaddress(asset_name, address, peje_change_address)
         n0.generate(1)
 
-        assert_raises_rpc_error(-32600, "freeze-address-when-already-frozen", n0.freezeaddress, asset_name, address, frens_change_address)
+        assert_raises_rpc_error(-32600, "freeze-address-when-already-frozen", n0.freezeaddress, asset_name, address, peje_change_address)
 
         # post-freezing verification
         assert_contains(asset_name, n0.listaddressrestrictions(address))
@@ -452,13 +451,13 @@ class RestrictedAssetsTest(FrenTestFramework):
 
         assert_raises_rpc_error(-8, "No asset outpoints are selected from the given address", n0.transferfromaddress, asset_name, address, 1000, n1.getnewaddress())
 
-        assert_raises_rpc_error(None, "Invalid Fren address", n0.unfreezeaddress, asset_name, "garbageaddress")
-        assert_raises_rpc_error(None, "Invalid Fren change address", n0.unfreezeaddress, asset_name, address, "garbagechangeaddress")
+        assert_raises_rpc_error(None, "Invalid Pejecoin address", n0.unfreezeaddress, asset_name, "garbageaddress")
+        assert_raises_rpc_error(None, "Invalid Pejecoin change address", n0.unfreezeaddress, asset_name, address, "garbagechangeaddress")
 
-        n0.unfreezeaddress(asset_name, address, frens_change_address)
+        n0.unfreezeaddress(asset_name, address, peje_change_address)
         n0.generate(1)
 
-        assert_raises_rpc_error(-32600, "unfreeze-address-when-not-frozen", n0.unfreezeaddress, asset_name, address, frens_change_address)
+        assert_raises_rpc_error(-32600, "unfreeze-address-when-not-frozen", n0.unfreezeaddress, asset_name, address, peje_change_address)
 
         # post-unfreezing verification
         assert_does_not_contain(asset_name, n0.listaddressrestrictions(address))
@@ -489,7 +488,7 @@ class RestrictedAssetsTest(FrenTestFramework):
         qty = 10000
         verifier = "true"
         address = n0.getnewaddress()
-        frens_change_address = n0.getnewaddress()
+        peje_change_address = n0.getnewaddress()
 
         n0.issue(base_asset_name)
         n0.generate(1)
@@ -509,23 +508,23 @@ class RestrictedAssetsTest(FrenTestFramework):
         assert_equal(1000, n1.listmyassets()[asset_name])
         address = change_address  # assets have moved
 
-        assert_raises_rpc_error(None, "Invalid Fren change address", n0.freezerestrictedasset, asset_name, "garbagechangeaddress")
+        assert_raises_rpc_error(None, "Invalid Pejecoin change address", n0.freezerestrictedasset, asset_name, "garbagechangeaddress")
 
-        n0.freezerestrictedasset(asset_name, frens_change_address)  # Can only freeze once!
-        assert_raises_rpc_error(-26, "Freezing transaction already in mempool", n0.freezerestrictedasset, asset_name, frens_change_address)
+        n0.freezerestrictedasset(asset_name, peje_change_address)  # Can only freeze once!
+        assert_raises_rpc_error(-26, "Freezing transaction already in mempool", n0.freezerestrictedasset, asset_name, peje_change_address)
         n0.generate(1)
-        assert_raises_rpc_error(None, "global-freeze-when-already-frozen", n0.freezerestrictedasset, asset_name, frens_change_address)
+        assert_raises_rpc_error(None, "global-freeze-when-already-frozen", n0.freezerestrictedasset, asset_name, peje_change_address)
 
         # post-freeze validation
         assert_contains(asset_name, n0.listglobalrestrictions())
         assert n0.checkglobalrestriction(asset_name)
         assert_raises_rpc_error(-8, "restricted asset has been globally frozen", n0.transferfromaddress, asset_name, address, 1000, n1.getnewaddress())
-        assert_raises_rpc_error(None, "Invalid Fren change address", n0.unfreezerestrictedasset, asset_name, "garbagechangeaddress")
+        assert_raises_rpc_error(None, "Invalid Pejecoin change address", n0.unfreezerestrictedasset, asset_name, "garbagechangeaddress")
 
-        n0.unfreezerestrictedasset(asset_name, frens_change_address)  # Can only un-freeze once!
-        assert_raises_rpc_error(-26, "Unfreezing transaction already in mempool", n0.unfreezerestrictedasset, asset_name, frens_change_address)
+        n0.unfreezerestrictedasset(asset_name, peje_change_address)  # Can only un-freeze once!
+        assert_raises_rpc_error(-26, "Unfreezing transaction already in mempool", n0.unfreezerestrictedasset, asset_name, peje_change_address)
         n0.generate(1)
-        assert_raises_rpc_error(None, "global-unfreeze-when-not-frozen", n0.unfreezerestrictedasset, asset_name, frens_change_address)
+        assert_raises_rpc_error(None, "global-unfreeze-when-not-frozen", n0.unfreezerestrictedasset, asset_name, peje_change_address)
 
         # post-unfreeze validation
         assert_does_not_contain(asset_name, n0.listglobalrestrictions())

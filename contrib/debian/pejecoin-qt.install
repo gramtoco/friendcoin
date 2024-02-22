@@ -1,0 +1,6 @@
+usr/local/bin/pejecoin-qt usr/bin
+share/pixmaps/peje32.xpm usr/share/pixmaps
+share/pixmaps/peje16.xpm usr/share/pixmaps
+share/pixmaps/peje128.png usr/share/pixmaps
+debian/pejecoin-qt.desktop usr/share/applications
+debian/pejecoin-qt.protocol usr/share/kde4/services/

@@ -1,6 +1,6 @@
 RASBERRY PI BUILD NOTES
 ====================
-Origin: traysi.org/fren_rpi.php
+Origin: traysi.org/pejecoin_rpi.php
 
 # Install necessary packages:
 ```
@@ -33,11 +33,11 @@ make -j4 # If error, remove the -j4
 sudo make install
 ```
 
-# Build Frencoin
+# Build Pejecoin
 ```
 cd ~/build/
-git clone https://github.com/Apushii/Frencoin
-cd Frencoin/
+git clone https://github.com/PejecoinBlockchain/Pejecoin
+cd Pejecoin/
 ./autogen.sh
 ./configure --disable-tests --with-gui=no CPPFLAGS="-I/usr/local/BerkeleyDB.4.8/include -O2" LDFLAGS="-L/usr/local/BerkeleyDB.4.8/lib"
 make

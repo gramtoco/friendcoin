@@ -1,4 +1,4 @@
-#include "frenunits.h"
+#include "pejecoinunits.h"
 
 #include <QAbstractTableModel>
 #include <QStringList>
@@ -53,7 +53,7 @@ public:
                 TxPlainTextRole,
         /** Unprocessed icon */
                 RawDecorationRole,
-        /** FRENS or name of an asset */
+        /** PEJE or name of an asset */
                 AssetNameRole,
     };
 

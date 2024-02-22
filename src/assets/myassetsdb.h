@@ -1,9 +1,9 @@
-// Copyright (c) 2019 The Fren Core developers
+// Copyright (c) 2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FRENCOIN_MYASSETSDB_H
-#define FRENCOIN_MYASSETSDB_H
+#ifndef PEJECOINCOIN_MYASSETSDB_H
+#define PEJECOINCOIN_MYASSETSDB_H
 
 #include <dbwrapper.h>
 
@@ -79,4 +79,4 @@ public:
 };
 
 
-#endif //FRENCOIN_MYASSETSDB_H
+#endif //PEJECOINCOIN_MYASSETSDB_H

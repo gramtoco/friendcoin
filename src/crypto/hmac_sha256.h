@@ -1,11 +1,10 @@
 // Copyright (c) 2014 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_CRYPTO_HMAC_SHA256_H
-#define FREN_CRYPTO_HMAC_SHA256_H
+#ifndef PEJECOIN_CRYPTO_HMAC_SHA256_H
+#define PEJECOIN_CRYPTO_HMAC_SHA256_H
 
 #include "crypto/sha256.h"
 
@@ -31,4 +30,4 @@ public:
     void Finalize(unsigned char hash[OUTPUT_SIZE]);
 };
 
-#endif // FREN_CRYPTO_HMAC_SHA256_H
+#endif // PEJECOIN_CRYPTO_HMAC_SHA256_H

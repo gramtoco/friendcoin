@@ -1,5 +1,5 @@
-Building Fren
+Building Pejecoin
 ================
 
 See doc/build-*.md for instructions on building the various
-elements of the Fren Core reference implementation of Fren.
+elements of the Pejecoin Core reference implementation of Pejecoin.

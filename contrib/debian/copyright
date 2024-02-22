@@ -1,10 +1,10 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: Frencoin
-Source: https://github.com/Apushii/Frencoin
+Upstream-Name: Pejecoin
+Source: https://github.com/PejecoinBlockchain/Pejecoin
 
 Files: *
 Copyright: 2009-2017, Bitcoin Core Developers
-           2017-2020, Fren Core Developers
+           2017-2020, Pejecoin Core Developers
 License: Expat
 Comment: The Bitcoin Core Developers encompasses the current developers listed on bitcoin.org,
          as well as the numerous contributors to the project.
@@ -77,10 +77,10 @@ License: Expat
 Comment: Modifications of Stephan Hutchings Typicons
 
 Files: src/qt/res/icons/about.png
-       src/qt/res/icons/fren.*
-       share/pixmaps/fren*
-       src/qt/res/src/fren.svg
-Copyright: The Fren Core Developers
+       src/qt/res/icons/pejecoin.*
+       share/pixmaps/pejecoin*
+       src/qt/res/src/pejecoin.svg
+Copyright: The Pejecoin Core Developers
 License: public-domain
 
 

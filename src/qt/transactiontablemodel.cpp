@@ -1,6 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2021 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2021 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -270,7 +269,7 @@ TransactionTableModel::~TransactionTableModel()
 /** Updates the column title to "Amount (DisplayUnit)" and emits headerDataChanged() signal for table headers to react. */
 //void TransactionTableModel::updateAmountColumnTitle()
 //{
-//    columns[Amount] = FrenUnits::getAmountColumnTitle(walletModel->getOptionsModel()->getDisplayUnit());
+//    columns[Amount] = PejecoinUnits::getAmountColumnTitle(walletModel->getOptionsModel()->getDisplayUnit());
 //    Q_EMIT headerDataChanged(Qt::Horizontal,Amount,Amount);
 //}
 
@@ -480,7 +479,7 @@ QVariant TransactionTableModel::addressColor(const TransactionRecord *wtx) const
     return QVariant();
 }
 
-QString TransactionTableModel::formatTxAmount(const TransactionRecord *wtx, bool showUnconfirmed, FrenUnits::SeparatorStyle separators) const
+QString TransactionTableModel::formatTxAmount(const TransactionRecord *wtx, bool showUnconfirmed, PejecoinUnits::SeparatorStyle separators) const
 {
     QString str;
     switch(wtx->type) {
@@ -493,7 +492,7 @@ QString TransactionTableModel::formatTxAmount(const TransactionRecord *wtx, bool
             } break;
         default:
             {
-            str = FrenUnits::format(walletModel->getOptionsModel()->getDisplayUnit(), wtx->credit + wtx->debit,
+            str = PejecoinUnits::format(walletModel->getOptionsModel()->getDisplayUnit(), wtx->credit + wtx->debit,
                                              false, separators);
             } break;
     }
@@ -599,12 +598,12 @@ QVariant TransactionTableModel::data(const QModelIndex &index, int role) const
         case ToAddress:
             return formatTxToAddress(rec, false);
         case Amount:
-            return formatTxAmount(rec, true, FrenUnits::separatorAlways);
+            return formatTxAmount(rec, true, PejecoinUnits::separatorAlways);
         case AssetName:
-            if (rec->assetName != "FRENS")
+            if (rec->assetName != "PEJE")
                return QString::fromStdString(rec->assetName);
             else
-               return QString(FrenUnits::name(walletModel->getOptionsModel()->getDisplayUnit()));
+               return QString(PejecoinUnits::name(walletModel->getOptionsModel()->getDisplayUnit()));
         } // no default case, so the compiler can warn about missing cases
         assert(false);
     case Qt::EditRole:
@@ -651,7 +650,7 @@ QVariant TransactionTableModel::data(const QModelIndex &index, int role) const
         }
         if(index.column() == AssetName)
         {
-            if (rec->assetName != "FRENS")
+            if (rec->assetName != "PEJE")
                return platformStyle->AssetTxColor();
         }
         break;
@@ -702,21 +701,21 @@ QVariant TransactionTableModel::data(const QModelIndex &index, int role) const
                 details.append(QString::fromStdString(rec->address));
                 details.append(" ");
             }
-            details.append(formatTxAmount(rec, false, FrenUnits::separatorNever));
+            details.append(formatTxAmount(rec, false, PejecoinUnits::separatorNever));
             return details;
         }
     case ConfirmedRole:
         return rec->status.countsForBalance;
     case FormattedAmountRole:
         // Used for copy/export, so don't include separators
-        return formatTxAmount(rec, false, FrenUnits::separatorNever);
+        return formatTxAmount(rec, false, PejecoinUnits::separatorNever);
     case AssetNameRole:
         {
             QString assetName;
-            if (rec->assetName != "FRENS")
+            if (rec->assetName != "PEJE")
                assetName.append(QString::fromStdString(rec->assetName));
             else
-               assetName.append(QString(FrenUnits::name(walletModel->getOptionsModel()->getDisplayUnit())));
+               assetName.append(QString(PejecoinUnits::name(walletModel->getOptionsModel()->getDisplayUnit())));
             return assetName;
         }
     case StatusRole:
@@ -753,7 +752,7 @@ QVariant TransactionTableModel::headerData(int section, Qt::Orientation orientat
             case Amount:
                 return tr("Amount removed from or added to balance.");
             case AssetName:
-                return tr("The asset (or FRENS) removed or added to balance.");
+                return tr("The asset (or PEJE) removed or added to balance.");
             }
         }
     }

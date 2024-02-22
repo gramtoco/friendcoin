@@ -1,12 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2015 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_SUPPORT_ALLOCATORS_ZEROAFTERFREE_H
-#define FREN_SUPPORT_ALLOCATORS_ZEROAFTERFREE_H
+#ifndef PEJECOIN_SUPPORT_ALLOCATORS_ZEROAFTERFREE_H
+#define PEJECOIN_SUPPORT_ALLOCATORS_ZEROAFTERFREE_H
 
 #include "support/cleanse.h"
 
@@ -47,4 +46,4 @@ struct zero_after_free_allocator : public std::allocator<T> {
 // Byte-vector that clears its contents before deletion.
 typedef std::vector<char, zero_after_free_allocator<char> > CSerializeData;
 
-#endif // FREN_SUPPORT_ALLOCATORS_ZEROAFTERFREE_H
+#endif // PEJECOIN_SUPPORT_ALLOCATORS_ZEROAFTERFREE_H

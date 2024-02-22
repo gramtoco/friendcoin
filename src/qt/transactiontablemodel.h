@@ -1,13 +1,12 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_QT_TRANSACTIONTABLEMODEL_H
-#define FREN_QT_TRANSACTIONTABLEMODEL_H
+#ifndef PEJECOIN_QT_TRANSACTIONTABLEMODEL_H
+#define PEJECOIN_QT_TRANSACTIONTABLEMODEL_H
 
-#include "frenunits.h"
+#include "pejecoinunits.h"
 
 #include <QAbstractTableModel>
 #include <QStringList>
@@ -75,7 +74,7 @@ public:
         StatusRole,
         /** Unprocessed icon */
         RawDecorationRole,
-        /** FRENS or name of an asset */
+        /** PEJE or name of an asset */
         AssetNameRole,
     };
 
@@ -103,7 +102,7 @@ private:
     QString formatTxDate(const TransactionRecord *wtx) const;
     QString formatTxType(const TransactionRecord *wtx) const;
     QString formatTxToAddress(const TransactionRecord *wtx, bool tooltip) const;
-    QString formatTxAmount(const TransactionRecord *wtx, bool showUnconfirmed=true, FrenUnits::SeparatorStyle separators=FrenUnits::separatorStandard) const;
+    QString formatTxAmount(const TransactionRecord *wtx, bool showUnconfirmed=true, PejecoinUnits::SeparatorStyle separators=PejecoinUnits::separatorStandard) const;
     QString formatTooltip(const TransactionRecord *rec) const;
     QVariant txStatusDecoration(const TransactionRecord *wtx) const;
     QVariant txWatchonlyDecoration(const TransactionRecord *wtx) const;
@@ -122,4 +121,4 @@ public Q_SLOTS:
     friend class TransactionTablePriv;
 };
 
-#endif // FREN_QT_TRANSACTIONTABLEMODEL_H
+#endif // PEJECOIN_QT_TRANSACTIONTABLEMODEL_H

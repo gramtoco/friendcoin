@@ -1,7 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -9,11 +8,11 @@
  * Server/client environment: argument handling, config file parsing,
  * logging, thread wrappers, startup time
  */
-#ifndef FREN_UTIL_H
-#define FREN_UTIL_H
+#ifndef PEJECOIN_UTIL_H
+#define PEJECOIN_UTIL_H
 
 #if defined(HAVE_CONFIG_H)
-#include "config/fren-config.h"
+#include "config/pejecoin-config.h"
 #endif
 
 #include "compat.h"
@@ -55,8 +54,8 @@ extern bool fLogIPs;
 extern std::atomic<bool> fReopenDebugLog;
 extern CTranslationInterface translationInterface;
 
-extern const char *const FREN_CONF_FILENAME;
-extern const char *const FREN_PID_FILENAME;
+extern const char *const PEJECOIN_CONF_FILENAME;
+extern const char *const PEJECOIN_PID_FILENAME;
 
 extern std::atomic<uint32_t> logCategories;
 
@@ -334,7 +333,7 @@ void RenameThread(const char *name);
 template<typename Callable>
 void TraceThread(const char *name, Callable func)
 {
-    std::string s = strprintf("fren-%s", name);
+    std::string s = strprintf("pejecoin-%s", name);
     RenameThread(s.c_str());
     try
     {
@@ -363,4 +362,4 @@ std::string CopyrightHolders(const std::string &strPrefix);
 
 void SetThreadPriority(int nPriority);
 
-#endif // FREN_UTIL_H
+#endif // PEJECOIN_UTIL_H

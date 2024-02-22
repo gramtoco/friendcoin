@@ -1,11 +1,10 @@
 // Copyright (c) 2012-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_BLOOM_H
-#define FREN_BLOOM_H
+#ifndef PEJECOIN_BLOOM_H
+#define PEJECOIN_BLOOM_H
 
 #include "serialize.h"
 
@@ -142,4 +141,4 @@ private:
     int nHashFuncs;
 };
 
-#endif // FREN_BLOOM_H
+#endif // PEJECOIN_BLOOM_H

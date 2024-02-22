@@ -1,11 +1,10 @@
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include <assets/assets.h>
 
-#include <test/test_fren.h>
+#include <test/test_pejecoin.h>
 
 #include <boost/test/unit_test.hpp>
 #include "core_write.cpp"
@@ -48,20 +47,20 @@ BOOST_FIXTURE_TEST_SUITE(asset_tests, BasicTestingSetup)
         BOOST_CHECK(!IsAssetNameValid("A._BC", type));
         BOOST_CHECK(!IsAssetNameValid("AB_.C", type));
 
-        //- Versions of FRENCOIN NOT allowed
-        BOOST_CHECK(!IsAssetNameValid("FRENS", type));
-        BOOST_CHECK(!IsAssetNameValid("FREN", type));
-        BOOST_CHECK(!IsAssetNameValid("FRENCOIN", type));
+        //- Versions of PEJECOINCOIN NOT allowed
+        BOOST_CHECK(!IsAssetNameValid("PEJE", type));
+        BOOST_CHECK(!IsAssetNameValid("PEJECOIN", type));
+        BOOST_CHECK(!IsAssetNameValid("PEJECOINCOIN", type));
 
-        //- Versions of FRENCOIN ALLOWED
-        BOOST_CHECK(IsAssetNameValid("FREN.COIN", type));
-        BOOST_CHECK(IsAssetNameValid("FREN_COIN", type));
-        BOOST_CHECK(IsAssetNameValid("FRENSSPYDER", type));
-        BOOST_CHECK(IsAssetNameValid("SPYDERFRENS", type));
-        BOOST_CHECK(IsAssetNameValid("FRENSPYDER", type));
-        BOOST_CHECK(IsAssetNameValid("SPYDEFREN", type));
-        BOOST_CHECK(IsAssetNameValid("BLACK_FRENS", type));
-        BOOST_CHECK(IsAssetNameValid("SEFRENSOT", type));
+        //- Versions of PEJECOINCOIN ALLOWED
+        BOOST_CHECK(IsAssetNameValid("PEJECOIN.COIN", type));
+        BOOST_CHECK(IsAssetNameValid("PEJECOIN_COIN", type));
+        BOOST_CHECK(IsAssetNameValid("PEJESPYDER", type));
+        BOOST_CHECK(IsAssetNameValid("SPYDERPEJE", type));
+        BOOST_CHECK(IsAssetNameValid("PEJECOINSPYDER", type));
+        BOOST_CHECK(IsAssetNameValid("SPYDEPEJECOIN", type));
+        BOOST_CHECK(IsAssetNameValid("BLACK_PEJECOINS", type));
+        BOOST_CHECK(IsAssetNameValid("SEPEJEOT", type));
 
         // subs
         BOOST_CHECK(IsAssetNameValid("ABC/A", type));
@@ -228,7 +227,7 @@ BOOST_FIXTURE_TEST_SUITE(asset_tests, BasicTestingSetup)
         SelectParams(CBaseChainParams::MAIN);
 
         // Create the asset scriptPubKey
-        CAssetTransfer asset("FREN", 1000);
+        CAssetTransfer asset("PEJECOIN", 1000);
         CScript scriptPubKey = GetScriptForDestination(DecodeDestination(GetParams().GlobalBurnAddress()));
         asset.ConstructTransaction(scriptPubKey);
 
@@ -249,7 +248,7 @@ BOOST_FIXTURE_TEST_SUITE(asset_tests, BasicTestingSetup)
         SelectParams(CBaseChainParams::MAIN);
 
         // Create the asset scriptPubKey
-        CNewAsset asset("FREN", 1000, 8, 1, 0, "");
+        CNewAsset asset("PEJECOIN", 1000, 8, 1, 0, "");
         CScript scriptPubKey = GetScriptForDestination(DecodeDestination(GetParams().GlobalBurnAddress()));
         asset.ConstructTransaction(scriptPubKey);
 

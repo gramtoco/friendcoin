@@ -1,6 +1,6 @@
 # List of fixed seed nodes for testnet
 
 # Onion nodes
-thfsmmn2jfren.onion
+thfsmmn2jpeje.onion
 
 

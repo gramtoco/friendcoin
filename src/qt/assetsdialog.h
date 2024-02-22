@@ -1,11 +1,10 @@
 ﻿// Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_QT_ASSETSDIALOG_H
-#define FREN_QT_ASSETSDIALOG_H
+#ifndef PEJECOIN_QT_ASSETSDIALOG_H
+#define PEJECOIN_QT_ASSETSDIALOG_H
 
 #include "walletmodel.h"
 
@@ -27,7 +26,7 @@ QT_BEGIN_NAMESPACE
 class QUrl;
 QT_END_NAMESPACE
 
-/** Dialog for sending frens */
+/** Dialog for sending pejes */
 class AssetsDialog : public QDialog
 {
     Q_OBJECT
@@ -109,14 +108,14 @@ private Q_SLOTS:
 
     void customFeeFeatureChanged(bool);
 
-    /** FRENS START */
+    /** PEJE START */
     void assetControlUpdateSendCoinsDialog();
     void focusAsset(const QModelIndex& index);
-    /** FRENS END */
+    /** PEJE END */
 
     Q_SIGNALS:
             // Fired when a message should be reported to the user
             void message(const QString &title, const QString &message, unsigned int style);
 };
 
-#endif // FREN_QT_ASSETSSDIALOG_H
+#endif // PEJECOIN_QT_ASSETSSDIALOG_H

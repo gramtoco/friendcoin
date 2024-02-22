@@ -1,99 +1,98 @@
 # Copyright (c) 2013-2016 The Bitcoin Core developers
-# Copyright (c) 2017-2019 The Raven Core developers
-# Copyright (c) 2023 The Fren Core developers
+# Copyright (c) 2017-2019 The Pejecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-bin_PROGRAMS += qt/fren-qt
-EXTRA_LIBRARIES += qt/libfrenqt.a
+bin_PROGRAMS += qt/pejecoin-qt
+EXTRA_LIBRARIES += qt/libpejecoinqt.a
 
-# fren qt core #
+# pejecoin qt core #
 QT_TS = \
-  qt/locale/fren_af.ts \
-  qt/locale/fren_af_ZA.ts \
-  qt/locale/fren_ar.ts \
-  qt/locale/fren_be_BY.ts \
-  qt/locale/fren_bg_BG.ts \
-  qt/locale/fren_bg.ts \
-  qt/locale/fren_ca_ES.ts \
-  qt/locale/fren_ca.ts \
-  qt/locale/fren_ca@valencia.ts \
-  qt/locale/fren_cs.ts \
-  qt/locale/fren_cy.ts \
-  qt/locale/fren_da.ts \
-  qt/locale/fren_de.ts \
-  qt/locale/fren_el_GR.ts \
-  qt/locale/fren_el.ts \
-  qt/locale/fren_en_GB.ts \
-  qt/locale/fren_en.ts \
-  qt/locale/fren_eo.ts \
-  qt/locale/fren_es_AR.ts \
-  qt/locale/fren_es_CL.ts \
-  qt/locale/fren_es_CO.ts \
-  qt/locale/fren_es_DO.ts \
-  qt/locale/fren_es_ES.ts \
-  qt/locale/fren_es_MX.ts \
-  qt/locale/fren_es.ts \
-  qt/locale/fren_es_UY.ts \
-  qt/locale/fren_es_VE.ts \
-  qt/locale/fren_et_EE.ts \
-  qt/locale/fren_et.ts \
-  qt/locale/fren_eu_ES.ts \
-  qt/locale/fren_fa_IR.ts \
-  qt/locale/fren_fa.ts \
-  qt/locale/fren_fi.ts \
-  qt/locale/fren_fr_CA.ts \
-  qt/locale/fren_fr_FR.ts \
-  qt/locale/fren_fr.ts \
-  qt/locale/fren_gl.ts \
-  qt/locale/fren_he.ts \
-  qt/locale/fren_hi_IN.ts \
-  qt/locale/fren_hr.ts \
-  qt/locale/fren_hu.ts \
-  qt/locale/fren_id_ID.ts \
-  qt/locale/fren_it_IT.ts \
-  qt/locale/fren_it.ts \
-  qt/locale/fren_ja.ts \
-  qt/locale/fren_ka.ts \
-  qt/locale/fren_kk_KZ.ts \
-  qt/locale/fren_ko_KR.ts \
-  qt/locale/fren_ku_IQ.ts \
-  qt/locale/fren_ky.ts \
-  qt/locale/fren_la.ts \
-  qt/locale/fren_lt.ts \
-  qt/locale/fren_lv_LV.ts \
-  qt/locale/fren_mk_MK.ts \
-  qt/locale/fren_mn.ts \
-  qt/locale/fren_ms_MY.ts \
-  qt/locale/fren_nb.ts \
-  qt/locale/fren_ne.ts \
-  qt/locale/fren_nl.ts \
-  qt/locale/fren_pl.ts \
-  qt/locale/fren_pt_BR.ts \
-  qt/locale/fren_pt_PT.ts \
-  qt/locale/fren_ro_RO.ts \
-  qt/locale/fren_ro.ts \
-  qt/locale/fren_ru_RU.ts \
-  qt/locale/fren_ru.ts \
-  qt/locale/fren_sk.ts \
-  qt/locale/fren_sl_SI.ts \
-  qt/locale/fren_sq.ts \
-  qt/locale/fren_sr@latin.ts \
-  qt/locale/fren_sr.ts \
-  qt/locale/fren_sv.ts \
-  qt/locale/fren_ta.ts \
-  qt/locale/fren_th_TH.ts \
-  qt/locale/fren_tr_TR.ts \
-  qt/locale/fren_tr.ts \
-  qt/locale/fren_uk.ts \
-  qt/locale/fren_ur_PK.ts \
-  qt/locale/fren_uz@Cyrl.ts \
-  qt/locale/fren_vi.ts \
-  qt/locale/fren_vi_VN.ts \
-  qt/locale/fren_zh_CN.ts \
-  qt/locale/fren_zh_HK.ts \
-  qt/locale/fren_zh.ts \
-  qt/locale/fren_zh_TW.ts
+  qt/locale/pejecoin_af.ts \
+  qt/locale/pejecoin_af_ZA.ts \
+  qt/locale/pejecoin_ar.ts \
+  qt/locale/pejecoin_be_BY.ts \
+  qt/locale/pejecoin_bg_BG.ts \
+  qt/locale/pejecoin_bg.ts \
+  qt/locale/pejecoin_ca_ES.ts \
+  qt/locale/pejecoin_ca.ts \
+  qt/locale/pejecoin_ca@valencia.ts \
+  qt/locale/pejecoin_cs.ts \
+  qt/locale/pejecoin_cy.ts \
+  qt/locale/pejecoin_da.ts \
+  qt/locale/pejecoin_de.ts \
+  qt/locale/pejecoin_el_GR.ts \
+  qt/locale/pejecoin_el.ts \
+  qt/locale/pejecoin_en_GB.ts \
+  qt/locale/pejecoin_en.ts \
+  qt/locale/pejecoin_eo.ts \
+  qt/locale/pejecoin_es_AR.ts \
+  qt/locale/pejecoin_es_CL.ts \
+  qt/locale/pejecoin_es_CO.ts \
+  qt/locale/pejecoin_es_DO.ts \
+  qt/locale/pejecoin_es_ES.ts \
+  qt/locale/pejecoin_es_MX.ts \
+  qt/locale/pejecoin_es.ts \
+  qt/locale/pejecoin_es_UY.ts \
+  qt/locale/pejecoin_es_VE.ts \
+  qt/locale/pejecoin_et_EE.ts \
+  qt/locale/pejecoin_et.ts \
+  qt/locale/pejecoin_eu_ES.ts \
+  qt/locale/pejecoin_fa_IR.ts \
+  qt/locale/pejecoin_fa.ts \
+  qt/locale/pejecoin_fi.ts \
+  qt/locale/pejecoin_fr_CA.ts \
+  qt/locale/pejecoin_fr_FR.ts \
+  qt/locale/pejecoin_fr.ts \
+  qt/locale/pejecoin_gl.ts \
+  qt/locale/pejecoin_he.ts \
+  qt/locale/pejecoin_hi_IN.ts \
+  qt/locale/pejecoin_hr.ts \
+  qt/locale/pejecoin_hu.ts \
+  qt/locale/pejecoin_id_ID.ts \
+  qt/locale/pejecoin_it_IT.ts \
+  qt/locale/pejecoin_it.ts \
+  qt/locale/pejecoin_ja.ts \
+  qt/locale/pejecoin_ka.ts \
+  qt/locale/pejecoin_kk_KZ.ts \
+  qt/locale/pejecoin_ko_KR.ts \
+  qt/locale/pejecoin_ku_IQ.ts \
+  qt/locale/pejecoin_ky.ts \
+  qt/locale/pejecoin_la.ts \
+  qt/locale/pejecoin_lt.ts \
+  qt/locale/pejecoin_lv_LV.ts \
+  qt/locale/pejecoin_mk_MK.ts \
+  qt/locale/pejecoin_mn.ts \
+  qt/locale/pejecoin_ms_MY.ts \
+  qt/locale/pejecoin_nb.ts \
+  qt/locale/pejecoin_ne.ts \
+  qt/locale/pejecoin_nl.ts \
+  qt/locale/pejecoin_pl.ts \
+  qt/locale/pejecoin_pt_BR.ts \
+  qt/locale/pejecoin_pt_PT.ts \
+  qt/locale/pejecoin_ro_RO.ts \
+  qt/locale/pejecoin_ro.ts \
+  qt/locale/pejecoin_ru_RU.ts \
+  qt/locale/pejecoin_ru.ts \
+  qt/locale/pejecoin_sk.ts \
+  qt/locale/pejecoin_sl_SI.ts \
+  qt/locale/pejecoin_sq.ts \
+  qt/locale/pejecoin_sr@latin.ts \
+  qt/locale/pejecoin_sr.ts \
+  qt/locale/pejecoin_sv.ts \
+  qt/locale/pejecoin_ta.ts \
+  qt/locale/pejecoin_th_TH.ts \
+  qt/locale/pejecoin_tr_TR.ts \
+  qt/locale/pejecoin_tr.ts \
+  qt/locale/pejecoin_uk.ts \
+  qt/locale/pejecoin_ur_PK.ts \
+  qt/locale/pejecoin_uz@Cyrl.ts \
+  qt/locale/pejecoin_vi.ts \
+  qt/locale/pejecoin_vi_VN.ts \
+  qt/locale/pejecoin_zh_CN.ts \
+  qt/locale/pejecoin_zh_HK.ts \
+  qt/locale/pejecoin_zh.ts \
+  qt/locale/pejecoin_zh_TW.ts
 
 QT_FORMS_UI = \
   qt/forms/addressbookpage.ui \
@@ -133,10 +132,10 @@ QT_MOC_CPP = \
   qt/moc_assetcontroltreewidget.cpp \
   qt/moc_assetfilterproxy.cpp \
   qt/moc_bantablemodel.cpp \
-  qt/moc_frenaddressvalidator.cpp \
-  qt/moc_frenamountfield.cpp \
-  qt/moc_frengui.cpp \
-  qt/moc_frenunits.cpp \
+  qt/moc_pejecoinaddressvalidator.cpp \
+  qt/moc_pejecoinamountfield.cpp \
+  qt/moc_pejecoingui.cpp \
+  qt/moc_pejecoinunits.cpp \
   qt/moc_callback.cpp \
   qt/moc_clientmodel.cpp \
   qt/moc_coincontroldialog.cpp \
@@ -187,28 +186,28 @@ QT_MOC_CPP = \
   qt/moc_sendassetsentry.cpp \
   qt/moc_mnemonicdialog.cpp
 
-FREN_MM = \
+PEJECOIN_MM = \
   qt/macdockiconhandler.mm \
   qt/macnotificationhandler.mm
 
 QT_MOC = \
-  qt/fren.moc \
-  qt/frenamountfield.moc \
+  qt/pejecoin.moc \
+  qt/pejecoinamountfield.moc \
   qt/callback.moc \
   qt/intro.moc \
   qt/overviewpage.moc \
   qt/rpcconsole.moc
 
-QT_QRC_CPP = qt/qrc_fren.cpp
-QT_QRC = qt/fren.qrc
-QT_QRC_LOCALE_CPP = qt/qrc_fren_locale.cpp
-QT_QRC_LOCALE = qt/fren_locale.qrc
+QT_QRC_CPP = qt/qrc_pejecoin.cpp
+QT_QRC = qt/pejecoin.qrc
+QT_QRC_LOCALE_CPP = qt/qrc_pejecoin_locale.cpp
+QT_QRC_LOCALE = qt/pejecoin_locale.qrc
 
 PROTOBUF_CC = qt/paymentrequest.pb.cc
 PROTOBUF_H = qt/paymentrequest.pb.h
 PROTOBUF_PROTO = qt/paymentrequest.proto
 
-FREN_QT_H = \
+PEJECOIN_QT_H = \
   qt/addressbookpage.h \
   qt/addresstablemodel.h \
   qt/askpassphrasedialog.h \
@@ -219,10 +218,10 @@ FREN_QT_H = \
   qt/assetsdialog.h \
   qt/createassetdialog.h \
   qt/bantablemodel.h \
-  qt/frenaddressvalidator.h \
-  qt/frenamountfield.h \
-  qt/frengui.h \
-  qt/frenunits.h \
+  qt/pejeaddressvalidator.h \
+  qt/pejecoinamountfield.h \
+  qt/pejecoingui.h \
+  qt/pejecoinunits.h \
   qt/callback.h \
   qt/clientmodel.h \
   qt/coincontroldialog.h \
@@ -293,10 +292,10 @@ RES_ICONS = \
   qt/res/icons/asset_manage_selected.png \
   qt/res/icons/asset_transfer.png \
   qt/res/icons/asset_transfer_selected.png \
-  qt/res/icons/frencointext.png \
-  qt/res/icons/fren.ico \
-  qt/res/icons/fren_testnet.ico \
-  qt/res/icons/fren.png \
+  qt/res/icons/pejecointext.png \
+  qt/res/icons/pejecoin.ico \
+  qt/res/icons/pejecoin_testnet.ico \
+  qt/res/icons/pejecoin.png \
   qt/res/icons/chevron.png \
   qt/res/icons/clock1.png \
   qt/res/icons/clock2.png \
@@ -392,12 +391,12 @@ RES_ICONS = \
   qt/res/fonts/OpenSans-SemiBoldItalic.ttf
 
 
-FREN_QT_BASE_CPP = \
+PEJECOIN_QT_BASE_CPP = \
   qt/bantablemodel.cpp \
-  qt/frenaddressvalidator.cpp \
-  qt/frenamountfield.cpp \
-  qt/frengui.cpp \
-  qt/frenunits.cpp \
+  qt/pejecoinaddressvalidator.cpp \
+  qt/pejecoinamountfield.cpp \
+  qt/pejecoingui.cpp \
+  qt/pejecoinunits.cpp \
   qt/clientmodel.cpp \
   qt/csvmodelwriter.cpp \
   qt/darkstyle.cpp \
@@ -418,9 +417,9 @@ FREN_QT_BASE_CPP = \
   qt/trafficgraphwidget.cpp \
   qt/utilitydialog.cpp
 
-FREN_QT_WINDOWS_CPP = qt/winshutdownmonitor.cpp
+PEJECOIN_QT_WINDOWS_CPP = qt/winshutdownmonitor.cpp
 
-FREN_QT_WALLET_CPP = \
+PEJECOIN_QT_WALLET_CPP = \
   qt/addressbookpage.cpp \
   qt/addresstablemodel.cpp \
   qt/askpassphrasedialog.cpp \
@@ -461,31 +460,31 @@ FREN_QT_WALLET_CPP = \
   qt/walletview.cpp \
   qt/mnemonicdialog.cpp
 
-FREN_QT_CPP = $(FREN_QT_BASE_CPP)
+PEJECOIN_QT_CPP = $(PEJECOIN_QT_BASE_CPP)
 if TARGET_WINDOWS
-FREN_QT_CPP += $(FREN_QT_WINDOWS_CPP)
+PEJECOIN_QT_CPP += $(PEJECOIN_QT_WINDOWS_CPP)
 endif
 if ENABLE_WALLET
-FREN_QT_CPP += $(FREN_QT_WALLET_CPP)
+PEJECOIN_QT_CPP += $(PEJECOIN_QT_WALLET_CPP)
 endif
 
 RES_IMAGES = 
 
 RES_MOVIES = $(wildcard $(srcdir)/qt/res/movies/spinner-*.png)
 
-FREN_RC = qt/res/fren-qt-res.rc
+PEJECOIN_RC = qt/res/pejecoin-qt-res.rc
 
-FREN_QT_INCLUDES = -I$(builddir)/qt -I$(srcdir)/qt -I$(srcdir)/qt/forms \
+PEJECOIN_QT_INCLUDES = -I$(builddir)/qt -I$(srcdir)/qt -I$(srcdir)/qt/forms \
   -I$(builddir)/qt/forms -DQT_NO_KEYWORDS
 
-qt_libfrenqt_a_CPPFLAGS = $(AM_CPPFLAGS) $(FREN_INCLUDES) $(FREN_QT_INCLUDES) \
+qt_libpejecoinqt_a_CPPFLAGS = $(AM_CPPFLAGS) $(PEJECOIN_INCLUDES) $(PEJECOIN_QT_INCLUDES) \
   $(QT_INCLUDES) $(QT_DBUS_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS)
-qt_libfrenqt_a_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+qt_libpejecoinqt_a_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
 
-qt_libfrenqt_a_SOURCES = $(FREN_QT_CPP) $(FREN_QT_H) $(QT_FORMS_UI) \
+qt_libpejecoinqt_a_SOURCES = $(PEJECOIN_QT_CPP) $(PEJECOIN_QT_H) $(QT_FORMS_UI) \
   $(QT_QRC) $(QT_QRC_LOCALE) $(QT_TS) $(PROTOBUF_PROTO) $(RES_ICONS) $(RES_IMAGES) $(RES_MOVIES)
 
-nodist_qt_libfrenqt_a_SOURCES = $(QT_MOC_CPP) $(QT_MOC) $(PROTOBUF_CC) \
+nodist_qt_libpejecoinqt_a_SOURCES = $(QT_MOC_CPP) $(QT_MOC) $(PROTOBUF_CC) \
   $(PROTOBUF_H) $(QT_QRC_CPP) $(QT_QRC_LOCALE_CPP)
 
 # forms/foo.h -> forms/ui_foo.h
@@ -494,71 +493,71 @@ QT_FORMS_H=$(join $(dir $(QT_FORMS_UI)),$(addprefix ui_, $(notdir $(QT_FORMS_UI:
 # Most files will depend on the forms and moc files as includes. Generate them
 # before anything else.
 $(QT_MOC): $(QT_FORMS_H)
-$(qt_libfrenqt_a_OBJECTS) $(qt_fren_qt_OBJECTS) : | $(QT_MOC)
+$(qt_libpejecoinqt_a_OBJECTS) $(qt_pejecoin_qt_OBJECTS) : | $(QT_MOC)
 
 #Generating these with a half-written protobuf header leads to wacky results.
 #This makes sure it's done.
 $(QT_MOC): $(PROTOBUF_H)
 $(QT_MOC_CPP): $(PROTOBUF_H)
 
-# fren-qt binary #
-qt_fren_qt_CPPFLAGS = $(AM_CPPFLAGS) $(FREN_INCLUDES) $(FREN_QT_INCLUDES) \
+# pejecoin-qt binary #
+qt_pejecoin_qt_CPPFLAGS = $(AM_CPPFLAGS) $(PEJECOIN_INCLUDES) $(PEJECOIN_QT_INCLUDES) \
   $(QT_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS)
-qt_fren_qt_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+qt_pejecoin_qt_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
 
-qt_fren_qt_SOURCES = qt/fren.cpp
+qt_pejecoin_qt_SOURCES = qt/pejecoin.cpp
 if TARGET_DARWIN
-  qt_fren_qt_SOURCES += $(FREN_MM)
+  qt_pejecoin_qt_SOURCES += $(PEJECOIN_MM)
 endif
 if TARGET_WINDOWS
-  qt_fren_qt_SOURCES += $(FREN_RC)
+  qt_pejecoin_qt_SOURCES += $(PEJECOIN_RC)
 endif
-qt_fren_qt_LDADD = qt/libfrenqt.a $(LIBFREN_SERVER)
+qt_pejecoin_qt_LDADD = qt/libpejecoinqt.a $(LIBPEJECOIN_SERVER)
 if ENABLE_WALLET
-qt_fren_qt_LDADD += $(LIBFREN_WALLET)
+qt_pejecoin_qt_LDADD += $(LIBPEJECOIN_WALLET)
 endif
 if ENABLE_ZMQ
-qt_fren_qt_LDADD += $(LIBFREN_ZMQ) $(ZMQ_LIBS)
+qt_pejecoin_qt_LDADD += $(LIBPEJECOIN_ZMQ) $(ZMQ_LIBS)
 endif
-qt_fren_qt_LDADD += $(LIBFREN_CLI) $(LIBFREN_COMMON) $(LIBFREN_UTIL) $(LIBFREN_CONSENSUS) $(LIBFREN_CRYPTO) $(LIBUNIVALUE) $(LIBLEVELDB) $(LIBLEVELDB_SSE42) $(LIBMEMENV) \
+qt_pejecoin_qt_LDADD += $(LIBPEJECOIN_CLI) $(LIBPEJECOIN_COMMON) $(LIBPEJECOIN_UTIL) $(LIBPEJECOIN_CONSENSUS) $(LIBPEJECOIN_CRYPTO) $(LIBUNIVALUE) $(LIBLEVELDB) $(LIBLEVELDB_SSE42) $(LIBMEMENV) \
   $(BOOST_LIBS) $(QT_LIBS) $(QT_DBUS_LIBS) $(QR_LIBS) $(PROTOBUF_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(LIBSECP256K1) \
   $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
-qt_fren_qt_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
-qt_fren_qt_LIBTOOLFLAGS = --tag CXX
+qt_pejecoin_qt_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+qt_pejecoin_qt_LIBTOOLFLAGS = --tag CXX
 
 #locale/foo.ts -> locale/foo.qm
 QT_QM=$(QT_TS:.ts=.qm)
 
 SECONDARY: $(QT_QM)
 
-$(srcdir)/qt/frenstrings.cpp: $(libfren_server_a_SOURCES) $(libfren_wallet_a_SOURCES) $(libfren_common_a_SOURCES) $(libfren_zmq_a_SOURCES) $(libfren_consensus_a_SOURCES) $(libfren_util_a_SOURCES)
+$(srcdir)/qt/pejestrings.cpp: $(libpejecoin_server_a_SOURCES) $(libpejecoin_wallet_a_SOURCES) $(libpejecoin_common_a_SOURCES) $(libpejecoin_zmq_a_SOURCES) $(libpejecoin_consensus_a_SOURCES) $(libpejecoin_util_a_SOURCES)
 	@test -n $(XGETTEXT) || echo "xgettext is required for updating translations"
 	$(AM_V_GEN) cd $(srcdir); XGETTEXT=$(XGETTEXT) PACKAGE_NAME="$(PACKAGE_NAME)" COPYRIGHT_HOLDERS="$(COPYRIGHT_HOLDERS)" COPYRIGHT_HOLDERS_SUBSTITUTION="$(COPYRIGHT_HOLDERS_SUBSTITUTION)" $(PYTHON) ../share/qt/extract_strings_qt.py $^
 
-translate: $(srcdir)/qt/frenstrings.cpp $(QT_FORMS_UI) $(QT_FORMS_UI) $(FREN_QT_BASE_CPP) qt/fren.cpp $(FREN_QT_WINDOWS_CPP) $(FREN_QT_WALLET_CPP) $(FREN_QT_H) $(FREN_MM)
+translate: $(srcdir)/qt/pejestrings.cpp $(QT_FORMS_UI) $(QT_FORMS_UI) $(PEJECOIN_QT_BASE_CPP) qt/pejecoin.cpp $(PEJECOIN_QT_WINDOWS_CPP) $(PEJECOIN_QT_WALLET_CPP) $(PEJECOIN_QT_H) $(PEJECOIN_MM)
 	@test -n $(LUPDATE) || echo "lupdate is required for updating translations"
-	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LUPDATE) $^ -locations relative -no-obsolete -ts $(srcdir)/qt/locale/fren_en.ts
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LUPDATE) $^ -locations relative -no-obsolete -ts $(srcdir)/qt/locale/pejecoin_en.ts
 
 $(QT_QRC_LOCALE_CPP): $(QT_QRC_LOCALE) $(QT_QM)
 	@test -f $(RCC)
 	@cp -f $< $(@D)/temp_$(<F)
-	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name fren_locale $(@D)/temp_$(<F) | \
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name pejecoin_locale $(@D)/temp_$(<F) | \
 	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
 	@rm $(@D)/temp_$(<F)
 
 $(QT_QRC_CPP): $(QT_QRC) $(QT_FORMS_H) $(RES_ICONS) $(RES_IMAGES) $(RES_MOVIES) $(PROTOBUF_H)
 	@test -f $(RCC)
-	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name fren $< | \
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name pejecoin $< | \
 	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
 
-CLEAN_QT = $(nodist_qt_libfrenqt_a_SOURCES) $(QT_QM) $(QT_FORMS_H) qt/*.gcda qt/*.gcno
+CLEAN_QT = $(nodist_qt_libpejecoinqt_a_SOURCES) $(QT_QM) $(QT_FORMS_H) qt/*.gcda qt/*.gcno
 
 CLEANFILES += $(CLEAN_QT)
 
-fren_qt_clean: FORCE
-	rm -f $(CLEAN_QT) $(qt_libfrenqt_a_OBJECTS) $(qt_fren_qt_OBJECTS) qt/fren-qt$(EXEEXT) $(LIBFRENQT)
+pejecoin_qt_clean: FORCE
+	rm -f $(CLEAN_QT) $(qt_libpejecoinqt_a_OBJECTS) $(qt_pejecoin_qt_OBJECTS) qt/pejecoin-qt$(EXEEXT) $(LIBPEJECOINQT)
 
-fren_qt : qt/fren-qt$(EXEEXT)
+pejecoin_qt : qt/pejecoin-qt$(EXEEXT)
 
 ui_%.h: %.ui
 	@test -f $(UIC)

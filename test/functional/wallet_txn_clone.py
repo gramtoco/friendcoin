@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
 # Copyright (c) 2014-2016 The Bitcoin Core developers
-# Copyright (c) 2017-2020 The Raven Core developers
-# Copyright (c) 2023 The Fren Core developers
+# Copyright (c) 2017-2020 The Pejecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 """Test the wallet accounts properly when there are cloned transactions with malleated scriptsigs."""
 
-from test_framework.test_framework import FrenTestFramework
+from test_framework.test_framework import PejecoinTestFramework
 from test_framework.util import disconnect_nodes, assert_equal, sync_blocks, connect_nodes
 
-class TxnMallTest(FrenTestFramework):
+class TxnMallTest(PejecoinTestFramework):
     def set_test_params(self):
         self.num_nodes = 4
         self.extra_args = [["-maxreorg=10000".format(i)] for i in range(self.num_nodes)]
@@ -27,7 +26,7 @@ class TxnMallTest(FrenTestFramework):
         disconnect_nodes(self.nodes[2], 1)
 
     def run_test(self):
-        # All nodes should start with 1,250 FRENS:
+        # All nodes should start with 1,250 PEJE:
         starting_balance = 125000
         for i in range(4):
             assert_equal(self.nodes[i].getbalance(), starting_balance)
@@ -64,7 +63,7 @@ class TxnMallTest(FrenTestFramework):
 
         # createrawtransaction randomizes the order of its outputs, so swap them if necessary.
         # output 0 is at version+#inputs+input+sigstub+sequence+#outputs
-        # 40 FRENS serialized is 00286bee00000000
+        # 40 PEJE serialized is 00286bee00000000
         pos0 = 2*(4+1+36+1+4+1)
         hex40 = "00286bee00000000"
         output_len = 16 + 2 + 2 * int("0x" + clone_raw[pos0 + 16 : pos0 + 16 + 2], 0)
@@ -87,7 +86,7 @@ class TxnMallTest(FrenTestFramework):
         tx1 = self.nodes[0].gettransaction(txid1)
         tx2 = self.nodes[0].gettransaction(txid2)
 
-        # Node0's balance should be starting balance, plus 50FRENS for another
+        # Node0's balance should be starting balance, plus 50PEJE for another
         # matured block, minus tx1 and tx2 amounts, and minus transaction fees:
         expected = starting_balance + fund_foo_tx["fee"] + fund_bar_tx["fee"]
         if self.options.mine_block: expected += 5000
@@ -131,7 +130,7 @@ class TxnMallTest(FrenTestFramework):
         assert_equal(tx1_clone["confirmations"], 2)
         assert_equal(tx2["confirmations"], 1)
 
-        # Check node0's total balance; should be same as before the clone, + 100 FRENS for 2 matured,
+        # Check node0's total balance; should be same as before the clone, + 100 PEJE for 2 matured,
         # less possible orphaned matured subsidy
         expected += 10000
         if self.options.mine_block:

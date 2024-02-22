@@ -1,11 +1,10 @@
 // Copyright (c) 2016 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_POLICY_RBF_H
-#define FREN_POLICY_RBF_H
+#ifndef PEJECOIN_POLICY_RBF_H
+#define PEJECOIN_POLICY_RBF_H
 
 #include "txmempool.h"
 
@@ -27,4 +26,4 @@ bool SignalsOptInRBF(const CTransaction &tx);
 // as the sequence numbers of all in-mempool ancestors.
 RBFTransactionState IsRBFOptIn(const CTransaction &tx, CTxMemPool &pool);
 
-#endif // FREN_POLICY_RBF_H
+#endif // PEJECOIN_POLICY_RBF_H

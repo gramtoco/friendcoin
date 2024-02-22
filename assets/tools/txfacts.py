@@ -6,13 +6,13 @@ import subprocess
 import json
 
 
-#Set this to your fren-cli program
-cli = "fren-cli"
+#Set this to your pejecoin-cli program
+cli = "pejecoin-cli"
 
 mode = "-testnet"
 mode = ""
-rpc_port = 14206
-#Set this information in your fren.conf file (in datadir, not testnet3)
+rpc_port = 18766
+#Set this information in your pejecoin.conf file (in datadir, not testnet3)
 rpc_user = 'rpcuser'
 rpc_pass = 'rpcpass555'
 
@@ -107,8 +107,8 @@ for i in range(23500,blockheight):
         for vout in tx_detail.get('vout'):
             #print("vout: " + str(vout.get('value')))
             #print(vout.get('scriptPubKey').get('asm'))
-            if (vout.get('scriptPubKey').get('asm')[86:98] == "OP_FRENS_ASSET"):
-                #print("Found OP_FRENS_ASSET")
+            if (vout.get('scriptPubKey').get('asm')[86:98] == "OP_PEJE_ASSET"):
+                #print("Found OP_PEJE_ASSET")
                 #print(vout.get('scriptPubKey').get('hex'))
                 asset_script = decode_script(vout.get('scriptPubKey').get('hex'))
                 asset_handler(asset_script)

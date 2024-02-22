@@ -1,15 +1,15 @@
-Frencoin Core
+Pejecoin Core
 ==============
 
 Setup
 ---------------------
-Frencoin Core is the original Frencoin client and it builds the backbone of the network. It downloads and, by default, stores the entire history of Frencoin transactions; depending on the speed of your computer and network connection, the synchronization process is typically complete in under an hour.
+Pejecoin Core is the original Pejecoin client and it builds the backbone of the network. It downloads and, by default, stores the entire history of Pejecoin transactions; depending on the speed of your computer and network connection, the synchronization process is typically complete in under an hour.
 
-To download compiled binaries of the Frencoin Core and wallet, visit the [GitHub release page](https://github.com/Apushii/Frencoin/releases).
+To download compiled binaries of the Pejecoin Core and wallet, visit the [GitHub release page](https://github.com/PejecoinBlockchain/Pejecoin/releases).
 
 Running
 ---------------------
-The following are some helpful notes on how to run Frencoin on your native platform.
+The following are some helpful notes on how to run Pejecoin on your native platform.
 
 ### Linux
 
@@ -17,15 +17,15 @@ The following are some helpful notes on how to run Frencoin on your native platf
 
 2) Install distribution-specific dependencies listed below.
 
-3) Run the GUI wallet or only the Frencoin core deamon
+3) Run the GUI wallet or only the Pejecoin core deamon
 
    a. GUI wallet:
 
-   `./fren-qt`
+   `./pejecoin-qt`
 
    b. Core deamon:
 
-   `./frend -deamon`
+   `./pejecoind -deamon`
 
 #### Ubuntu 16.04, 17.04/17.10 and 18.04
 
@@ -70,15 +70,15 @@ The GUI wallet requires the QR Code encoding library and Google's data interchan
 
 ### OS X
 
-1) Download Fren-Qt.dmg.
+1) Download Pejecoin-Qt.dmg.
 
 2) Double click the DMG to mount it.
 
-3) Drag Fren Core icon to the Applications Folder
+3) Drag Pejecoin Core icon to the Applications Folder
 
 ![alt tag](https://i.imgur.com/GLhBFUV.png)
 
-4) Open the Applications folder and Launch Fren Core. The client will begin synchronizing with the network.
+4) Open the Applications folder and Launch Pejecoin Core. The client will begin synchronizing with the network.
 
 ![alt tag](https://i.imgur.com/v3962qo.png)
 
@@ -86,67 +86,67 @@ Note: You may get the follow error on first launch:
 ```
 Dyld Error Message:
   Library not loaded: @loader_path/libboost_system-mt.dylib
-  Referenced from: /Applications/Fren-Qt.app/Contents/Frameworks/libboost_thread-mt.dylib
+  Referenced from: /Applications/Pejecoin-Qt.app/Contents/Frameworks/libboost_thread-mt.dylib
   Reason: image not found
 ```
-To resolve, you will need to copy libboost_system.dylib to libboost_system-mt.dylib in the /Applications/Fren-Qt.app/Contents/Frameworks folder
+To resolve, you will need to copy libboost_system.dylib to libboost_system-mt.dylib in the /Applications/Pejecoin-Qt.app/Contents/Frameworks folder
 
 ### Windows
 
 1) Download windows-x86_64.zip and unpack executables to desired folder.
 
-2) Double click the fren-qt.exe to launch it.
+2) Double click the pejecoin-qt.exe to launch it.
 
 ### Need Help?
 
-- See the documentation at the [Frencoin Wiki](https://fren.wiki/wiki/Frencoin_Wiki)
+- See the documentation at the [Pejecoin Wiki](https://pejecoin.wiki/wiki/Pejecoincoin_Wiki)
 for help and more information.
-- Ask for help on [Discord](https://discord.gg/DUkcBst), [Telegram](https://t.me/FrencoinDev) or [Reddit](https://www.reddit.com/r/Frencoin/).
+- Ask for help on [Discord](https://discord.gg/DUkcBst), [Telegram](https://t.me/PejecoincoinDev) or [Reddit](https://www.reddit.com/r/Pejecoin/).
 
 Building from source
 ---------------------
-The following are developer notes on how to build the Frencoin core software on your native platform. They are not complete guides, but include notes on the necessary libraries, compile flags, etc.
+The following are developer notes on how to build the Pejecoin core software on your native platform. They are not complete guides, but include notes on the necessary libraries, compile flags, etc.
 
-- [Dependencies](https://github.com/Apushii/Frencoin/tree/master/doc/dependencies.md)
-- [OS X Build Notes](https://github.com/Apushii/Frencoin/tree/master/doc/build-osx.md)
-- [Unix Build Notes](https://github.com/Apushii/Frencoin/tree/master/doc/build-unix.md)
-- [Windows Build Notes](https://github.com/Apushii/Frencoin/tree/master/doc/build-windows.md)
-- [OpenBSD Build Notes](https://github.com/Apushii/Frencoin/tree/master/doc/build-openbsd.md)
-- [Gitian Building Guide](https://github.com/Apushii/Frencoin/tree/master/doc/gitian-building.md)
+- [Dependencies](https://github.com/PejecoinBlockchain/Pejecoin/tree/master/doc/dependencies.md)
+- [OS X Build Notes](https://github.com/PejecoinBlockchain/Pejecoin/tree/master/doc/build-osx.md)
+- [Unix Build Notes](https://github.com/PejecoinBlockchain/Pejecoin/tree/master/doc/build-unix.md)
+- [Windows Build Notes](https://github.com/PejecoinBlockchain/Pejecoin/tree/master/doc/build-windows.md)
+- [OpenBSD Build Notes](https://github.com/PejecoinBlockchain/Pejecoin/tree/master/doc/build-openbsd.md)
+- [Gitian Building Guide](https://github.com/PejecoinBlockchain/Pejecoin/tree/master/doc/gitian-building.md)
 
 Development
 ---------------------
-Frencoin repo's [root README](https://github.com/Apushii/Frencoin/blob/master/README.md) contains relevant information on the development process and automated testing.
+Pejecoin repo's [root README](https://github.com/PejecoinBlockchain/Pejecoin/blob/master/README.md) contains relevant information on the development process and automated testing.
 
-- [Developer Notes](https://github.com/Apushii/Frencoin/blob/master/doc/developer-notes.md)
-- [Release Notes](https://github.com/Apushii/Frencoin/blob/master/doc/release-notes.md)
-- [Release Process](https://github.com/Apushii/Frencoin/blob/master/doc/release-process.md)
-- [Source Code Documentation (External Link)](https://dev.visucore.com/fren/doxygen/) -- 2018-05-11 -- Broken link
-- [Translation Process](https://github.com/Apushii/Frencoin/blob/master/doc/translation_process.md)
-- [Translation Strings Policy](https://github.com/Apushii/Frencoin/blob/master/doc/translation_strings_policy.md)
-- [Travis CI](https://github.com/Apushii/Frencoin/blob/master/doc/travis-ci.md)
-- [Unauthenticated REST Interface](https://github.com/Apushii/Frencoin/blob/master/doc/REST-interface.md)
-- [Shared Libraries](https://github.com/Apushii/Frencoin/blob/master/doc/shared-libraries.md)
-- [BIPS](https://github.com/Apushii/Frencoin/blob/master/doc/bips.md)
-- [Dnsseed Policy](https://github.com/Apushii/Frencoin/blob/master/doc/dnsseed-policy.md)
-- [Benchmarking](https://github.com/Apushii/Frencoin/blob/master/doc/benchmarking.md)
+- [Developer Notes](https://github.com/PejecoinBlockchain/Pejecoin/blob/master/doc/developer-notes.md)
+- [Release Notes](https://github.com/PejecoinBlockchain/Pejecoin/blob/master/doc/release-notes.md)
+- [Release Process](https://github.com/PejecoinBlockchain/Pejecoin/blob/master/doc/release-process.md)
+- [Source Code Documentation (External Link)](https://dev.visucore.com/pejecoin/doxygen/) -- 2018-05-11 -- Broken link
+- [Translation Process](https://github.com/PejecoinBlockchain/Pejecoin/blob/master/doc/translation_process.md)
+- [Translation Strings Policy](https://github.com/PejecoinBlockchain/Pejecoin/blob/master/doc/translation_strings_policy.md)
+- [Travis CI](https://github.com/PejecoinBlockchain/Pejecoin/blob/master/doc/travis-ci.md)
+- [Unauthenticated REST Interface](https://github.com/PejecoinBlockchain/Pejecoin/blob/master/doc/REST-interface.md)
+- [Shared Libraries](https://github.com/PejecoinBlockchain/Pejecoin/blob/master/doc/shared-libraries.md)
+- [BIPS](https://github.com/PejecoinBlockchain/Pejecoin/blob/master/doc/bips.md)
+- [Dnsseed Policy](https://github.com/PejecoinBlockchain/Pejecoin/blob/master/doc/dnsseed-policy.md)
+- [Benchmarking](https://github.com/PejecoinBlockchain/Pejecoin/blob/master/doc/benchmarking.md)
 
 ### Resources
-- Discuss on chat [Discord](https://discord.gg/jn6uhur), [Telegram](https://t.me/FrencoinDev) or [Reddit](https://www.reddit.com/r/Frencoin/).
-- Find out more on the [Frencoin Wiki](https://fren.wiki/wiki/Frencoin_Wiki)
-- Visit the project home [Frencoin.org](https://frencoin.org)
+- Discuss on chat [Discord](https://discord.gg/jn6uhur), [Telegram](https://t.me/PejecoincoinDev) or [Reddit](https://www.reddit.com/r/Pejecoin/).
+- Find out more on the [Pejecoin Wiki](https://pejecoin.wiki/wiki/Pejecoincoin_Wiki)
+- Visit the project home [Pejecoin.org](https://pejecoin.org)
 
 ### Miscellaneous
-- [Assets Attribution](https://github.com/Apushii/Frencoin/blob/master/doc/assets-attribution.md)
-- [Files](https://github.com/Apushii/Frencoin/blob/master/doc/files.md)
-- [Fuzz-testing](https://github.com/Apushii/Frencoin/blob/master/doc/fuzzing.md)
-- [Reduce Traffic](https://github.com/Apushii/Frencoin/blob/master/doc/reduce-traffic.md)
-- [Tor Support](https://github.com/Apushii/Frencoin/blob/master/doc/tor.md)
-- [Init Scripts (systemd/upstart/openrc)](https://github.com/Apushii/Frencoin/blob/master/doc/init.md)
-- [ZMQ](https://github.com/Apushii/Frencoin/blob/master/doc/zmq.md)
+- [Assets Attribution](https://github.com/PejecoinBlockchain/Pejecoin/blob/master/doc/assets-attribution.md)
+- [Files](https://github.com/PejecoinBlockchain/Pejecoin/blob/master/doc/files.md)
+- [Fuzz-testing](https://github.com/PejecoinBlockchain/Pejecoin/blob/master/doc/fuzzing.md)
+- [Reduce Traffic](https://github.com/PejecoinBlockchain/Pejecoin/blob/master/doc/reduce-traffic.md)
+- [Tor Support](https://github.com/PejecoinBlockchain/Pejecoin/blob/master/doc/tor.md)
+- [Init Scripts (systemd/upstart/openrc)](https://github.com/PejecoinBlockchain/Pejecoin/blob/master/doc/init.md)
+- [ZMQ](https://github.com/PejecoinBlockchain/Pejecoin/blob/master/doc/zmq.md)
 
 License
 ---------------------
-Distributed under the [MIT software license](https://github.com/Apushii/Frencoin/blob/master/COPYING).
+Distributed under the [MIT software license](https://github.com/PejecoinBlockchain/Pejecoin/blob/master/COPYING).
 This product includes software developed by the OpenSSL Project for use in the [OpenSSL Toolkit](https://www.openssl.org/). This product includes
 cryptographic software written by Eric Young ([eay@cryptsoft.com](mailto:eay@cryptsoft.com)), and UPnP software written by Thomas Bernard.

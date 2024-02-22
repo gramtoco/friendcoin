@@ -11,8 +11,8 @@
 ###############################################################################
 */
 
-#ifndef FRENCOIN_DARKSTYLE_H
-#define FRENCOIN_DARKSTYLE_H
+#ifndef PEJECOINCOIN_DARKSTYLE_H
+#define PEJECOINCOIN_DARKSTYLE_H
 
 #include <QApplication>
 #include <QProxyStyle>
@@ -37,4 +37,4 @@ private:
     QStyle *styleBase(QStyle *style = Q_NULLPTR) const;
 };
 
-#endif //FRENCOIN_DARKSTYLE_H
+#endif //PEJECOINCOIN_DARKSTYLE_H

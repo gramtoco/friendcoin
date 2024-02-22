@@ -1,6 +1,6 @@
-## Frencoin Metadata Specification
+## Pejecoin Metadata Specification
 
-Additional fields may be added, but will be ignored by Frencoin.
+Additional fields may be added, but will be ignored by Pejecoin.
 
 ```
 {
@@ -9,7 +9,7 @@ Additional fields may be added, but will be ignored by Frencoin.
 
    "contract_hash": "<SHA256 hash in hex of contract_url contents>",
 
-   "contract_signature": "<Frencoin signed contract_hash>",
+   "contract_signature": "<Pejecoin signed contract_hash>",
 
    "contract_address": "R9x4u22ru3zm5v8suWiXNji4ENWSG7eYkx",
 
@@ -43,7 +43,7 @@ Additional fields may be added, but will be ignored by Frencoin.
 
    "forsale": true,
 
-   "forsale_price": "5000 FRENS",
+   "forsale_price": "5000 PEJE",
    
    "domain": "bitactivate.com",
    
@@ -92,8 +92,8 @@ All fields are optional. Clients, explorers, and wallets are not obligated to di
 
 **forsale** - Should be true or false.  Used by desirable token names that have been left as reissuable.  This is not for the cost of buying one token, but rather for buying the rights to own, control, and reissue the entire asset token.  This might be parsed by token broker websites.
 
-**forsale_price** - To give buyers an idea of the cost to own and admin the asset token.   Price followed by a space, followed by the currency.  Examples: "10000 FRENS" or "0.3 BTC" or "50000 USD"  This might be parsed by token broker websites.
+**forsale_price** - To give buyers an idea of the cost to own and admin the asset token.   Price followed by a space, followed by the currency.  Examples: "10000 PEJE" or "0.3 BTC" or "50000 USD"  This might be parsed by token broker websites.
 
-**domain** - A root domain for the project (if applicable).  Setting the TXT record for frens.<domain> to a signed message of the token name -- signed by the issuer address.  This could be verified by clients to ensure the token and domain go together.  Example:  Set TXT record for frens.bitactivate.com to the signature of the message "BITACTIVATE".  Any client or individual can verify the issuer address, message "BITACTIVATE" which is the token/asset name, and valid signature in the TXT record for frens.bitactivate.com and return true/false.
+**domain** - A root domain for the project (if applicable).  Setting the TXT record for peje.<domain> to a signed message of the token name -- signed by the issuer address.  This could be verified by clients to ensure the token and domain go together.  Example:  Set TXT record for peje.bitactivate.com to the signature of the message "BITACTIVATE".  Any client or individual can verify the issuer address, message "BITACTIVATE" which is the token/asset name, and valid signature in the TXT record for peje.bitactivate.com and return true/false.
 
-**restricted** - Designate the token as being restricted.  One example is "rule144" which means sale may be restricted because of the type of token and the exemption used for issuance.  Other restrictions types can be used here as a signal to explorers, exchanges, or token brokers.  No enforcement of restrictions is built into the Frencoin protocol. 
+**restricted** - Designate the token as being restricted.  One example is "rule144" which means sale may be restricted because of the type of token and the exemption used for issuance.  Other restrictions types can be used here as a signal to explorers, exchanges, or token brokers.  No enforcement of restrictions is built into the Pejecoin protocol. 

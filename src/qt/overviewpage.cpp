@@ -1,13 +1,12 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2021 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2021 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "overviewpage.h"
 #include "ui_overviewpage.h"
 
-#include "frenunits.h"
+#include "pejecoinunits.h"
 #include "clientmodel.h"
 #include "guiconstants.h"
 #include "guiutil.h"
@@ -47,7 +46,7 @@ class TxViewDelegate : public QAbstractItemDelegate
     Q_OBJECT
 public:
     explicit TxViewDelegate(const PlatformStyle *_platformStyle, QObject *parent=nullptr):
-        QAbstractItemDelegate(parent), unit(FrenUnits::FRENS),
+        QAbstractItemDelegate(parent), unit(PejecoinUnits::PEJE),
         platformStyle(_platformStyle)
     {
 
@@ -156,7 +155,7 @@ class AssetViewDelegate : public QAbstractItemDelegate
 Q_OBJECT
 public:
     explicit AssetViewDelegate(const PlatformStyle *_platformStyle, QObject *parent=nullptr):
-            QAbstractItemDelegate(parent), unit(FrenUnits::FRENS),
+            QAbstractItemDelegate(parent), unit(PejecoinUnits::PEJE),
             platformStyle(_platformStyle)
     {
 
@@ -300,7 +299,7 @@ public:
 
 };
 #include "overviewpage.moc"
-#include "frengui.h"
+#include "pejecoingui.h"
 #include <QFontDatabase>
 
 OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) :
@@ -369,7 +368,7 @@ OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) 
 
     /** Update the labels colors */
     ui->assetBalanceLabel->setStyleSheet(STRING_LABEL_COLOR);
-    ui->frensBalancesLabel->setStyleSheet(STRING_LABEL_COLOR);
+    ui->pejeBalancesLabel->setStyleSheet(STRING_LABEL_COLOR);
     ui->labelBalanceText->setStyleSheet(STRING_LABEL_COLOR);
     ui->labelPendingText->setStyleSheet(STRING_LABEL_COLOR);
     ui->labelImmatureText->setStyleSheet(STRING_LABEL_COLOR);
@@ -379,7 +378,7 @@ OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) 
     ui->recentTransactionsLabel->setStyleSheet(STRING_LABEL_COLOR);
 
     /** Update the labels font */
-    ui->frensBalancesLabel->setFont(GUIUtil::getTopLabelFont());
+    ui->pejeBalancesLabel->setFont(GUIUtil::getTopLabelFont());
     ui->assetBalanceLabel->setFont(GUIUtil::getTopLabelFont());
     ui->recentTransactionsLabel->setFont(GUIUtil::getTopLabelFont());
 
@@ -562,14 +561,14 @@ void OverviewPage::setBalance(const CAmount& balance, const CAmount& unconfirmed
     currentWatchOnlyBalance = watchOnlyBalance;
     currentWatchUnconfBalance = watchUnconfBalance;
     currentWatchImmatureBalance = watchImmatureBalance;
-    ui->labelBalance->setText(FrenUnits::formatWithUnit(unit, balance, false, FrenUnits::separatorAlways));
-    ui->labelUnconfirmed->setText(FrenUnits::formatWithUnit(unit, unconfirmedBalance, false, FrenUnits::separatorAlways));
-    ui->labelImmature->setText(FrenUnits::formatWithUnit(unit, immatureBalance, false, FrenUnits::separatorAlways));
-    ui->labelTotal->setText(FrenUnits::formatWithUnit(unit, balance + unconfirmedBalance + immatureBalance, false, FrenUnits::separatorAlways));
-    ui->labelWatchAvailable->setText(FrenUnits::formatWithUnit(unit, watchOnlyBalance, false, FrenUnits::separatorAlways));
-    ui->labelWatchPending->setText(FrenUnits::formatWithUnit(unit, watchUnconfBalance, false, FrenUnits::separatorAlways));
-    ui->labelWatchImmature->setText(FrenUnits::formatWithUnit(unit, watchImmatureBalance, false, FrenUnits::separatorAlways));
-    ui->labelWatchTotal->setText(FrenUnits::formatWithUnit(unit, watchOnlyBalance + watchUnconfBalance + watchImmatureBalance, false, FrenUnits::separatorAlways));
+    ui->labelBalance->setText(PejecoinUnits::formatWithUnit(unit, balance, false, PejecoinUnits::separatorAlways));
+    ui->labelUnconfirmed->setText(PejecoinUnits::formatWithUnit(unit, unconfirmedBalance, false, PejecoinUnits::separatorAlways));
+    ui->labelImmature->setText(PejecoinUnits::formatWithUnit(unit, immatureBalance, false, PejecoinUnits::separatorAlways));
+    ui->labelTotal->setText(PejecoinUnits::formatWithUnit(unit, balance + unconfirmedBalance + immatureBalance, false, PejecoinUnits::separatorAlways));
+    ui->labelWatchAvailable->setText(PejecoinUnits::formatWithUnit(unit, watchOnlyBalance, false, PejecoinUnits::separatorAlways));
+    ui->labelWatchPending->setText(PejecoinUnits::formatWithUnit(unit, watchUnconfBalance, false, PejecoinUnits::separatorAlways));
+    ui->labelWatchImmature->setText(PejecoinUnits::formatWithUnit(unit, watchImmatureBalance, false, PejecoinUnits::separatorAlways));
+    ui->labelWatchTotal->setText(PejecoinUnits::formatWithUnit(unit, watchOnlyBalance + watchUnconfBalance + watchImmatureBalance, false, PejecoinUnits::separatorAlways));
 
     // only show immature (newly mined) balance if it's non-zero, so as not to complicate things
     // for the non-mining users
@@ -645,7 +644,7 @@ void OverviewPage::setWalletModel(WalletModel *model)
         connect(model, SIGNAL(notifyWatchonlyChanged(bool)), this, SLOT(updateWatchOnlyLabels(bool)));
     }
 
-    // update the display unit, to not use the default ("FRENS")
+    // update the display unit, to not use the default ("PEJE")
     updateDisplayUnit();
 }
 
@@ -694,7 +693,7 @@ void OverviewPage::showAssets()
         ui->assetBalanceLabel->hide();
         ui->labelAssetStatus->hide();
 
-        // This keeps the FRENS balance grid from expanding and looking terrible when asset balance is hidden
+        // This keeps the PEJE balance grid from expanding and looking terrible when asset balance is hidden
         ui->assetVerticalSpaceWidget->show();
         ui->assetVerticalSpaceWidget2->show();
     }

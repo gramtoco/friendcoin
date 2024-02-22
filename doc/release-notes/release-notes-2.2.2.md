@@ -1,7 +1,7 @@
-Fren Core version *2.2.2* is now available!!
+Pejecoin Core version *2.2.2* is now available!!
 ==============
 
-  <https://github.com/Apushii/Frencoin/releases/tag/v2.2.2>
+  <https://github.com/PejecoinBlockchain/Pejecoin/releases/tag/v2.2.2>
 
 
 This is a major release containing bug fixes and enhancements for 2.2.0/2.2.1.  It is highly recommended that users 
@@ -9,19 +9,19 @@ upgrade to this version.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/Apushii/Frencoin/issues>
+  <https://github.com/PejecoinBlockchain/Pejecoin/issues>
 
 To receive security and update notifications, please subscribe to:
 
-  <https://frencoin.org/en/list/announcements/join/>
+  <https://pejecoin.org/en/list/announcements/join/>
 
 How to Upgrade
 ==============
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), then run the 
-installer (on Windows) or just copy over `/Applications/Fren-Qt` (on Mac)
-or `frend`/`fren-qt` (on Linux).
+installer (on Windows) or just copy over `/Applications/Pejecoin-Qt` (on Mac)
+or `pejecoind`/`pejecoin-qt` (on Linux).
 
 The first time you run version 2.1.0 or higher, your chainstate database may
 be converted to a new format, which will take anywhere from a few minutes to
@@ -49,14 +49,14 @@ will not fork the chain.
 Compatibility
 ==============
 
-Fren Core is extensively tested on multiple operating systems using
+Pejecoin Core is extensively tested on multiple operating systems using
 the Linux kernel, macOS 10.8+, and Windows 10(x64) and later. 32-bit versions of Windows,
 and Windows XP are not supported.
 
-Fren Core should also work on most other Unix-like systems but is not
+Pejecoin Core should also work on most other Unix-like systems but is not
 frequently tested on them.
 
-Fren Core has been tested with macOS 10.14 Mojave, but it is recommended that *developers*
+Pejecoin Core has been tested with macOS 10.14 Mojave, but it is recommended that *developers*
 do not update to Mojave.  There is an incompatibility with Berkeley-db 4.8.30 that causes
 the binaries to seg-fault.  There is a workaround, but as of this release users should
 not update to Mojave (see build-OSX.md for current status of this issue).  There are no
@@ -71,7 +71,7 @@ Notable changes
 - QT dark mode (not using OSX Mojave dark mode)
 - Chain split attack vector fix
 - Better asset caching
-- Enhancements for Frencoin Dev Kit and Mobile Wallet Support
+- Enhancements for Pejecoin Dev Kit and Mobile Wallet Support
 - Limit listaddressesbyasset RPC call to only return 5,000 asset-addresses per call
 - Updates and fixes to the functional and unit tests for better asset coverage and stability
 
@@ -79,14 +79,14 @@ Notable changes
 2.2.2 Change log
 ==============
 
-Changelog available here: <https://github.com/Apushii/Frencoin/commits/release_2.2.2>
+Changelog available here: <https://github.com/PejecoinBlockchain/Pejecoin/commits/release_2.2.2>
 
 Credits
 ==============
 
 Thanks to everyone who directly contributed to this release:
 
-- Most importantly - The Fren Community!
+- Most importantly - The Pejecoin Community!
 - Tron Black
 - Jesse Empey
 - Jeremy Anderson

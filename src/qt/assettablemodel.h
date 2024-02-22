@@ -1,11 +1,10 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2020 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2020 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_QT_ASSETTABLEMODEL_H
-#define FREN_QT_ASSETTABLEMODEL_H
+#ifndef PEJECOIN_QT_ASSETTABLEMODEL_H
+#define PEJECOIN_QT_ASSETTABLEMODEL_H
 
 #include "amount.h"
 
@@ -39,13 +38,13 @@ public:
     enum RoleIndex {
         /** Net amount of transaction */
             AmountRole = 100,
-        /** FRENS or name of an asset */
+        /** PEJE or name of an asset */
             AssetNameRole = 101,
         /** Formatted amount, without brackets when unconfirmed */
             FormattedAmountRole = 102,
         /** AdministratorRole */
             AdministratorRole = 103,
-        /** FRENS or name of an asset */
+        /** PEJE or name of an asset */
             AssetIPFSHashRole = 104,
         /** IPFS Decoration Role */
             AssetIPFSHashDecorationRole = 105
@@ -71,4 +70,4 @@ private:
     friend class AssetTablePriv;
 };
 
-#endif // FREN_QT_ASSETTABLEMODEL_H
+#endif // PEJECOIN_QT_ASSETTABLEMODEL_H

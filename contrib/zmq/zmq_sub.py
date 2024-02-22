@@ -1,19 +1,18 @@
 #!/usr/bin/env python3
 # Copyright (c) 2014-2016 The Bitcoin Core developers
-# Copyright (c) 2017-2019 The Raven Core developers
-# Copyright (c) 2023 The Fren Core developers
+# Copyright (c) 2017-2021 The Pejecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 """
     ZMQ example using python3's asyncio
 
-    Fren should be started with the command line arguments:
-        frend -testnet -daemon \
-                -zmqpubhashblock=tcp://127.0.0.1:24206 \
-                -zmqpubrawtx=tcp://127.0.0.1:24206 \
-                -zmqpubhashtx=tcp://127.0.0.1:24206 \
-                -zmqpubhashblock=tcp://127.0.0.1:24206
+    Pejecoin should be started with the command line arguments:
+        pejecoind -testnet -daemon \
+                -zmqpubhashblock=tcp://127.0.0.1:28766 \
+                -zmqpubrawtx=tcp://127.0.0.1:28766 \
+                -zmqpubhashtx=tcp://127.0.0.1:28766 \
+                -zmqpubhashblock=tcp://127.0.0.1:28766
 
     We use the asyncio library here.  `self.handle()` installs itself as a
     future at the end of the function.  Since it never returns with the event
@@ -36,7 +35,7 @@ if not (sys.version_info.major >= 3 and sys.version_info.minor >= 5):
     print("This example only works with Python 3.5 and greater")
     sys.exit(1)
 
-port = 24206
+port = 28766
 
 class ZMQHandler():
     def __init__(self):

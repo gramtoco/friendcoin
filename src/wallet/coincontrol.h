@@ -1,11 +1,10 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_WALLET_COINCONTROL_H
-#define FREN_WALLET_COINCONTROL_H
+#ifndef PEJECOIN_WALLET_COINCONTROL_H
+#define PEJECOIN_WALLET_COINCONTROL_H
 
 #include "policy/feerate.h"
 #include "policy/fees.h"
@@ -38,10 +37,10 @@ public:
     //! Fee estimation mode to control arguments to estimateSmartFee
     FeeEstimateMode m_fee_mode;
 
-    /** FRENS START */
+    /** PEJE START */
     //! Name of the asset that is selected, used when sending assets with coincontrol
     std::string strAssetSelected;
-    /** FRENS END */
+    /** PEJE END */
 
     CCoinControl()
     {
@@ -131,4 +130,4 @@ private:
     std::set<COutPoint> setAssetsSelected;
 };
 
-#endif // FREN_WALLET_COINCONTROL_H
+#endif // PEJECOIN_WALLET_COINCONTROL_H

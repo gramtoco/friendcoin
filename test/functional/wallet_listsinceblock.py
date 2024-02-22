@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
 # Copyright (c) 2017 The Bitcoin Core developers
-# Copyright (c) 2017-2020 The Raven Core developers
-# Copyright (c) 2023 The Fren Core developers
+# Copyright (c) 2017-2020 The Pejecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 """Test the listsincelast RPC."""
 
-from test_framework.test_framework import FrenTestFramework
+from test_framework.test_framework import PejecoinTestFramework
 from test_framework.util import assert_equal
 
-class ListSinceBlockTest (FrenTestFramework):
+class ListSinceBlockTest (PejecoinTestFramework):
     def set_test_params(self):
         self.num_nodes = 4
         self.setup_clean_chain = True
@@ -94,8 +93,8 @@ class ListSinceBlockTest (FrenTestFramework):
 
         Problematic case:
 
-        1. User 1 receives FRENS in tx1 from utxo1 in block aa1.
-        2. User 2 receives FRENS in tx2 from utxo1 (same) in block bb1
+        1. User 1 receives PEJE in tx1 from utxo1 in block aa1.
+        2. User 2 receives PEJE in tx2 from utxo1 (same) in block bb1
         3. User 1 sees 2 confirmations at block aa3.
         4. Reorg into bb chain.
         5. User 1 asks `listsinceblock aa3` and does not see that tx1 is now

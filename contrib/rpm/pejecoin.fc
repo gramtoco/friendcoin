@@ -1,0 +1,8 @@
+/usr/bin/pejecoin-cli		--	gen_context(system_u:object_r:pejecoin_exec_t,s0)
+/usr/sbin/pejecoind		--	gen_context(system_u:object_r:pejecoin_exec_t,s0)
+/usr/lib(64)?/pejecoin/pejecoind		--	gen_context(system_u:object_r:pejecoin_exec_t,s0)
+
+/etc/pejecoin(/.*)?		gen_context(system_u:object_r:pejecoin_conf_t,s0)
+/var/lib/pejecoin(/.*)?		gen_context(system_u:object_r:pejecoin_var_lib_t,s0)
+
+(/var)?/run/pejecoind(/.*)?   gen_context(system_u:object_r:pejecoin_var_run_t,s0)

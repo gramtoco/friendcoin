@@ -1,14 +1,13 @@
 // Copyright (c) 2014-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_COMPAT_BYTESWAP_H
-#define FREN_COMPAT_BYTESWAP_H
+#ifndef PEJECOIN_COMPAT_BYTESWAP_H
+#define PEJECOIN_COMPAT_BYTESWAP_H
 
 #if defined(HAVE_CONFIG_H)
-#include "config/fren-config.h"
+#include "config/pejecoin-config.h"
 #endif
 
 #include <stdint.h>
@@ -65,4 +64,4 @@ inline uint64_t bswap_64(uint64_t x)
 
 #endif // defined(__APPLE__)
 
-#endif // FREN_COMPAT_BYTESWAP_H
+#endif // PEJECOIN_COMPAT_BYTESWAP_H

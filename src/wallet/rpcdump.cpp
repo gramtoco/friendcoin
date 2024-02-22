@@ -1,6 +1,5 @@
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2021 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2021 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -120,7 +119,7 @@ UniValue importprivkey(const JSONRPCRequest& request)
     if (fRescan && fPruneMode)
         throw JSONRPCError(RPC_WALLET_ERROR, "Rescan is disabled in pruned mode");
 
-    CFrenSecret vchSecret;
+    CPejecoinSecret vchSecret;
     bool fGood = vchSecret.SetString(strSecret);
 
     if (!fGood) throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid private key encoding");
@@ -277,7 +276,7 @@ UniValue importaddress(const JSONRPCRequest& request)
         std::vector<unsigned char> data(ParseHex(request.params[0].get_str()));
         ImportScript(pwallet, CScript(data.begin(), data.end()), strLabel, fP2SH);
     } else {
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Fren address or script");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Pejecoin address or script");
     }
 
     if (fRescan)
@@ -501,7 +500,7 @@ UniValue importwallet(const JSONRPCRequest& request)
         boost::split(vstr, line, boost::is_any_of(" "));
         if (vstr.size() < 2)
             continue;
-        CFrenSecret vchSecret;
+        CPejecoinSecret vchSecret;
         if (!vchSecret.SetString(vstr[0]))
             continue;
         CKey key = vchSecret.GetKey();
@@ -562,7 +561,7 @@ UniValue dumpprivkey(const JSONRPCRequest& request)
             "\nReveals the private key corresponding to 'address'.\n"
             "Then the importprivkey can be used with this output\n"
             "\nArguments:\n"
-            "1. \"address\"   (string, required) The fren address for the private key\n"
+            "1. \"address\"   (string, required) The pejecoin address for the private key\n"
             "\nResult:\n"
             "\"key\"                (string) The private key\n"
             "\nExamples:\n"
@@ -578,7 +577,7 @@ UniValue dumpprivkey(const JSONRPCRequest& request)
     std::string strAddress = request.params[0].get_str();
     CTxDestination dest = DecodeDestination(strAddress);
     if (!IsValidDestination(dest)) {
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Fren address");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Pejecoin address");
     }
     const CKeyID *keyID = boost::get<CKeyID>(&dest);
     if (!keyID) {
@@ -588,7 +587,7 @@ UniValue dumpprivkey(const JSONRPCRequest& request)
     if (!pwallet->GetKey(*keyID, vchSecret)) {
         throw JSONRPCError(RPC_WALLET_ERROR, "Private key for address " + strAddress + " is not known");
     }
-    return CFrenSecret(vchSecret).ToString();
+    return CPejecoinSecret(vchSecret).ToString();
 }
 
 
@@ -604,7 +603,7 @@ UniValue dumpwallet(const JSONRPCRequest& request)
             "dumpwallet \"filename\"\n"
             "\nDumps all wallet keys in a human-readable format to a server-side file. This does not allow overwriting existing files.\n"
             "\nArguments:\n"
-            "1. \"filename\"    (string, required) The filename with path (either absolute or relative to frend)\n"
+            "1. \"filename\"    (string, required) The filename with path (either absolute or relative to pejecoind)\n"
             "\nResult:\n"
             "{                           (json object)\n"
             "  \"filename\" : {        (string) The filename with full absolute path\n"
@@ -650,7 +649,7 @@ UniValue dumpwallet(const JSONRPCRequest& request)
     std::sort(vKeyBirth.begin(), vKeyBirth.end());
 
     // produce output
-    file << strprintf("# Wallet dump created by Fren %s\n", CLIENT_BUILD);
+    file << strprintf("# Wallet dump created by Pejecoin %s\n", CLIENT_BUILD);
     file << strprintf("# * Created on %s\n", EncodeDumpTime(GetTime()));
     file << strprintf("# * Best block at time of backup was %i (%s),\n", chainActive.Height(), chainActive.Tip()->GetBlockHash().ToString());
     file << strprintf("#   mined on %s\n", EncodeDumpTime(chainActive.Tip()->GetBlockTime()));
@@ -667,13 +666,13 @@ UniValue dumpwallet(const JSONRPCRequest& request)
                 CExtKey masterKey;
                 masterKey.SetSeed(seed.begin(), seed.size());
 
-                CFrenExtKey b58extkey;
+                CPejecoinExtKey b58extkey;
                 b58extkey.SetKey(masterKey);
 
                 CExtPubKey pubkey;
                 pubkey = masterKey.Neuter();
 
-                CFrenExtPubKey b58extpubkey;
+                CPejecoinExtPubKey b58extpubkey;
                 b58extpubkey.SetKey(pubkey);
 
                 file << "# extended private masterkey: " << b58extkey.ToString() << "\n\n";
@@ -695,13 +694,13 @@ UniValue dumpwallet(const JSONRPCRequest& request)
             CExtKey masterKey;
             masterKey.SetSeed(vchSeed.data(), vchSeed.size());
 
-            CFrenExtKey b58extkey;
+            CPejecoinExtKey b58extkey;
             b58extkey.SetKey(masterKey);
 
             CExtPubKey pubkey;
             pubkey = masterKey.Neuter();
 
-            CFrenExtPubKey b58extpubkey;
+            CPejecoinExtPubKey b58extpubkey;
             b58extpubkey.SetKey(pubkey);
 
             file << "# extended private masterkey: " << b58extkey.ToString() << "\n\n";
@@ -719,7 +718,7 @@ UniValue dumpwallet(const JSONRPCRequest& request)
         std::string strAddr = EncodeDestination(keyid);
         CKey key;
         if (pwallet->GetKey(keyid, key)) {
-            file << strprintf("%s %s ", CFrenSecret(key).ToString(), strTime);
+            file << strprintf("%s %s ", CPejecoinSecret(key).ToString(), strTime);
             if (pwallet->mapAddressBook.count(keyid)) {
                 file << strprintf("label=%s", EncodeDumpString(pwallet->mapAddressBook[keyid].name));
             } else if (keyid == seed_id) {
@@ -787,16 +786,16 @@ UniValue getmasterkeyinfo(const JSONRPCRequest& request)
                 CExtKey masterKey;
                 masterKey.SetSeed(seed.begin(), seed.size());;
 
-                // Get the Fren Ext Key from the master key
-                CFrenExtKey b58extkey;
+                // Get the Pejecoin Ext Key from the master key
+                CPejecoinExtKey b58extkey;
                 b58extkey.SetKey(masterKey);
 
                 // Get the public key from the master key
                 CExtPubKey pubkey;
                 pubkey = masterKey.Neuter();
 
-                // Get the Fren Ext Key from the public key
-                CFrenExtPubKey b58extpubkey;
+                // Get the Pejecoin Ext Key from the public key
+                CPejecoinExtPubKey b58extpubkey;
                 b58extpubkey.SetKey(pubkey);
 
                 // Add the private and public key to the output
@@ -812,12 +811,12 @@ UniValue getmasterkeyinfo(const JSONRPCRequest& request)
                 CExtPubKey account_extended_public_key;
                 account_extended_public_key = accountKey.Neuter();
 
-                // Create the Fren Account Ext Private Key
-                CFrenExtKey b58accountextprivatekey;
+                // Create the Pejecoin Account Ext Private Key
+                CPejecoinExtKey b58accountextprivatekey;
                 b58accountextprivatekey.SetKey(accountKey);
 
-                // Create the Fren Account Ext Public Key
-                CFrenExtPubKey b58actextpubkey;
+                // Create the Pejecoin Account Ext Public Key
+                CPejecoinExtPubKey b58actextpubkey;
                 b58actextpubkey.SetKey(account_extended_public_key);
 
                 // Add the account extended public and private keys to the return
@@ -842,16 +841,16 @@ UniValue getmasterkeyinfo(const JSONRPCRequest& request)
             CExtKey masterKey;
             masterKey.SetSeed(vchSeed.data(), vchSeed.size());
 
-            // Get the Fren Ext Key from the master key
-            CFrenExtKey b58extkey;
+            // Get the Pejecoin Ext Key from the master key
+            CPejecoinExtKey b58extkey;
             b58extkey.SetKey(masterKey);
 
             // Get the public key from the master key
             CExtPubKey pubkey;
             pubkey = masterKey.Neuter();
 
-            // Get the Fren Ext Key from the public key
-            CFrenExtPubKey b58extpubkey;
+            // Get the Pejecoin Ext Key from the public key
+            CPejecoinExtPubKey b58extpubkey;
             b58extpubkey.SetKey(pubkey);
 
             // Add the private and public key to the output
@@ -875,12 +874,12 @@ UniValue getmasterkeyinfo(const JSONRPCRequest& request)
             CExtPubKey account_extended_public_key;
             account_extended_public_key = accountKey.Neuter();
 
-            // Create the Fren Account Ext Private Key
-            CFrenExtKey b58accountextprivatekey;
+            // Create the Pejecoin Account Ext Private Key
+            CPejecoinExtKey b58accountextprivatekey;
             b58accountextprivatekey.SetKey(accountKey);
 
-            // Create the Fren Account Ext Public Key
-            CFrenExtPubKey b58actextpubkey;
+            // Create the Pejecoin Account Ext Public Key
+            CPejecoinExtPubKey b58actextpubkey;
             b58actextpubkey.SetKey(account_extended_public_key);
 
             // Add the account extended public and private keys to the return
@@ -1008,7 +1007,7 @@ UniValue ProcessImport(CWallet * const pwallet, const UniValue& data, const int6
                 for (size_t i = 0; i < keys.size(); i++) {
                     const std::string& privkey = keys[i].get_str();
 
-                    CFrenSecret vchSecret;
+                    CPejecoinSecret vchSecret;
                     bool fGood = vchSecret.SetString(privkey);
 
                     if (!fGood) {
@@ -1115,7 +1114,7 @@ UniValue ProcessImport(CWallet * const pwallet, const UniValue& data, const int6
                 const std::string& strPrivkey = keys[0].get_str();
 
                 // Checks.
-                CFrenSecret vchSecret;
+                CPejecoinSecret vchSecret;
                 bool fGood = vchSecret.SetString(strPrivkey);
 
                 if (!fGood) {
@@ -1349,7 +1348,7 @@ UniValue importmulti(const JSONRPCRequest& mainRequest)
                                       "block from time %d, which is after or within %d seconds of key creation, and "
                                       "could contain transactions pertaining to the key. As a result, transactions "
                                       "and coins using this key may not appear in the wallet. This error could be "
-                                      "caused by pruning or data corruption (see frend log for details) and could "
+                                      "caused by pruning or data corruption (see pejecoind log for details) and could "
                                       "be dealt with by downloading and rescanning the relevant blocks (see -reindex "
                                       "and -rescan options).",
                                 GetImportTimestamp(request, now), scannedTime - TIMESTAMP_WINDOW - 1, TIMESTAMP_WINDOW)));

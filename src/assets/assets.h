@@ -1,11 +1,10 @@
-// Copyright (c) 2017-2021 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2021 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 
-#ifndef FRENCOIN_ASSET_PROTOCOL_H
-#define FRENCOIN_ASSET_PROTOCOL_H
+#ifndef PEJECOINCOIN_ASSET_PROTOCOL_H
+#define PEJECOINCOIN_ASSET_PROTOCOL_H
 
 #include "amount.h"
 #include "tinyformat.h"
@@ -17,12 +16,12 @@
 #include <unordered_map>
 #include <list>
 
-#define FRENS_R 114
-#define FRENS_V 118
-#define FRENS_N 110
-#define FRENS_Q 113
-#define FRENS_T 116
-#define FRENS_O 111
+#define PEJE_R 114
+#define PEJE_V 118
+#define PEJE_N 110
+#define PEJE_Q 113
+#define PEJE_T 116
+#define PEJE_O 111
 
 #define DEFAULT_UNITS 0
 #define DEFAULT_REISSUABLE 1
@@ -464,10 +463,10 @@ bool CheckIssueBurnTx(const CTxOut& txOut, const AssetType& type);
 bool CheckReissueBurnTx(const CTxOut& txOut);
 
 //! issue asset scripts to make sure script meets the standards
-bool CheckIssueDataTx(const CTxOut& txOut); // OP_FREN_ASSET FRENSQ (That is a Q as in Que not an O)
-bool CheckOwnerDataTx(const CTxOut& txOut);// OP_FREN_ASSET FRENSO
-bool CheckReissueDataTx(const CTxOut& txOut);// OP_FREN_ASSET FRENSR
-bool CheckTransferOwnerTx(const CTxOut& txOut);// OP_FREN_ASSET FRENST
+bool CheckIssueDataTx(const CTxOut& txOut); // OP_PEJECOIN_ASSET PEJEQ (That is a Q as in Que not an O)
+bool CheckOwnerDataTx(const CTxOut& txOut);// OP_PEJECOIN_ASSET PEJEO
+bool CheckReissueDataTx(const CTxOut& txOut);// OP_PEJECOIN_ASSET PEJER
+bool CheckTransferOwnerTx(const CTxOut& txOut);// OP_PEJECOIN_ASSET PEJET
 
 //! Check the Encoded hash and make sure it is either an IPFS hash or a OIP hash
 bool CheckEncoded(const std::string& hash, std::string& strError);
@@ -580,4 +579,4 @@ bool ContextualCheckReissueAsset(CAssetsCache* assetCache, const CReissueAsset& 
 bool ContextualCheckUniqueAssetTx(CAssetsCache* assetCache, std::string& strError, const CTransaction& tx);
 bool ContextualCheckUniqueAsset(CAssetsCache* assetCache, const CNewAsset& unique_asset, std::string& strError);
 
-#endif //FRENCOIN_ASSET_PROTOCOL_H
+#endif //PEJECOINCOIN_ASSET_PROTOCOL_H

@@ -1,4 +1,4 @@
-Source: fren
+Source: pejecoin
 Section: utils
 Priority: optional
 Maintainer: Matt Corallo <matt@mattcorallo.com>
@@ -26,45 +26,45 @@ Build-Depends: debhelper,
  python,
  libzmq3-dev
 Standards-Version: 3.9.2
-Homepage: https://frencoin.org/
-Vcs-Git: git://github.com/Apushii/Frencoin.git
-Vcs-Browser: https://github.com/Apushii/Frencoin
+Homepage: https://pejecoin.org/
+Vcs-Git: git://github.com/PejecoinBlockchain/Pejecoin.git
+Vcs-Browser: https://github.com/PejecoinBlockchain/Pejecoin
 
-Package: frend
+Package: pejecoind
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: peer-to-peer network based digital currency - daemon
- Fren is a free open source peer-to-peer electronic cash system that
+ Pejecoin is a free open source peer-to-peer electronic cash system that
  is completely decentralized, without the need for a central server or
  trusted parties.  Users hold the crypto keys to their own money and
  transact directly with each other, with the help of a P2P network to
  check for double-spending.
  .
- This package provides the daemon, frend, and the CLI tool
- fren-cli to interact with the daemon.
+ This package provides the daemon, pejecoind, and the CLI tool
+ pejecoin-cli to interact with the daemon.
 
-Package: fren-qt
+Package: pejecoin-qt
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: peer-to-peer network based digital currency - Qt GUI
- Fren is a free open source peer-to-peer electronic cash system that
+ Pejecoin is a free open source peer-to-peer electronic cash system that
  is completely decentralized, without the need for a central server or
  trusted parties.  Users hold the crypto keys to their own money and
  transact directly with each other, with the help of a P2P network to
  check for double-spending.
  .
- This package provides Fren-Qt, a GUI for Fren based on Qt.
+ This package provides Pejecoin-Qt, a GUI for Pejecoin based on Qt.
 
-Package: fren-tx
+Package: pejecoin-tx
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: peer-to-peer digital currency - standalone transaction tool
- Fren is a free open source peer-to-peer electronic cash system that
+ Pejecoin is a free open source peer-to-peer electronic cash system that
  is completely decentralized, without the need for a central server or
  trusted parties.  Users hold the crypto keys to their own money and
  transact directly with each other, with the help of a P2P network to
  check for double-spending.
  .
- This package provides fren-tx, a command-line transaction creation
- tool which can be used without a fren daemon.  Some means of
+ This package provides pejecoin-tx, a command-line transaction creation
+ tool which can be used without a pejecoin daemon.  Some means of
  exchanging minimal transaction data with peers is still required.

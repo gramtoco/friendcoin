@@ -1,12 +1,11 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_RPCCLIENT_H
-#define FREN_RPCCLIENT_H
+#ifndef PEJECOIN_RPCCLIENT_H
+#define PEJECOIN_RPCCLIENT_H
 
 #include <univalue.h>
 
@@ -21,4 +20,4 @@ UniValue RPCConvertNamedValues(const std::string& strMethod, const std::vector<s
  */
 UniValue ParseNonRFCJSONValue(const std::string& strVal);
 
-#endif // FREN_RPCCLIENT_H
+#endif // PEJECOIN_RPCCLIENT_H

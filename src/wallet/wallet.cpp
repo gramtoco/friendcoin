@@ -1,7 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2021 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2021 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -1701,7 +1700,7 @@ void CWalletTx::GetAmounts(std::list<COutputEntry>& listReceived,
                 listReceived.push_back(output);
         }
 
-        /** FRENS START */
+        /** PEJE START */
         if (AreAssetsDeployed()) {
             if (txout.scriptPubKey.IsAssetScript()) {
                 CAssetOutputEntry assetoutput;
@@ -1716,7 +1715,7 @@ void CWalletTx::GetAmounts(std::list<COutputEntry>& listReceived,
                     assetsReceived.emplace_back(assetoutput);
             }
         }
-        /** FRENS END */
+        /** PEJE END */
     }
 
 }
@@ -2320,7 +2319,7 @@ void CWallet::AvailableCoinsWithAssets(std::vector<COutput> &vCoins, std::map<st
     AvailableCoinsAll(vCoins, mapAssetCoins, true, AreAssetsDeployed(), fOnlySafe, coinControl, nMinimumAmount, nMaximumAmount, nMinimumSumAmount, nMaximumCount, nMinDepth, nMaxDepth);
 }
 
-void CWallet::AvailableCoinsAll(std::vector<COutput>& vCoins, std::map<std::string, std::vector<COutput> >& mapAssetCoins, bool fGetFRENS, bool fGetAssets, bool fOnlySafe, const CCoinControl *coinControl, const CAmount& nMinimumAmount, const CAmount& nMaximumAmount, const CAmount& nMinimumSumAmount, const uint64_t& nMaximumCount, const int& nMinDepth, const int& nMaxDepth) const {
+void CWallet::AvailableCoinsAll(std::vector<COutput>& vCoins, std::map<std::string, std::vector<COutput> >& mapAssetCoins, bool fGetPEJE, bool fGetAssets, bool fOnlySafe, const CCoinControl *coinControl, const CAmount& nMinimumAmount, const CAmount& nMaximumAmount, const CAmount& nMinimumSumAmount, const uint64_t& nMaximumCount, const int& nMinDepth, const int& nMaxDepth) const {
     vCoins.clear();
 
     {
@@ -2328,8 +2327,8 @@ void CWallet::AvailableCoinsAll(std::vector<COutput>& vCoins, std::map<std::stri
 
         CAmount nTotal = 0;
 
-        /** FRENS START */
-        bool fFRENSLimitHit = false;
+        /** PEJE START */
+        bool fPEJELimitHit = false;
         // A set of the hashes that have already been used
         std::set<uint256> usedMempoolHashes;
 
@@ -2474,11 +2473,11 @@ void CWallet::AvailableCoinsAll(std::vector<COutput>& vCoins, std::map<std::stri
                     }
                 }
 
-                if (fGetFRENS) { // Looking for FRENS Tx OutPoints Only
-                    if (fFRENSLimitHit) // We hit our limit
+                if (fGetPEJE) { // Looking for PEJE Tx OutPoints Only
+                    if (fPEJELimitHit) // We hit our limit
                         continue;
 
-                    // We only want FRENS OutPoints. Don't include Asset OutPoints
+                    // We only want PEJE OutPoints. Don't include Asset OutPoints
                     if (isAssetScript)
                         continue;
 
@@ -2489,23 +2488,23 @@ void CWallet::AvailableCoinsAll(std::vector<COutput>& vCoins, std::map<std::stri
                         nTotal += pcoin->tx->vout[i].nValue;
 
                         if (nTotal >= nMinimumSumAmount) {
-                            fFRENSLimitHit = true;
+                            fPEJELimitHit = true;
                         }
                     }
 
                     // Checks the maximum number of UTXO's.
                     if (nMaximumCount > 0 && vCoins.size() >= nMaximumCount) {
-                        fFRENSLimitHit = true;
+                        fPEJELimitHit = true;
                     }
                     continue;
                 }
             }
         }
-        /** FRENS END */
+        /** PEJE END */
     }
 }
 
-/** FRENS START */
+/** PEJE START */
 
 std::map<CTxDestination, std::vector<COutput>> CWallet::ListAssets() const
 {
@@ -2557,7 +2556,7 @@ std::map<CTxDestination, std::vector<COutput>> CWallet::ListAssets() const
     return result;
 }
 
-/** FRENS END */
+/** PEJE END */
 
 std::map<CTxDestination, std::vector<COutput>> CWallet::ListCoins() const
 {
@@ -2889,7 +2888,7 @@ bool CWallet::SelectCoins(const std::vector<COutput>& vAvailableCoins, const CAm
     return res;
 }
 
-/** FRENS START */
+/** PEJE START */
 bool CWallet::CreateNewChangeAddress(CReserveKey& reservekey, CKeyID& keyID, std::string& strFailReason)
 {
     // Called with coin control doesn't have a change_address
@@ -3119,7 +3118,7 @@ bool CWallet::SelectAssets(const std::map<std::string, std::vector<COutput> >& m
     return true;
 }
 
-/** FRENS END */
+/** PEJE END */
 
 bool CWallet::SignTransaction(CMutableTransaction &tx)
 {
@@ -3255,7 +3254,7 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
                                    bool fTransferAsset, bool fReissueAsset, const CReissueAsset& reissueAsset,
                                    const AssetType& assetType, bool sign)
 {
-    /** FRENS START */
+    /** PEJE START */
     if (!AreAssetsDeployed() && (fTransferAsset || fNewAsset || fReissueAsset))
         return false;
 
@@ -3267,7 +3266,7 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
 
     if (fReissueAsset && (reissueAsset.IsNull() || !IsValidDestination(destination)))
         return error("%s : Tried reissuing an asset and the reissue data was null or the destination was invalid", __func__);
-    /** FRENS END */
+    /** PEJE END */
 
     CAmount nValue = 0;
     std::map<std::string, CAmount> mapAssetValue;
@@ -3275,7 +3274,7 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
     unsigned int nSubtractFeeFromAmount = 0;
     for (const auto& recipient : vecSend)
     {
-        /** FRENS START */
+        /** PEJE START */
         if (fTransferAsset || fReissueAsset || assetType == AssetType::SUB || assetType == AssetType::UNIQUE || assetType == AssetType::MSGCHANNEL || assetType == AssetType::SUB_QUALIFIER || assetType == AssetType::RESTRICTED) {
             CAssetTransfer assetTransfer;
             std::string address;
@@ -3291,7 +3290,7 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
                 mapAssetValue[assetTransfer.strName] += assetTransfer.nAmount;
             }
         }
-        /** FRENS END */
+        /** PEJE END */
 
         if (nValue < 0 || recipient.nAmount < 0)
         {
@@ -3353,17 +3352,17 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
         std::set<CInputCoin> setAssets;
         LOCK2(cs_main, cs_wallet);
         {
-            /** FRENS START */
+            /** PEJE START */
             std::vector<COutput> vAvailableCoins;
             std::map<std::string, std::vector<COutput> > mapAssetCoins;
             if (fTransferAsset || fReissueAsset || assetType == AssetType::SUB || assetType == AssetType::UNIQUE || assetType == AssetType::MSGCHANNEL || assetType == AssetType::SUB_QUALIFIER || assetType == AssetType::RESTRICTED)
                 AvailableCoinsWithAssets(vAvailableCoins, mapAssetCoins, true, &coin_control);
             else
                 AvailableCoins(vAvailableCoins, true, &coin_control);
-            /** FRENS END */
+            /** PEJE END */
             // Create change script that will be used if we need change
             // TODO: pass in scriptChange instead of reservekey so
-            // change transaction isn't always pay-to-fren-address
+            // change transaction isn't always pay-to-pejecoin-address
             CScript scriptChange;
             CScript assetScriptChange;
 
@@ -3380,13 +3379,13 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
                 scriptChange = GetScriptForDestination(keyID);
             }
 
-            /** FRENS START */
+            /** PEJE START */
             if (!boost::get<CNoDestination>(&coin_control.assetDestChange)) {
                 assetScriptChange = GetScriptForDestination(coin_control.assetDestChange);
             } else {
                 assetScriptChange = scriptChange;
             }
-            /** FRENS END */
+            /** PEJE END */
 
             CTxOut change_prototype_txout(0, scriptChange);
             size_t change_prototype_size = GetSerializeSize(change_prototype_txout, SER_DISK, 0);
@@ -3416,14 +3415,14 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
                 {
                     CTxOut txout(recipient.nAmount, recipient.scriptPubKey);
 
-                    /** FRENS START */
-                    // Check to see if you need to make an asset data outpoint OP_FRENS_ASSET data
+                    /** PEJE START */
+                    // Check to see if you need to make an asset data outpoint OP_PEJE_ASSET data
                     if (recipient.scriptPubKey.IsNullAssetTxDataScript()) {
                         assert(txout.nValue == 0);
                         txNew.vout.push_back(txout);
                         continue;
                     }
-                    /** FRENS END */
+                    /** PEJE END */
 
                     if (recipient.fSubtractFeeFromAmount)
                     {
@@ -3437,7 +3436,7 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
                         }
                     }
 
-                    if (IsDust(txout, ::dustRelayFee) && !IsScriptTransferAsset(recipient.scriptPubKey)) /** FRENS START */ /** FRENS END */
+                    if (IsDust(txout, ::dustRelayFee) && !IsScriptTransferAsset(recipient.scriptPubKey)) /** PEJE START */ /** PEJE END */
                     {
                         if (recipient.fSubtractFeeFromAmount && nFeeRet > 0)
                         {
@@ -3465,7 +3464,7 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
                         return false;
                     }
 
-                    /** FRENS START */
+                    /** PEJE START */
                     if (AreAssetsDeployed()) {
                         setAssets.clear();
                         mapAssetsIn.clear();
@@ -3474,12 +3473,12 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
                             return false;
                         }
                     }
-                    /** FRENS END */
+                    /** PEJE END */
                 }
 
                 const CAmount nChange = nValueIn - nValueToSelect;
 
-                /** FRENS START */
+                /** PEJE START */
                 if (AreAssetsDeployed()) {
                     // Add the change for the assets
                     std::map<std::string, CAmount> mapAssetChange;
@@ -3566,7 +3565,7 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
                         }
                     }
                 }
-                /** FRENS END */
+                /** PEJE END */
 
                 if (nChange > 0)
                 {
@@ -3600,7 +3599,7 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
                     nChangePosInOut = -1;
                 }
 
-                /** FRENS START */
+                /** PEJE START */
                 if (AreAssetsDeployed()) {
                     if (fNewAsset) {
                         for (auto asset : assets) {
@@ -3629,7 +3628,7 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
                         txNew.vout.push_back(reissueTxOut);
                     }
                 }
-                /** FRENS END */
+                /** PEJE END */
 
                 // Fill vin
                 //
@@ -3647,13 +3646,13 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
                     txNew.vin.push_back(CTxIn(coin.outpoint,CScript(),
                                               nSequence));
 
-                /** FRENS START */
+                /** PEJE START */
                 if (AreAssetsDeployed()) {
                     for (const auto &asset : setAssets)
                         txNew.vin.push_back(CTxIn(asset.outpoint, CScript(),
                                                   nSequence));
                 }
-                /** FRENS END */
+                /** PEJE END */
 
                 // Add the new asset inputs into the tempSet so the dummysigntx will add the correct amount of sigsß
                 std::set<CInputCoin> tempSet = setCoins;
@@ -3765,7 +3764,7 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
 
                 nIn++;
             }
-            /** FRENS START */
+            /** PEJE START */
             if (AreAssetsDeployed()) {
                 for (const auto &asset : setAssets) {
                     const CScript &scriptPubKey = asset.txout.scriptPubKey;
@@ -3783,7 +3782,7 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
                     nIn++;
                 }
             }
-            /** FRENS END */
+            /** PEJE END */
         }
 
         // Embed the constructed transaction data in wtxNew.

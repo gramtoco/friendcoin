@@ -1,6 +1,5 @@
 // Copyright (c) 2014-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -215,13 +214,13 @@ int CBase58Data::CompareTo(const CBase58Data& b58) const
 namespace
 {
 
-class CFrenAddressVisitor : public boost::static_visitor<bool>
+class CPejecoinAddressVisitor : public boost::static_visitor<bool>
 {
 private:
-    CFrenAddress* addr;
+    CPejecoinAddress* addr;
 
 public:
-    explicit CFrenAddressVisitor(CFrenAddress* addrIn) : addr(addrIn) {}
+    explicit CPejecoinAddressVisitor(CPejecoinAddress* addrIn) : addr(addrIn) {}
 
     bool operator()(const CKeyID& id) const { return addr->Set(id); }
     bool operator()(const CScriptID& id) const { return addr->Set(id); }
@@ -230,29 +229,29 @@ public:
 
 } // namespace
 
-bool CFrenAddress::Set(const CKeyID& id)
+bool CPejecoinAddress::Set(const CKeyID& id)
 {
     SetData(GetParams().Base58Prefix(CChainParams::PUBKEY_ADDRESS), &id, 20);
     return true;
 }
 
-bool CFrenAddress::Set(const CScriptID& id)
+bool CPejecoinAddress::Set(const CScriptID& id)
 {
     SetData(GetParams().Base58Prefix(CChainParams::SCRIPT_ADDRESS), &id, 20);
     return true;
 }
 
-bool CFrenAddress::Set(const CTxDestination& dest)
+bool CPejecoinAddress::Set(const CTxDestination& dest)
 {
-    return boost::apply_visitor(CFrenAddressVisitor(this), dest);
+    return boost::apply_visitor(CPejecoinAddressVisitor(this), dest);
 }
 
-bool CFrenAddress::IsValid() const
+bool CPejecoinAddress::IsValid() const
 {
     return IsValid(GetParams());
 }
 
-bool CFrenAddress::IsValid(const CChainParams& params) const
+bool CPejecoinAddress::IsValid(const CChainParams& params) const
 {
     bool fCorrectSize = vchData.size() == 20;
     bool fKnownVersion = vchVersion == params.Base58Prefix(CChainParams::PUBKEY_ADDRESS) ||
@@ -260,7 +259,7 @@ bool CFrenAddress::IsValid(const CChainParams& params) const
     return fCorrectSize && fKnownVersion;
 }
 
-CTxDestination CFrenAddress::Get() const
+CTxDestination CPejecoinAddress::Get() const
 {
     if (!IsValid())
         return CNoDestination();
@@ -274,7 +273,7 @@ CTxDestination CFrenAddress::Get() const
         return CNoDestination();
 }
 
-bool CFrenAddress::GetIndexKey(uint160& hashBytes, int& type) const
+bool CPejecoinAddress::GetIndexKey(uint160& hashBytes, int& type) const
 {
     if (!IsValid()) {
         return false;
@@ -291,7 +290,7 @@ bool CFrenAddress::GetIndexKey(uint160& hashBytes, int& type) const
     return false;
 }
 
-void CFrenSecret::SetKey(const CKey& vchSecret)
+void CPejecoinSecret::SetKey(const CKey& vchSecret)
 {
     assert(vchSecret.IsValid());
     SetData(GetParams().Base58Prefix(CChainParams::SECRET_KEY), vchSecret.begin(), vchSecret.size());
@@ -299,7 +298,7 @@ void CFrenSecret::SetKey(const CKey& vchSecret)
         vchData.push_back(1);
 }
 
-CKey CFrenSecret::GetKey()
+CKey CPejecoinSecret::GetKey()
 {
     CKey ret;
     assert(vchData.size() >= 32);
@@ -307,41 +306,41 @@ CKey CFrenSecret::GetKey()
     return ret;
 }
 
-bool CFrenSecret::IsValid() const
+bool CPejecoinSecret::IsValid() const
 {
     bool fExpectedFormat = vchData.size() == 32 || (vchData.size() == 33 && vchData[32] == 1);
     bool fCorrectVersion = vchVersion == GetParams().Base58Prefix(CChainParams::SECRET_KEY);
     return fExpectedFormat && fCorrectVersion;
 }
 
-bool CFrenSecret::SetString(const char* pszSecret)
+bool CPejecoinSecret::SetString(const char* pszSecret)
 {
     return CBase58Data::SetString(pszSecret) && IsValid();
 }
 
-bool CFrenSecret::SetString(const std::string& strSecret)
+bool CPejecoinSecret::SetString(const std::string& strSecret)
 {
     return SetString(strSecret.c_str());
 }
 
 std::string EncodeDestination(const CTxDestination& dest)
 {
-    CFrenAddress addr(dest);
+    CPejecoinAddress addr(dest);
     if (!addr.IsValid()) return "";
     return addr.ToString();
 }
 
 CTxDestination DecodeDestination(const std::string& str)
 {
-    return CFrenAddress(str).Get();
+    return CPejecoinAddress(str).Get();
 }
 
 bool IsValidDestinationString(const std::string& str, const CChainParams& params)
 {
-    return CFrenAddress(str).IsValid(params);
+    return CPejecoinAddress(str).IsValid(params);
 }
 
 bool IsValidDestinationString(const std::string& str)
 {
-    return CFrenAddress(str).IsValid();
+    return CPejecoinAddress(str).IsValid();
 }

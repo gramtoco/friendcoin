@@ -1,16 +1,15 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2021 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2021 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_QT_CURRENCYUNITS_H
-#define FREN_QT_CURRENCYUNITS_H
+#ifndef PEJECOIN_QT_CURRENCYUNITS_H
+#define PEJECOIN_QT_CURRENCYUNITS_H
 
 #include <QString>
 #include <array>
 
-/** Currency unit definitions. Stores basic title and symbol for a frens swap asset,
+/** Currency unit definitions. Stores basic title and symbol for a peje swap asset,
  * as well as how many decimals to format the dispaly with.
 */
 struct CurrencyUnitDetails
@@ -31,4 +30,4 @@ public:
     }
 };
 
-#endif // FREN_QT_CURRENCYUNITS_H
+#endif // PEJECOIN_QT_CURRENCYUNITS_H

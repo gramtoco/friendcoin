@@ -1,15 +1,14 @@
 # Copyright (c) 2013-2016 The Bitcoin Core developers
-# Copyright (c) 2017-2019 The Raven Core developers
-# Copyright (c) 2023 The Fren Core developers
+# Copyright (c) 2017-2019 The Pejecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-TESTS += test/test_fren
-bin_PROGRAMS += test/test_fren
-noinst_PROGRAMS += test/test_fren_fuzzy
-noinst_PROGRAMS += test/test_fren_hash
+TESTS += test/test_pejecoin
+bin_PROGRAMS += test/test_pejecoin
+noinst_PROGRAMS += test/test_pejecoin_fuzzy
+noinst_PROGRAMS += test/test_pejecoin_hash
 TEST_SRCDIR = test
-TEST_BINARY=test/test_fren$(EXEEXT)
+TEST_BINARY=test/test_pejecoin$(EXEEXT)
 
 JSON_TEST_FILES = \
   test/data/script_tests.json \
@@ -24,8 +23,8 @@ RAW_TEST_FILES =
 
 GENERATED_TEST_FILES = $(JSON_TEST_FILES:.json=.json.h) $(RAW_TEST_FILES:.raw=.raw.h)
 
-# test_fren binary #
-FREN_TESTS =\
+# test_pejecoin binary #
+PEJECOIN_TESTS =\
   test/assets/asset_tests.cpp \
   test/assets/serialization_tests.cpp \
   test/assets/asset_tx_tests.cpp \
@@ -90,9 +89,9 @@ FREN_TESTS =\
   test/sigopcount_tests.cpp \
   test/skiplist_tests.cpp \
   test/streams_tests.cpp \
-  test/test_fren.cpp \
-  test/test_fren.h \
-  test/test_fren_main.cpp \
+  test/test_pejecoin.cpp \
+  test/test_pejecoin.h \
+  test/test_pejecoin_main.cpp \
   test/timedata_tests.cpp \
   test/torcontrol_tests.cpp \
   test/transaction_tests.cpp \
@@ -103,7 +102,7 @@ FREN_TESTS =\
   test/util_tests.cpp
 
 if ENABLE_WALLET
-FREN_TESTS += \
+PEJECOIN_TESTS += \
   wallet/test/wallet_test_fixture.cpp \
   wallet/test/wallet_test_fixture.h \
   wallet/test/accounting_tests.cpp \
@@ -111,77 +110,77 @@ FREN_TESTS += \
   wallet/test/crypto_tests.cpp
 endif
 
-test_test_fren_SOURCES = $(FREN_TESTS) $(JSON_TEST_FILES) $(RAW_TEST_FILES)
-test_test_fren_CPPFLAGS = $(AM_CPPFLAGS) $(FREN_INCLUDES) -I$(builddir)/test/ $(TESTDEFS) $(EVENT_CFLAGS)
-test_test_fren_LDADD =
+test_test_pejecoin_SOURCES = $(PEJECOIN_TESTS) $(JSON_TEST_FILES) $(RAW_TEST_FILES)
+test_test_pejecoin_CPPFLAGS = $(AM_CPPFLAGS) $(PEJECOIN_INCLUDES) -I$(builddir)/test/ $(TESTDEFS) $(EVENT_CFLAGS)
+test_test_pejecoin_LDADD =
 if ENABLE_WALLET
-test_test_fren_LDADD += $(LIBFREN_WALLET)
+test_test_pejecoin_LDADD += $(LIBPEJECOIN_WALLET)
 endif
-test_test_fren_LDADD += $(LIBFREN_SERVER) $(LIBFREN_CLI) $(LIBFREN_COMMON) $(LIBFREN_UTIL) $(LIBFREN_CONSENSUS) $(LIBFREN_CRYPTO) $(LIBUNIVALUE) \
+test_test_pejecoin_LDADD += $(LIBPEJECOIN_SERVER) $(LIBPEJECOIN_CLI) $(LIBPEJECOIN_COMMON) $(LIBPEJECOIN_UTIL) $(LIBPEJECOIN_CONSENSUS) $(LIBPEJECOIN_CRYPTO) $(LIBUNIVALUE) \
   $(LIBLEVELDB) $(LIBLEVELDB_SSE42) $(LIBMEMENV) $(BOOST_LIBS) $(BOOST_UNIT_TEST_FRAMEWORK_LIB) $(LIBSECP256K1) $(EVENT_LIBS) $(EVENT_PTHREADS_LIBS)
-test_test_fren_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+test_test_pejecoin_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 
-test_test_fren_LDADD += $(LIBFREN_CONSENSUS) $(LIBFREN_CRYPTO) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS)
-test_test_fren_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) -static
+test_test_pejecoin_LDADD += $(LIBPEJECOIN_CONSENSUS) $(LIBPEJECOIN_CRYPTO) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS)
+test_test_pejecoin_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) -static
 
 if ENABLE_ZMQ
-test_test_fren_LDADD += $(ZMQ_LIBS)
+test_test_pejecoin_LDADD += $(ZMQ_LIBS)
 endif
 #
 
-# test_fren_fuzzy binary #
-test_test_fren_fuzzy_SOURCES = test/test_fren_fuzzy.cpp
-test_test_fren_fuzzy_CPPFLAGS = $(AM_CPPFLAGS) $(FREN_INCLUDES)
-test_test_fren_fuzzy_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-test_test_fren_fuzzy_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# test_pejecoin_fuzzy binary #
+test_test_pejecoin_fuzzy_SOURCES = test/test_pejecoin_fuzzy.cpp
+test_test_pejecoin_fuzzy_CPPFLAGS = $(AM_CPPFLAGS) $(PEJECOIN_INCLUDES)
+test_test_pejecoin_fuzzy_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+test_test_pejecoin_fuzzy_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
-test_test_fren_fuzzy_LDADD = \
+test_test_pejecoin_fuzzy_LDADD = \
   $(LIBUNIVALUE) \
-  $(LIBFREN_SERVER) \
-  $(LIBFREN_COMMON) \
-  $(LIBFREN_UTIL) \
-  $(LIBFREN_CONSENSUS) \
-  $(LIBFREN_CRYPTO) \
+  $(LIBPEJECOIN_SERVER) \
+  $(LIBPEJECOIN_COMMON) \
+  $(LIBPEJECOIN_UTIL) \
+  $(LIBPEJECOIN_CONSENSUS) \
+  $(LIBPEJECOIN_CRYPTO) \
   $(LIBSECP256K1)
 
-test_test_fren_fuzzy_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
+test_test_pejecoin_fuzzy_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
 #
 
-# test_fren_hash binary #
-test_test_fren_hash_SOURCES = test/test_fren_hash.cpp
-test_test_fren_hash_CPPFLAGS = $(AM_CPPFLAGS) $(FREN_INCLUDES)
-test_test_fren_hash_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-test_test_fren_hash_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_AP_LDFLAGS)
+# test_pejecoin_hash binary #
+test_test_pejecoin_hash_SOURCES = test/test_pejecoin_hash.cpp
+test_test_pejecoin_hash_CPPFLAGS = $(AM_CPPFLAGS) $(PEJECOIN_INCLUDES)
+test_test_pejecoin_hash_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+test_test_pejecoin_hash_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_AP_LDFLAGS)
 
-test_test_fren_hash_LDADD = \
+test_test_pejecoin_hash_LDADD = \
   $(LIBUNIVALUE) \
-  $(LIBFREN_COMMON) \
-  $(LIBFREN_UTIL) \
-  $(LIBFREN_CONSENSUS) \
-  $(LIBFREN_CRYPTO)
+  $(LIBPEJECOIN_COMMON) \
+  $(LIBPEJECOIN_UTIL) \
+  $(LIBPEJECOIN_CONSENSUS) \
+  $(LIBPEJECOIN_CRYPTO)
 
-test_test_fren_hash_LDADD += $(CRYPTO_LIBS)
+test_test_pejecoin_hash_LDADD += $(CRYPTO_LIBS)
 #
 
-nodist_test_test_fren_SOURCES = $(GENERATED_TEST_FILES)
+nodist_test_test_pejecoin_SOURCES = $(GENERATED_TEST_FILES)
 
-$(FREN_TESTS): $(GENERATED_TEST_FILES)
+$(PEJECOIN_TESTS): $(GENERATED_TEST_FILES)
 
-CLEAN_FREN_TEST = test/*.gcda test/*.gcno $(GENERATED_TEST_FILES)
+CLEAN_PEJECOIN_TEST = test/*.gcda test/*.gcno $(GENERATED_TEST_FILES)
 
-CLEANFILES += $(CLEAN_FREN_TEST)
+CLEANFILES += $(CLEAN_PEJECOIN_TEST)
 
-fren_test: $(TEST_BINARY)
+pejecoin_test: $(TEST_BINARY)
 
-fren_test_check: $(TEST_BINARY) FORCE
+pejecoin_test_check: $(TEST_BINARY) FORCE
 	$(MAKE) check-TESTS TESTS=$^
 
-fren_test_clean : FORCE
-	rm -f $(CLEAN_FREN_TEST) $(test_test_fren_OBJECTS) $(TEST_BINARY)
+pejecoin_test_clean : FORCE
+	rm -f $(CLEAN_PEJECOIN_TEST) $(test_test_pejecoin_OBJECTS) $(TEST_BINARY)
 
 check-local:
-	@echo "Running test/util/fren-util-test.py..."
-	$(PYTHON) $(top_builddir)/test/util/fren-util-test.py
+	@echo "Running test/util/pejecoin-util-test.py..."
+	$(PYTHON) $(top_builddir)/test/util/pejecoin-util-test.py
 	$(AM_V_at)$(MAKE) $(AM_MAKEFLAGS) -C secp256k1 check
 if EMBEDDED_UNIVALUE
 	$(AM_V_at)$(MAKE) $(AM_MAKEFLAGS) -C univalue check

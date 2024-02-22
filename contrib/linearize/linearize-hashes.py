@@ -3,8 +3,7 @@
 # linearize-hashes.py:  List blocks in a linear, no-fork version of the chain.
 #
 # Copyright (c) 2013-2016 The Bitcoin Core developers
-# Copyright (c) 2017-2020 The Raven Core developers
-# Copyright (c) 2023 The Fren Core developers
+# Copyright (c) 2017-2020 The Pejecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #
@@ -29,7 +28,7 @@ def hex_switchEndian(s):
 	pairList = [s[i:i+2].encode() for i in range(0, len(s), 2)]
 	return b''.join(pairList[::-1]).decode()
 
-class FrenRPC:
+class PejecoinRPC:
 	def __init__(self, host, port, username, password):
 		authpair = "%s:%s" % (username, password)
 		authpair = authpair.encode('utf-8')
@@ -71,7 +70,7 @@ class FrenRPC:
 		return 'error' in resp_obj and resp_obj['error'] is not None
 
 def get_block_hashes(settings, max_blocks_per_call=10000):
-	rpc = FrenRPC(settings['host'], settings['port'],
+	rpc = PejecoinRPC(settings['host'], settings['port'],
 			 settings['rpcuser'], settings['rpcpassword'])
 
 	height = settings['min_height']
@@ -127,7 +126,7 @@ if __name__ == '__main__':
 	if 'host' not in settings:
 		settings['host'] = '127.0.0.1'
 	if 'port' not in settings:
-		settings['port'] = 4206
+		settings['port'] = 9766
 	if 'min_height' not in settings:
 		settings['min_height'] = 0
 	if 'max_height' not in settings:

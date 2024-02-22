@@ -1,11 +1,10 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2021 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2021 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_QT_GUICONSTANTS_H
-#define FREN_QT_GUICONSTANTS_H
+#ifndef PEJECOIN_QT_GUICONSTANTS_H
+#define PEJECOIN_QT_GUICONSTANTS_H
 
 /* Milliseconds between model updates */
 static const int MODEL_UPDATE_DELAY = 250;
@@ -13,7 +12,7 @@ static const int MODEL_UPDATE_DELAY = 250;
 /* AskPassphraseDialog -- Maximum passphrase length */
 static const int MAX_PASSPHRASE_SIZE = 1024;
 
-/* FrenGUI -- Size of icons in status bar */
+/* PejecoinGUI -- Size of icons in status bar */
 static const int STATUSBAR_ICONSIZE = 16;
 
 static const bool DEFAULT_SPLASHSCREEN = true;
@@ -37,28 +36,28 @@ static const bool DEFAULT_SPLASHSCREEN = true;
 /* Widget Background color - default color */
 #define COLOR_WHITE QColor(255, 255, 255)
 
-#define COLOR_WALLETFRAME_SHADOW QColor(0,0,0,71)
+#define COLOR_WALLETFRAME_SHADOW QColor(153,106,0)
 
 /* Color of labels */
-#define COLOR_LABELS QColor("#4960ad")
+#define COLOR_LABELS QColor("#BE840A")
 
 /** LIGHT MODE */
 /* Background color, very light gray */
 #define COLOR_BACKGROUND_LIGHT QColor("#fbfbfe")
-/* Frencoin dark orange */
+/* Pejecoin dark orange */
 #define COLOR_DARK_ORANGE QColor("#f05239")
-/* Frencoin light orange */
+/* Pejecoin light orange */
 #define COLOR_LIGHT_ORANGE QColor("#f79433")
-/* Frencoin dark blue */
-#define COLOR_DARK_BLUE QColor("#384192")
-/* Frencoin light blue */
-#define COLOR_LIGHT_BLUE QColor("#5874cf")
-/* Frencoin asset text */
+/* Pejecoin dark blue */
+#define COLOR_DARK_BLUE QColor("#996a00")
+/* Pejecoin light blue */
+#define COLOR_LIGHT_BLUE QColor("#BE840A")
+/* Pejecoin asset text */
 #define COLOR_ASSET_TEXT QColor(255, 255, 255)
-/* Frencoin shadow color - light mode */
+/* Pejecoin shadow color - light mode */
 #define COLOR_SHADOW_LIGHT QColor("#e1e6f3")
 /* Toolbar not selected text color */
-#define COLOR_TOOLBAR_NOT_SELECTED_TEXT QColor("#a5b7f3")
+#define COLOR_TOOLBAR_NOT_SELECTED_TEXT QColor("#fbfbfe")
 /* Toolbar selected text color */
 #define COLOR_TOOLBAR_SELECTED_TEXT COLOR_WHITE
 /* Send entries background color */
@@ -68,19 +67,19 @@ static const bool DEFAULT_SPLASHSCREEN = true;
 /** DARK MODE */
 /* Widget background color, dark mode */
 #define COLOR_WIDGET_BACKGROUND_DARK QColor("#1c2535")
-/* Frencoin shadow color - dark mode */
+/* Pejecoin shadow color - dark mode */
 #define COLOR_SHADOW_DARK QColor("#0c1b3d")
-/* Frencoin Light blue - dark mode - dark mode */
+/* Pejecoin Light blue - dark mode - dark mode */
 #define COLOR_LIGHT_BLUE_DARK QColor("#1e2636")
-/* Frencoin Dark blue - dark mode - dark mode */
+/* Pejecoin Dark blue - dark mode - dark mode */
 #define COLOR_DARK_BLUE_DARK QColor("#0b1018")
 /* Pricing widget background color */
 #define COLOR_PRICING_WIDGET QColor("#161e2d")
-/* Frencoin dark mode administrator background color */
+/* Pejecoin dark mode administrator background color */
 #define COLOR_ADMIN_CARD_DARK COLOR_BLACK
-/* Frencoin dark mode regular asset background color */
+/* Pejecoin dark mode regular asset background color */
 #define COLOR_REGULAR_CARD_DARK_BLUE_DARK_MODE QColor("#06132a")
-/* Frencoin dark mode regular asset background color */
+/* Pejecoin dark mode regular asset background color */
 #define COLOR_REGULAR_CARD_LIGHT_BLUE_DARK_MODE QColor("#0e1b3b")
 /* Toolbar not selected text color */
 #define COLOR_TOOLBAR_NOT_SELECTED_TEXT_DARK_MODE QColor("#6c80c5")
@@ -90,8 +89,8 @@ static const bool DEFAULT_SPLASHSCREEN = true;
 #define COLOR_SENDENTRIES_BACKGROUND_DARK QColor("#1c2535")
 
 
-/* Frencoin label color as a string */
-#define STRING_LABEL_COLOR "color: #4960ad"
+/* Pejecoin label color as a string */
+#define STRING_LABEL_COLOR "color: #BE840A"
 #define STRING_LABEL_COLOR_WARNING "color: #FF8080"
 
 
@@ -115,15 +114,15 @@ static const int MAX_URI_LENGTH = 255;
 /* Number of frames in spinner animation */
 #define SPINNER_FRAMES 36
 
-#define QAPP_ORG_NAME "Fren"
-#define QAPP_ORG_DOMAIN "fren.org"
-#define QAPP_APP_NAME_DEFAULT "Fren-Qt"
-#define QAPP_APP_NAME_TESTNET "Fren-Qt-testnet"
+#define QAPP_ORG_NAME "Pejecoin"
+#define QAPP_ORG_DOMAIN "pejecoin.org"
+#define QAPP_APP_NAME_DEFAULT "Pejecoin-Qt"
+#define QAPP_APP_NAME_TESTNET "Pejecoin-Qt-testnet"
 
-/* Default third party browser urls separate with | */
-#define DEFAULT_THIRD_PARTY_BROWSERS "https://explorer.frencoin.org/tx/%s"
+/* Default third party browser urls */
+#define DEFAULT_THIRD_PARTY_BROWSERS "https://api.pejecoin.org/tx/%s|https://peje.cryptoscope.io/tx/?txid=%s|https://blockbook.pejecoin.org/tx/%s|https://explorer.mangofarmassets.com/tx/%s|https://www.assetsexplorer.com/tx/%s|https://explorer.pejeland.org/tx/%s"
 
 /* Default IPFS viewer */
 #define DEFAULT_IPFS_VIEWER "https://ipfs.io/ipfs/%s"
 
-#endif // FREN_QT_GUICONSTANTS_H
+#endif // PEJECOIN_QT_GUICONSTANTS_H

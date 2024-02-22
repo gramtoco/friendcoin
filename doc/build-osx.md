@@ -38,21 +38,26 @@ like so:
 ./contrib/install_db4.sh .
 ```
 
-from the root of the repository.
+from the root of the repository. This command will print instructions at the very end. It will give you an export command, as well as a configure command you will use in the future. Running the export command will give you no output. But it is an important step. The configure command will be used in place of the ./configure -- later on.
+If you used the export command, your configure command will probably be this: 
 
-**Note**: You only need Berkeley DB if the wallet is enabled (see [*Disable-wallet mode*](/doc/build-osx.md#disable-wallet-mode)).
+```shell
+./configure BDB_LIBS="-L${BDB_PREFIX}/lib -ldb_cxx-4.8" BDB_CFLAGS="-I${BDB_PREFIX}/include"
+```
 
-## Build Fren Core
+**Note**: You only need Berkeley DB if the wallet is enabled (see [*Disable-wallet mode*](/doc/build-osx.md#disable-wallet-mode)). Nearly all users want this for compatibility reasons.
 
-1. Clone the Fren Core source code:
+## Build Pejecoin Core
+
+1. Clone the Pejecoin Core source code:
     ```shell
-    git clone https://github.com/Apushii/Frencoin
-    cd Frencoin
+    git clone https://github.com/PejecoinBlockchain/Pejecoin
+    cd Pejecoin
     ```
 
-2.  Build fren-core:
+2.  Build pejecoin-core:
 
-    Configure and build the headless fren binaries as well as the GUI (if Qt is found).
+    Configure and build the headless pejecoin binaries as well as the GUI (if Qt is found).
 
     You can disable the GUI build by passing `--without-gui` to configure.
     ```shell
@@ -61,7 +66,7 @@ from the root of the repository.
     make
     ```
 
-3.  It is recommended to build and run the unit tests:
+3.  It is recommended to build and run the unit tests(This command is most likely broken at the moment, id recommended continuing to the next step):
     ```shell
     make check
     ```
@@ -72,7 +77,7 @@ from the root of the repository.
     ```
 
 ## `disable-wallet` mode
-When the intention is to run only a P2P node without a wallet, Fren Core may be
+When the intention is to run only a P2P node without a wallet, Pejecoin Core may be
 compiled in `disable-wallet` mode with:
 ```shell
 ./configure --disable-wallet
@@ -83,42 +88,42 @@ In this case there is no dependency on Berkeley DB 4.8 and SQLite.
 Mining is also possible in disable-wallet mode using the `getblocktemplate` RPC call.
 
 ## Running
-Fren Core is now available at `./src/frend`
+Pejecoin Core is now available at `./src/pejecoind`
 
 Before running, you may create an empty configuration file:
 ```shell
-mkdir -p "/Users/${USER}/Library/Application Support/Fren"
+mkdir -p "/Users/${USER}/Library/Application Support/Pejecoin"
 
-touch "/Users/${USER}/Library/Application Support/Fren/fren.conf"
+touch "/Users/${USER}/Library/Application Support/Pejecoin/pejecoin.conf"
 
-chmod 600 "/Users/${USER}/Library/Application Support/Fren/fren.conf"
+chmod 600 "/Users/${USER}/Library/Application Support/Pejecoin/pejecoin.conf"
 ```
 
-The first time you run frend, it will start downloading the blockchain. This process could
+The first time you run pejecoind, it will start downloading the blockchain. This process could
 take many hours, or even days on slower than average systems.
 
 You can monitor the download process by looking at the debug.log file:
 ```shell
-tail -f $HOME/Library/Application\ Support/Fren/debug.log
+tail -f $HOME/Library/Application\ Support/Pejecoin/debug.log
 ```
 
 Other commands:
 -------
 
-    ./src/frend -daemon # Starts the fren daemon.
-    ./src/fren-cli --help # Outputs a list of command-line options.
-    ./src/fren-cli help # Outputs a list of RPC commands when the daemon is running.
+    ./src/pejecoind -daemon # Starts the pejecoin daemon.
+    ./src/pejecoin-cli --help # Outputs a list of command-line options.
+    ./src/pejecoin-cli help # Outputs a list of RPC commands when the daemon is running.
 
 Using Qt Creator as IDE
 ------------------------
-You can use Qt Creator as an IDE, for fren development.
+You can use Qt Creator as an IDE, for pejecoin development.
 Download and install the community edition of [Qt Creator](https://www.qt.io/download/).
 Uncheck everything except Qt Creator during the installation process.
 
 1. Make sure you installed everything through Homebrew mentioned above
 2. Do a proper ./configure --enable-debug
 3. In Qt Creator do "New Project" -> Import Project -> Import Existing Project
-4. Enter "fren-qt" as project name, enter src/qt as location
+4. Enter "pejecoin-qt" as project name, enter src/qt as location
 5. Leave the file selection as it is
 6. Confirm the "summary page"
 7. In the "Projects" tab select "Manage Kits..."

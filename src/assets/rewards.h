@@ -1,10 +1,9 @@
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FRENCOIN_REWARDS_H
-#define FRENCOIN_REWARDS_H
+#ifndef PEJECOINCOIN_REWARDS_H
+#define PEJECOINCOIN_REWARDS_H
 
 #include "amount.h"
 #include "tinyformat.h"
@@ -168,4 +167,4 @@ void CheckRewardDistributions(CWallet * p_wallet);
 
 
 
-#endif //FRENCOIN_REWARDS_H
+#endif //PEJECOINCOIN_REWARDS_H

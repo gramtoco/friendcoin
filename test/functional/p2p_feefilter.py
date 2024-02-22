@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2016 The Bitcoin Core developers
-# Copyright (c) 2017-2020 The Raven Core developers
-# Copyright (c) 2023 The Fren Core developers
+# Copyright (c) 2017-2020 The Pejecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -13,7 +12,7 @@ Test processing of feefilter messages.
 
 import time
 from test_framework.mininode import mininode_lock, NodeConnCB, NodeConn, NetworkThread, MsgFeeFilter
-from test_framework.test_framework import FrenTestFramework
+from test_framework.test_framework import PejecoinTestFramework
 from test_framework.util import sync_blocks, p2p_port, Decimal, sync_mempools
 
 def hash_to_hex(hash_data):
@@ -42,7 +41,7 @@ class TestNode(NodeConnCB):
         with mininode_lock:
             self.txinvs = []
 
-class FeeFilterTest(FrenTestFramework):
+class FeeFilterTest(PejecoinTestFramework):
     def set_test_params(self):
         self.num_nodes = 2
 
@@ -60,13 +59,13 @@ class FeeFilterTest(FrenTestFramework):
         NetworkThread().start()
         test_node.wait_for_verack()
 
-        # Test that invs are received for all txs at feerate of 2,000,000 helpers
+        # Test that invs are received for all txs at feerate of 2,000,000 corbies
         node1.settxfee(Decimal("0.02000000"))
         txids = [node1.sendtoaddress(node1.getnewaddress(), 1) for _ in range(3)]
         assert(all_invs_match(txids, test_node))
         test_node.clear_invs()
 
-        # Set a filter of 1,500,000 helpers (must be above 1,000,000 helpers (min fee is enforced)
+        # Set a filter of 1,500,000 corbies (must be above 1,000,000 corbies (min fee is enforced)
         test_node.send_and_ping(MsgFeeFilter(1500000))
 
         # Test that txs are still being received (paying 70 sat/byte)
@@ -74,7 +73,7 @@ class FeeFilterTest(FrenTestFramework):
         assert(all_invs_match(txids, test_node))
         test_node.clear_invs()
 
-        # Change tx fee rate to 1,350,000 helpers and test they are no longer received
+        # Change tx fee rate to 1,350,000 corbies and test they are no longer received
         node1.settxfee(Decimal("0.013500000"))
         [node1.sendtoaddress(node1.getnewaddress(), 1) for _ in range(3)]
         sync_mempools(self.nodes) # must be sure node 0 has received all txs 

@@ -1,12 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_NETMESSAGEMAKER_H
-#define FREN_NETMESSAGEMAKER_H
+#ifndef PEJECOIN_NETMESSAGEMAKER_H
+#define PEJECOIN_NETMESSAGEMAKER_H
 
 #include "net.h"
 #include "serialize.h"
@@ -35,4 +34,4 @@ private:
     const int nVersion;
 };
 
-#endif // FREN_NETMESSAGEMAKER_H
+#endif // PEJECOIN_NETMESSAGEMAKER_H

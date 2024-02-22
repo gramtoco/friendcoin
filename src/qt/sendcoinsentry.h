@@ -1,11 +1,10 @@
 // Copyright (c) 2011-2015 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_QT_SENDCOINSENTRY_H
-#define FREN_QT_SENDCOINSENTRY_H
+#ifndef PEJECOIN_QT_SENDCOINSENTRY_H
+#define PEJECOIN_QT_SENDCOINSENTRY_H
 
 #include "walletmodel.h"
 
@@ -19,7 +18,7 @@ namespace Ui {
 }
 
 /**
- * A single entry in the dialog for sending frens.
+ * A single entry in the dialog for sending pejes.
  * Stacked widget, with different UIs for payment requests
  * with a strong payee identity.
  */
@@ -72,4 +71,4 @@ private:
     bool updateLabel(const QString &address);
 };
 
-#endif // FREN_QT_SENDCOINSENTRY_H
+#endif // PEJECOIN_QT_SENDCOINSENTRY_H

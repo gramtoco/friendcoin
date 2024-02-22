@@ -1,11 +1,10 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2021 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2021 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_QT_OPTIONSMODEL_H
-#define FREN_QT_OPTIONSMODEL_H
+#ifndef PEJECOIN_QT_OPTIONSMODEL_H
+#define PEJECOIN_QT_OPTIONSMODEL_H
 
 #include "amount.h"
 
@@ -15,7 +14,7 @@ QT_BEGIN_NAMESPACE
 class QNetworkProxy;
 QT_END_NAMESPACE
 
-/** Interface from Qt to configuration data structure for Fren client.
+/** Interface from Qt to configuration data structure for Pejecoin client.
    To Qt, the options are presented as a list with the different options
    laid out vertically.
    This can be changed to a tree once the settings become sufficiently
@@ -41,7 +40,7 @@ public:
         ProxyUseTor,            // bool
         ProxyIPTor,             // QString
         ProxyPortTor,           // int
-        DisplayUnit,            // FrenUnits::Unit
+        DisplayUnit,            // PejecoinUnits::Unit
         DisplayCurrencyIndex,   // int
         ThirdPartyTxUrls,       // QString
         IpfsUrl,                // QString
@@ -97,10 +96,10 @@ private:
     QString strThirdPartyTxUrls;
     QString strIpfsUrl;
     bool fCoinControlFeatures;
-    /** FRENS START*/
+    /** PEJE START*/
     bool fCustomFeeFeatures;
     bool fDarkModeEnabled;
-    /** FRENS END*/
+    /** PEJE END*/
     /* settings that were overridden by command-line */
     QString strOverriddenByCommandLine;
 
@@ -118,4 +117,4 @@ Q_SIGNALS:
     void updateIconsOnlyToolbar(bool);
 };
 
-#endif // FREN_QT_OPTIONSMODEL_H
+#endif // PEJECOIN_QT_OPTIONSMODEL_H

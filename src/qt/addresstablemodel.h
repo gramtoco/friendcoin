@@ -1,11 +1,10 @@
 // Copyright (c) 2011-2015 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_QT_ADDRESSTABLEMODEL_H
-#define FREN_QT_ADDRESSTABLEMODEL_H
+#ifndef PEJECOIN_QT_ADDRESSTABLEMODEL_H
+#define PEJECOIN_QT_ADDRESSTABLEMODEL_H
 
 #include <QAbstractTableModel>
 #include <QStringList>
@@ -28,7 +27,7 @@ public:
 
     enum ColumnIndex {
         Label = 0,   /**< User specified label */
-        Address = 1  /**< Fren address */
+        Address = 1  /**< Pejecoin address */
     };
 
     enum RoleIndex {
@@ -94,4 +93,4 @@ public Q_SLOTS:
     friend class AddressTablePriv;
 };
 
-#endif // FREN_QT_ADDRESSTABLEMODEL_H
+#endif // PEJECOIN_QT_ADDRESSTABLEMODEL_H

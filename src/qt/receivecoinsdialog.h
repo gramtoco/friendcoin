@@ -1,11 +1,10 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2021 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2021 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_QT_RECEIVECOINSDIALOG_H
-#define FREN_QT_RECEIVECOINSDIALOG_H
+#ifndef PEJECOIN_QT_RECEIVECOINSDIALOG_H
+#define PEJECOIN_QT_RECEIVECOINSDIALOG_H
 
 #include "guiutil.h"
 
@@ -28,7 +27,7 @@ QT_BEGIN_NAMESPACE
 class QModelIndex;
 QT_END_NAMESPACE
 
-/** Dialog for requesting payment of frens */
+/** Dialog for requesting payment of pejes */
 class ReceiveCoinsDialog : public QDialog
 {
     Q_OBJECT
@@ -79,4 +78,4 @@ private Q_SLOTS:
     void copyAmount();
 };
 
-#endif // FREN_QT_RECEIVECOINSDIALOG_H
+#endif // PEJECOIN_QT_RECEIVECOINSDIALOG_H

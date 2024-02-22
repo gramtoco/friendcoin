@@ -1,6 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -20,7 +19,7 @@
 #include "util.h"
 #include "utilstrencodings.h"
 
-#include "test/test_fren.h"
+#include "test/test_pejecoin.h"
 
 #include <memory>
 
@@ -253,7 +252,7 @@ BOOST_FIXTURE_TEST_SUITE(miner_tests, TestingSetup)
         tx.vin[0].prevout.hash = txFirst[2]->GetHash();
         tx.vout.resize(2);
         tx.vout[0].nValue = 5000000000LL - 100000000;
-        tx.vout[1].nValue = 100000000; // 1FRENS output
+        tx.vout[1].nValue = 100000000; // 1PEJE output
         uint256 hashFreeTx2 = tx.GetHash();
         mempool.addUnchecked(hashFreeTx2, entry.Fee(0).SpendsCoinbase(true).FromTx(tx));
 
@@ -296,7 +295,7 @@ BOOST_FIXTURE_TEST_SUITE(miner_tests, TestingSetup)
         chainparams.TurnOffBIP65();
         chainparams.TurnOffBIP66();
         CScript scriptPubKey = CScript()
-                << ParseHex("04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f")
+                << ParseHex("02078afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f")
                 << OP_CHECKSIG;
         std::unique_ptr<CBlockTemplate> pblocktemplate;
         CMutableTransaction tx, tx2;

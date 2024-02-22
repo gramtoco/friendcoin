@@ -1,5 +1,5 @@
-#ifndef FREN_QT_TEST_WALLETTESTS_H
-#define FREN_QT_TEST_WALLETTESTS_H
+#ifndef PEJECOIN_QT_TEST_WALLETTESTS_H
+#define PEJECOIN_QT_TEST_WALLETTESTS_H
 
 #include <QObject>
 #include <QTest>
@@ -12,4 +12,4 @@ private Q_SLOTS:
     void walletTests();
 };
 
-#endif // FREN_QT_TEST_WALLETTESTS_H
+#endif // PEJECOIN_QT_TEST_WALLETTESTS_H

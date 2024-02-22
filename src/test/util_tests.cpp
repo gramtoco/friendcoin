@@ -1,6 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2020 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2020 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -11,7 +10,7 @@
 #include "sync.h"
 #include "utilstrencodings.h"
 #include "utilmoneystr.h"
-#include "test/test_fren.h"
+#include "test/test_pejecoin.h"
 
 #include <stdint.h>
 #include <vector>
@@ -59,7 +58,7 @@ BOOST_FIXTURE_TEST_SUITE(util_tests, BasicTestingSetup)
         std::vector<unsigned char> result;
         std::vector<unsigned char> expected(ParseHex_expected, ParseHex_expected + sizeof(ParseHex_expected));
         // Basic test vector
-        result = ParseHex("04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f");
+        result = ParseHex("02078afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f");
         BOOST_CHECK_EQUAL_COLLECTIONS(result.begin(), result.end(), expected.begin(), expected.end());
 
         // Spaces between bytes must be supported
@@ -81,7 +80,7 @@ BOOST_FIXTURE_TEST_SUITE(util_tests, BasicTestingSetup)
 
         BOOST_CHECK_EQUAL(
                 HexStr(ParseHex_expected, ParseHex_expected + sizeof(ParseHex_expected)),
-                "04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f");
+                "02078afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f");
 
         BOOST_CHECK_EQUAL(
                 HexStr(ParseHex_expected, ParseHex_expected + 5, true),

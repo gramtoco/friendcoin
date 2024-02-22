@@ -1,9 +1,9 @@
-// Copyright (c) 2019 The Fren Core developers
+// Copyright (c) 2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_QT_ASSIGNQUALIFIER_H
-#define FREN_QT_ASSIGNQUALIFIER_H
+#ifndef PEJECOIN_QT_ASSIGNQUALIFIER_H
+#define PEJECOIN_QT_ASSIGNQUALIFIER_H
 
 #include "amount.h"
 
@@ -64,4 +64,4 @@ private Q_SLOTS:
     void changeAddressChanged(int);
 };
 
-#endif // FREN_QT_ASSIGNQUALIFIER_H
+#endif // PEJECOIN_QT_ASSIGNQUALIFIER_H

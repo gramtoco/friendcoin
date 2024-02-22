@@ -1,6 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -14,11 +13,11 @@
 #include "script/sign.h"
 #include "util.h"
 #include "utilstrencodings.h"
-#include "test/test_fren.h"
+#include "test/test_pejecoin.h"
 #include "rpc/server.h"
 
 #if defined(HAVE_CONSENSUS_LIB)
-#include "script/frenconsensus.h"
+#include "script/pejecoinconsensus.h"
 #endif
 
 #include <fstream>
@@ -173,13 +172,13 @@ BOOST_FIXTURE_TEST_SUITE(script_tests, BasicTestingSetup)
 #if defined(HAVE_CONSENSUS_LIB)
         CDataStream stream(SER_NETWORK, PROTOCOL_VERSION);
         stream << tx2;
-        int libconsensus_flags = flags & frenconsensus_SCRIPT_FLAGS_VERIFY_ALL;
+        int libconsensus_flags = flags & pejeconsensus_SCRIPT_FLAGS_VERIFY_ALL;
         if (libconsensus_flags == flags) {
-            if (flags & frenconsensus_SCRIPT_FLAGS_VERIFY_WITNESS) {
-                BOOST_CHECK_MESSAGE(frenconsensus_verify_script_with_amount(scriptPubKey.data(), scriptPubKey.size(), txCredit.vout[0].nValue, (const unsigned char*)&stream[0], stream.size(), 0, libconsensus_flags, nullptr) == expect, message);
+            if (flags & pejeconsensus_SCRIPT_FLAGS_VERIFY_WITNESS) {
+                BOOST_CHECK_MESSAGE(pejeconsensus_verify_script_with_amount(scriptPubKey.data(), scriptPubKey.size(), txCredit.vout[0].nValue, (const unsigned char*)&stream[0], stream.size(), 0, libconsensus_flags, nullptr) == expect, message);
             } else {
-                BOOST_CHECK_MESSAGE(frenconsensus_verify_script_with_amount(scriptPubKey.data(), scriptPubKey.size(), 0, (const unsigned char*)&stream[0], stream.size(), 0, libconsensus_flags, nullptr) == expect, message);
-                BOOST_CHECK_MESSAGE(frenconsensus_verify_script(scriptPubKey.data(), scriptPubKey.size(), (const unsigned char*)&stream[0], stream.size(), 0, libconsensus_flags, nullptr) == expect,message);
+                BOOST_CHECK_MESSAGE(pejeconsensus_verify_script_with_amount(scriptPubKey.data(), scriptPubKey.size(), 0, (const unsigned char*)&stream[0], stream.size(), 0, libconsensus_flags, nullptr) == expect, message);
+                BOOST_CHECK_MESSAGE(pejeconsensus_verify_script(scriptPubKey.data(), scriptPubKey.size(), (const unsigned char*)&stream[0], stream.size(), 0, libconsensus_flags, nullptr) == expect,message);
             }
         }
 #endif
@@ -1640,7 +1639,7 @@ BOOST_FIXTURE_TEST_SUITE(script_tests, BasicTestingSetup)
         BOOST_CHECK(s == d);
 
         // check doubling a script that's large enough to require reallocation
-        static const char hex[] = "04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f";
+        static const char hex[] = "02078afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f";
         s = CScript() << ParseHex(hex) << OP_CHECKSIG;
         d = CScript() << ParseHex(hex) << OP_CHECKSIG << ParseHex(hex) << OP_CHECKSIG;
         s += s;

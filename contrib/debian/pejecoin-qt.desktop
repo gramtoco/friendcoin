@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Pejecoin Core
+Comment=Connect to the Pejecoin P2P Network
+Comment[de]=Verbinde mit dem Pejecoin peer-to-peer Netzwerk
+Comment[fr]=Pejecoin, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Pejecoin, eşten eşe kriptografik sanal para birimi
+Exec=pejecoin-qt %u
+Terminal=false
+Type=Application
+Icon=peje128
+MimeType=x-scheme-handler/pejecoin;
+Categories=Office;Finance;

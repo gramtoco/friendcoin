@@ -1,14 +1,13 @@
 // Copyright (c) 2014 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_CRYPTO_COMMON_H
-#define FREN_CRYPTO_COMMON_H
+#ifndef PEJECOIN_CRYPTO_COMMON_H
+#define PEJECOIN_CRYPTO_COMMON_H
 
 #if defined(HAVE_CONFIG_H)
-#include "config/fren-config.h"
+#include "config/pejecoin-config.h"
 #endif
 
 #include <stdint.h>
@@ -102,4 +101,4 @@ uint64_t static inline CountBits(uint64_t x)
     return ret;
 }
 
-#endif // FREN_CRYPTO_COMMON_H
+#endif // PEJECOIN_CRYPTO_COMMON_H

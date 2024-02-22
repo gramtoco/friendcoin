@@ -6,13 +6,13 @@ import subprocess
 import json
 
 
-#Set this to your fren-cli program
-cli = "fren-cli"
+#Set this to your pejecoin-cli program
+cli = "pejecoin-cli"
 
 #mode = "-testnet"
 mode = ""
-rpc_port = 4206
-#Set this information in your fren.conf file (in datadir, not testnet3)
+rpc_port = 9766
+#Set this information in your pejecoin.conf file (in datadir, not testnet3)
 rpc_user = 'rpcuser'
 rpc_pass = 'rpcpass555'
 

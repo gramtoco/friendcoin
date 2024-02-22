@@ -1,6 +1,5 @@
 // Copyright (c) 2015 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -9,7 +8,7 @@
 #include "pow.h"
 #include "random.h"
 #include "util.h"
-#include "test/test_fren.h"
+#include "test/test_pejecoin.h"
 
 #include <boost/test/unit_test.hpp>
 

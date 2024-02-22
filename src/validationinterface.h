@@ -1,12 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_VALIDATIONINTERFACE_H
-#define FREN_VALIDATIONINTERFACE_H
+#ifndef PEJECOIN_VALIDATIONINTERFACE_H
+#define PEJECOIN_VALIDATIONINTERFACE_H
 
 #include <memory>
 
@@ -112,4 +111,4 @@ public:
 
 CMainSignals& GetMainSignals();
 
-#endif // FREN_VALIDATIONINTERFACE_H
+#endif // PEJECOIN_VALIDATIONINTERFACE_H

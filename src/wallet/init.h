@@ -1,12 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_WALLET_INIT_H
-#define FREN_WALLET_INIT_H
+#ifndef PEJECOIN_WALLET_INIT_H
+#define PEJECOIN_WALLET_INIT_H
 
 #include <string>
 
@@ -42,4 +41,4 @@ void StopWallets();
 //! Close all wallets.
 void CloseWallets();
 
-#endif // FREN_WALLET_INIT_H
+#endif // PEJECOIN_WALLET_INIT_H

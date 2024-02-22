@@ -1,10 +1,10 @@
-// Copyright (c) 2018-2020 The Fren Core developers
+// Copyright (c) 2018-2020 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 
-#ifndef FRENCOIN_MESSAGES_H
-#define FRENCOIN_MESSAGES_H
+#ifndef PEJECOINCOIN_MESSAGES_H
+#define PEJECOINCOIN_MESSAGES_H
 
 #include <uint256.h>
 #include <serialize.h>
@@ -140,4 +140,4 @@ public:
     std::string createJsonString();
 };
 
-#endif //FRENCOIN_MESSAGES_H
+#endif //PEJECOINCOIN_MESSAGES_H

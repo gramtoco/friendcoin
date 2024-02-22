@@ -1,11 +1,10 @@
 // Copyright (c) 2009-2015 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2019 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_QT_TEST_PAYMENTSERVERTESTS_H
-#define FREN_QT_TEST_PAYMENTSERVERTESTS_H
+#ifndef PEJECOIN_QT_TEST_PAYMENTSERVERTESTS_H
+#define PEJECOIN_QT_TEST_PAYMENTSERVERTESTS_H
 
 #include "../paymentserver.h"
 
@@ -34,4 +33,4 @@ public:
     SendCoinsRecipient recipient;
 };
 
-#endif // FREN_QT_TEST_PAYMENTSERVERTESTS_H
+#endif // PEJECOIN_QT_TEST_PAYMENTSERVERTESTS_H

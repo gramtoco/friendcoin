@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2014-2016 The Bitcoin Core developers
-# Copyright (c) 2017-2020 The Raven Core developers
-# Copyright (c) 2023 The Fren Core developers
+# Copyright (c) 2017-2020 The Pejecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -16,11 +15,11 @@ Test the following RPCs:
    - getrawtransaction
 """
 
-from test_framework.test_framework import FrenTestFramework
+from test_framework.test_framework import PejecoinTestFramework
 from test_framework.util import connect_nodes_bi, assert_raises_rpc_error, assert_equal, Decimal
 
 # Create one-input, one-output, no-fee transaction:
-class RawTransactionsTest(FrenTestFramework):
+class RawTransactionsTest(PejecoinTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 3
@@ -69,7 +68,7 @@ class RawTransactionsTest(FrenTestFramework):
         #use balance deltas instead of absolute values
         bal = self.nodes[2].getbalance()
 
-        # send 1.2 FRENS to msig adr
+        # send 1.2 PEJE to msig adr
         self.nodes[0].sendtoaddress(mSigObj, 1.2)
         self.sync_all()
         self.nodes[0].generate(1)

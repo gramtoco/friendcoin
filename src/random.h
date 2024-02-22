@@ -1,12 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2021 The Raven Core developers
-// Copyright (c) 2023 The Fren Core developers
+// Copyright (c) 2017-2021 The Pejecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FREN_RANDOM_H
-#define FREN_RANDOM_H
+#ifndef PEJECOIN_RANDOM_H
+#define PEJECOIN_RANDOM_H
 
 #include "crypto/chacha20.h"
 #include "crypto/common.h"
@@ -168,4 +167,4 @@ bool Random_SanityCheck();
 /** Initialize the RNG. */
 void RandomInit();
 
-#endif // FREN_RANDOM_H
+#endif // PEJECOIN_RANDOM_H

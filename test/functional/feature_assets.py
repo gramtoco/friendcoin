@@ -1,26 +1,25 @@
 #!/usr/bin/env python3
 # Copyright (c) 2017 The Bitcoin Core developers
-# Copyright (c) 2017-2020 The Raven Core developers
-# Copyright (c) 2023 The Fren Core developers
+# Copyright (c) 2017-2020 The Pejecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 """Testing asset use cases"""
 
-from test_framework.test_framework import FrenTestFramework
+from test_framework.test_framework import PejecoinTestFramework
 from test_framework.util import assert_equal, assert_is_hash_string, assert_does_not_contain_key, assert_raises_rpc_error, JSONRPCException, Decimal
 
 import string
 
 
-class AssetTest(FrenTestFramework):
+class AssetTest(PejecoinTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 3
         self.extra_args = [['-assetindex'], ['-assetindex'], ['-assetindex']]
 
     def activate_assets(self):
-        self.log.info("Generating FRENS for node[0] and activating assets...")
+        self.log.info("Generating PEJE for node[0] and activating assets...")
         n0 = self.nodes[0]
 
         n0.generate(1)
@@ -137,13 +136,13 @@ class AssetTest(FrenTestFramework):
         assert_equal(n0.listassetbalancesbyaddress(address0)["MY_ASSET"], 2000)
 
         self.log.info("Checking listassets()...")
-        n0.issue("FREN1", 1000)
-        n0.issue("FREN2", 1000)
-        n0.issue("FREN3", 1000)
+        n0.issue("PEJECOIN1", 1000)
+        n0.issue("PEJECOIN2", 1000)
+        n0.issue("PEJECOIN3", 1000)
         n0.generate(1)
         self.sync_all()
 
-        n0.listassets(asset="FREN*", verbose=False, count=2, start=-2)
+        n0.listassets(asset="PEJECOIN*", verbose=False, count=2, start=-2)
 
         self.log.info("Creating some sub-assets...")
         n0.issue(asset_name="MY_ASSET/SUB1", qty=1000, to_address=address0, change_address=address0, units=4, reissuable=True, has_ipfs=True, ipfs_hash=ipfs_hash)
@@ -162,10 +161,10 @@ class AssetTest(FrenTestFramework):
         assert_equal(assetdata["has_ipfs"], 1)
         assert_equal(assetdata["ipfs_hash"], ipfs_hash)
 
-        fren_assets = n0.listassets(asset="FREN*", verbose=False, count=2, start=-2)
-        assert_equal(len(fren_assets), 2)
-        assert_equal(fren_assets[0], "FREN2")
-        assert_equal(fren_assets[1], "FREN3")
+        pejecoin_assets = n0.listassets(asset="PEJECOIN*", verbose=False, count=2, start=-2)
+        assert_equal(len(pejecoin_assets), 2)
+        assert_equal(pejecoin_assets[0], "PEJECOIN2")
+        assert_equal(pejecoin_assets[1], "PEJECOIN3")
         self.sync_all()
 
     def issue_param_checks(self):
